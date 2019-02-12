@@ -1,5 +1,4 @@
-theme = "hugo-academic"
+theme = "themes/hugo-academic"
 baseURL = ""
 languageCode = "en-us"
 title = "Sichong Peng"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
