@@ -1,4 +1,4 @@
-theme = "themes/hugo-academic"
+theme = "hugo-academic"
 baseURL = ""
 languageCode = "en-us"
 title = "Sichong Peng"
