@@ -1,0 +1,23 @@
+---
+title: "Case-control study with small sample size"
+author: "Sichong Peng"
+date: '2019-02-13'
+image:
+  caption: ''
+  focal_point: ''
+slug: case-control-study-with-small-sample-size
+tags: genetics
+categories: Genetics
+draft: true
+---
+
+
+
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>A breed-specific disease was discovered in horses and we would like to identify its causal variant. Let’s suppose we have whole genome sequences of 3 affected horses and 4 unaffected horses. A common startegy would be a case-control study identifying variants significantly associated with affected cohort. However, a limitation behind this approach is our sample size: with 3 cases and 4 controls, the best association we can get is:</p>
+<pre class="r"><code>fisher.test(rbind(c(6,0), c(0,8)))$p.value #Diploidy</code></pre>
+<pre><code>## [1] 0.0003330003</code></pre>
+<p>This can never pass a Bonferroni-corrected <span class="math inline">\(\alpha\)</span> which is usually at 1e-09 level! This is quite often a problem for researchers when samples are very hard to obtain. And it gets worse if we’re dealing with anything other than recessive traits! A less stringent <span class="math inline">\(\alpha\)</span> (say 0.001)is certain to give us tons of false positives: for a dataset with 2 million variants, an average of <span class="math inline">\(0.001*2*10^6=2000\)</span> false positives!</p>
+<p>One way to get around of this problem is by utilizing the fact that this disease is breed-specific. This means that we are looking at a mutation that is fairly new: no earlier than the breed’s founding population!</p>
+</div>

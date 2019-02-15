@@ -6,8 +6,63 @@
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Sep 2018 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Case-control study with small sample size</title>
+      <link>/post/case-control-study-with-small-sample-size/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/case-control-study-with-small-sample-size/</guid>
+      <description>
+
+
+&lt;p&gt;For how to plot data, see `r linkpage(“click here for an awesome post”, “2019-02-13-draw-karyotype-plot-on-any-organism”)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Draw karyotype plot on any organism</title>
+      <link>/post/draw-karyotype-plot-on-any-organism/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/draw-karyotype-plot-on-any-organism/</guid>
+      <description>
+
+
+&lt;p&gt;In my work, we often need to visualize the location of a set of variants in a genome. When you have a dozen variants, it’s usually not too bad to go through them manually and place them on chromosomes. However, as the number of variants grow, it gets annoying very quickly!&lt;/p&gt;
+&lt;p&gt;Like most of you working on non-model organisms, I have long been jealousy of human geneticists’ ability to quickly draw a fancy karyotype plot (among other things). For a long time our solution has been (you guessed it) ggplot. As powerful as it is, it can get very complicated and intimidating with layers on top of layers!&lt;/p&gt;
+&lt;p&gt;There comes &lt;a href=&#34;https://bernatgel.github.io/karyoploter_tutorial/&#34;&gt;karyoploteR&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;KaryoploteR is an R package developed by &lt;a href=&#34;https://github.com/bernatgel/karyoploteR&#34;&gt;bernatgel&lt;/a&gt;. It’s a great tool for data visualization in association with chromosomes. It can plot any genomic features (genes, promoters, smRNAs, expression levels, etc) along chromosomes. For this post, I will be focusing on a small problem which only utilizes a tiny fraction of what karyoploteR is capable of. You should definitely check out their full tutorial to harvest its power!&lt;/p&gt;
+&lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;A breed-specific disease was discovered in horses and we would like to identify its causal variant. Let’s suppose we have whole genome sequences of 3 affected horses and 4 unaffected horses. A common startegy would be a case-control study identifying variants significantly associated with affected cohort. However, a limitation behind this approach is our sample size: with 3 cases and 4 controls, the best association we can get is:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fisher.test(rbind(c(6,0), c(0,8)))$p.value #Diploidy&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.0003330003&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This can never pass a Bonferroni-corrected &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; which is usually at 1e-09 level! This is quite often a problem for researchers when samples are very hard to obtain. And it gets worse if we’re dealing with anything other than recessive traits! A less stringent &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; (say 0.001)is certain to give us tons of false positives: for a dataset with 2 million variants, an average of &lt;span class=&#34;math inline&#34;&gt;\(0.001*2*10^6=2000\)&lt;/span&gt; false positives!&lt;/p&gt;
+&lt;p&gt;One way to get around of this problem is by utilizing the fact that this disease is breed-specific. This means that we are looking at a mutation that is fairly new: no earlier than the breed’s founding population!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>BIOinformatics for BIOlogists</title>
+      <link>/post/foreword/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/foreword/</guid>
+      <description>
+
+
+&lt;div id=&#34;what-is-bioinformatics-without-biologists&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is Bioinformatics without Biologists?&lt;/h2&gt;
+&lt;p&gt;When I first joined a genetics lab in grad school, my first task was to analyze a set of variants. Now this may sound idiot-proof to you. But imagine the intimidation of a gigantic text file with a not-so-intuitive format (VCF) on a not-so-fool-frieldly command line interface to someone who spent the majority of their undergrad education learning about how molecules work with each other or how peas can be smooth or wrinkle. It’s an uncharted territory!&lt;/p&gt;
+&lt;p&gt;At the time I had little background on CS. My only exposure to it was a series of CS classes I took in undergrad. It consisted of an intro to C, an intro to data structure, and an intro to JAVA. And I was considered fairly “tech-savy” among my lab mates!&lt;/p&gt;
+&lt;p&gt;Combing through internet to teach myself all the in’s and out’s of bioinformatics was certainly rewarding, for both my research and career. However, I have also seen many talented biologists struggling with these flashy new tools and often times resort back to the old fashioned way. Nothing is wrong with old school genetics. But also indisputable is the fact that utilization of bioinformatics methods has drastically accelerated both genetics and genomics research. And for students jumping into the field today, it’s almost unavoidable that at some point in their research they’ll need to code a line or two. Therefore having some resources for them to be able to quickly&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Example Page</title>

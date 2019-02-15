@@ -1,0 +1,20 @@
+---
+title: BIOinformatics for BIOlogists
+author: Sichong Peng
+date: '2019-02-12'
+slug: foreword
+categories: ['Foreword']
+tags: ['Foreword']
+draft: true
+image:
+  caption: ''
+  focal_point: ''
+---
+
+##What is Bioinformatics without Biologists?
+When I first joined a genetics lab in grad school, my first task was to analyze a set of variants. Now this may sound idiot-proof to you. But imagine the intimidation of a gigantic text file with a not-so-intuitive format (VCF) on a not-so-fool-frieldly command line interface to someone who spent the majority of their undergrad education learning about how molecules work with each other or how peas can be smooth or wrinkle. It's an uncharted territory!    
+
+At the time I had little background on CS. My only exposure to it was a series of CS classes I took in undergrad. It consisted of an intro to C, an intro to data structure, and an intro to JAVA. And I was considered fairly "tech-savy" among my lab mates!  
+
+Combing through internet to teach myself all the in's and out's of bioinformatics was certainly rewarding, for both my research and career. However, I have also seen many talented biologists struggling with these flashy new tools and often times resort back to the old fashioned way. Nothing is wrong with old school genetics. But also indisputable is the fact that utilization of bioinformatics methods has drastically accelerated both genetics and genomics research. And for students jumping into the field today, it's almost unavoidable that at some point in their research they'll need to code a line or two. Therefore having some resources for them to be able to quickly  
+

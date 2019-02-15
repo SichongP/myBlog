@@ -6,10 +6,38 @@
     <description>Recent content in Posts on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Case-control study with small sample size</title>
+      <link>/post/case-control-study-with-small-sample-size/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/case-control-study-with-small-sample-size/</guid>
+      <description>For how to plot data, see `r linkpage(“click here for an awesome post”, “2019-02-13-draw-karyotype-plot-on-any-organism”)</description>
+    </item>
+    
+    <item>
+      <title>Draw karyotype plot on any organism</title>
+      <link>/post/draw-karyotype-plot-on-any-organism/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/draw-karyotype-plot-on-any-organism/</guid>
+      <description>In my work, we often need to visualize the location of a set of variants in a genome. When you have a dozen variants, it’s usually not too bad to go through them manually and place them on chromosomes. However, as the number of variants grow, it gets annoying very quickly!
+Like most of you working on non-model organisms, I have long been jealousy of human geneticists’ ability to quickly draw a fancy karyotype plot (among other things).</description>
+    </item>
+    
+    <item>
+      <title>BIOinformatics for BIOlogists</title>
+      <link>/post/foreword/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/foreword/</guid>
+      <description>What is Bioinformatics without Biologists?When I first joined a genetics lab in grad school, my first task was to analyze a set of variants. Now this may sound idiot-proof to you. But imagine the intimidation of a gigantic text file with a not-so-intuitive format (VCF) on a not-so-fool-frieldly command line interface to someone who spent the majority of their undergrad education learning about how molecules work with each other or how peas can be smooth or wrinkle.</description>
+    </item>
     
     <item>
       <title>Hello R Markdown</title>

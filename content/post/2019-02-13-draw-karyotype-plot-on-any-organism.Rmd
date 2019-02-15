@@ -1,0 +1,170 @@
+---
+title: "Draw karyotype plot on any organism"
+author: "Sichong Peng"
+date: '2019-02-13'
+draft: yes
+image:
+  caption: ''
+  focal_point: ''
+slug: draw-karyotype-plot-on-any-organism
+tags:
+- visualization
+- plot
+categories:
+- R
+- Visualization
+---
+
+
+In my work, we often need to visualize the location of a set of variants in a genome. When you have a dozen variants, it's usually not too bad to go through them manually and place them on chromosomes. However, as the number of variants grow, it gets annoying very quickly!
+
+Like most of you working on non-model organisms, I have long been jealousy of human geneticists' ability to quickly draw a fancy karyotype plot (among other things).  For a long time our solution has been (you guessed it) ggplot. As powerful as it is, it can get very complicated and intimidating with layers on top of layers!
+
+There comes [karyoploteR](https://bernatgel.github.io/karyoploter_tutorial/)!
+
+KaryoploteR is an R package developed by [bernatgel](https://github.com/bernatgel/karyoploteR). It's a great tool for data visualization in association with chromosomes. It can plot any genomic features (genes, promoters, smRNAs, expression levels, etc) along chromosomes. For this post, I will be focusing on a small problem which only utilizes a tiny fraction of what karyoploteR is capable of. You should definitely check out their full tutorial to harvest its power!
+
+
+
+#Let's try it
+---
+title: "2-13-19-karyotyploteR"
+author: "Sichong Peng"
+date: "February 14, 2019"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+Prep library
+```{r warning=FALSE}
+library(karyoploteR, quietly = TRUE)
+library(readr, quietly = TRUE)
+library(dplyr, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
+library(qqman,quietly = TRUE)
+library(stringr, quietly = TRUE)
+```
+
+
+##Load data:
+```{r}
+data = read_tsv("cc_data.tsv")
+chrom_data = read_tsv("ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/863/925/GCF_002863925.1_EquCab3.0/GCF_002863925.1_EquCab3.0_assembly_report.txt", comment = "#", col_names = FALSE)
+chrom_data = filter(chrom_data, X3 != "na")
+chrom_data$start = rep(0,33)
+chrom_data_1 = select(chrom_data, X1, start,X9)
+colnames(chrom_data_1) = c("chr","start","end")
+colnames(data) = c("CHR","BP","P")
+```
+
+
+##Make a custom equine genome:
+```{r}
+genome = toGRanges(data.frame(chrom_data_1))
+kp <- plotKaryotype(genome = genome)
+```
+
+##Correct chrom names in data
+```{r}
+data$CHR <- chrom_data$X1[match(data$CHR, chrom_data$X5)]
+#Drop those not on chromosome-level assembly
+data = filter(data, !is.na(CHR))
+data$start = data$BP
+data = select(data, CHR, start, BP, P)
+```
+
+
+##Let's try to plot them as markers on karyotypes 
+
+```{r}
+kp <- plotKaryotype(genome = genome)
+kpPlotRegions(kp, toGRanges(data.frame(data)), col = "red", data.panel="ideogram")
+```
+
+###So... It's useless
+
+
+##What if we try plotting those of p<0.01?
+```{r}
+kp <- plotKaryotype(genome = genome)
+kpPlotRegions(kp, toGRanges(data.frame(filter(data, P <= 0.01))), col = "red", data.panel="ideogram")
+```
+
+
+###It's still everywhere...
+###Now let's see what p-values we have in our data
+```{r}
+summary(data$P)
+```
+
+###Histogram:
+```{r}
+ggplot(data = data, aes(x = P)) + geom_histogram(binwidth = 0.001)
+```
+
+###Notice all those missing p-values? This is because how few samples we have here
+###Indeed, in the vcf file we have this comment line:
+>SnpSiftCmd="SnpSift CaseControl -f all_var.vcf 0+-++---++--------"
+
+###This tells us that in this dataset there are 5 cases and 12 controls. How many different p-values can there possibly be? (hint: how many different contingency tables can you draw?)
+###This is also why a Manhattan plot is often not a good idea for whole genome association studies (unless you have a lot more samples)
+###Let's try to plot a Manhattan plot:
+```{r}
+data_man = filter(mutate(data, CHR = str_extract(CHR, "[1-9]+$")), !is.na(CHR))
+data_man$CHR = as.numeric(data_man$CHR)
+manhattan(data_man)
+```
+
+###We can also use karyoyplotR to draw a Manhattan plot:
+```{r}
+genome_man = toGRanges(data.frame(filter(mutate(chrom_data_1, chr = str_extract(chr, "[1-9]+$")), !is.na(chr))))
+kp <- plotKaryotype(genome = genome_man, plot.type = 4)
+kpPoints(kp, data = toGRanges(data.frame(data_man[data_man[,1]%%2==1,])), y = -log10(data_man[data_man[,1]%%2==1,]$P), col="gold", ymin = 0, ymax = 10)
+kpPoints(kp, data = toGRanges(data.frame(data_man[data_man[,1]%%2==0,])), y = -log10(data_man[data_man[,1]%%2==0,]$P), col="blue", ymin = 0, ymax = 10)
+kpAxis(kp, ymax = 10)
+```
+
+
+###Let's see some more stringgent p-values:
+```{r}
+kp <- plotKaryotype(genome = genome)
+kpPlotRegions(kp, toGRanges(data.frame(filter(data, P <= 0.0001))), col = "red", data.panel="ideogram")
+```
+
+###Now let's focus on chromsome 24
+```{r}
+data_24 = filter(data, CHR == "chr24")
+chrom_24 = toGRanges(data.frame(filter(chrom_data_1, chr == "chr24")))
+data_24$logP = -log10(data_24$P)
+```
+
+###First let's see variants
+```{r}
+kp <- plotKaryotype(genome = chrom_24)
+kpPlotRegions(kp, toGRanges(data.frame(data_24)), col = "red", data.panel="ideogram")
+```
+
+###This tells us that a majority of variants are in the middle of chromosome 24
+
+```{r}
+kp <- plotKaryotype(genome = chrom_24)
+kpPoints(kp, data = toGRanges(data.frame(data_24)), y = data_24$logP, col="red", ymin = 0, ymax = 8)
+kpAxis(kp, ymin = 0, ymax = 8)
+#data.panel="ideogram"
+```
+
+###Now we see a chunk of them with low p-value on chr24. This is what we are looking for. Let's get the coordinates of this region.
+```{r}
+data_24_selected = filter(data_24, logP>=4)
+summary(data_24_selected$BP)
+```
+
+###Now the min and max points to our region: chr24:20526862-27265538
+###Let's zoom in
+```{r}
+zoom.region <- toGRanges(data.frame("chr24", 20526862, 27265538))
+kp <- plotKaryotype(genome = chrom_24, zoom = zoom.region)
+kpPoints(kp, data = toGRanges(data.frame(data_24)), y = data_24$logP, col="red", ymin = 0, ymax = 8)
+kpAxis(kp, ymin = 0, ymax = 8)
+```
