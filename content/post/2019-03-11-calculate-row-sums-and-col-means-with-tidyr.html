@@ -1,0 +1,157 @@
+---
+title: Calculate row sums and col means with tidyR
+author: Sichong Peng
+date: '2019-03-11'
+slug: calculate-row-sums-and-col-means-with-tidyr
+categories:
+  - R
+tags:
+  - tidyverse
+  - R
+image:
+  caption: ''
+  focal_point: ''
+knitr.table.format: markdown
+---
+
+
+
+<p>Recently Someone asked a question on reddit: <a href="https://www.reddit.com/r/Rlanguage/comments/azwcs5/adding_a_row_and_a_column_that_are_means_for_a/">Adding a row and a column that are means for a set matrix</a></p>
+<p>This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?</p>
+<p>Let’s give it a try.</p>
+<p>Here is the question:</p>
+<blockquote>
+<p>I have the following sequence:<br />
+<code>S&lt;-seq(1,90, by=3)</code><br />
+I make a matrix that is the following:<br />
+<code>matrix(S, nrow = 6, ncol = 5)</code><br />
+Now I am trying to do the following:<br />
+I want to calculate the means of the columns of the matrix and add them as a new row under the columns.<br />
+Next I want to calculate the sum of the rows of the matrix and add them as a new column on the right of the matrix.</p>
+</blockquote>
+<p>Here is what their data looks like:</p>
+<pre class="r"><code>data_matrix = matrix(seq(1, 90, by = 3), nrow = 6, ncol = 5)
+data_matrix</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1   19   37   55   73
+## [2,]    4   22   40   58   76
+## [3,]    7   25   43   61   79
+## [4,]   10   28   46   64   82
+## [5,]   13   31   49   67   85
+## [6,]   16   34   52   70   88</code></pre>
+<p>They want to calculate the mean of each column and sum of each row.<br />
+Now if you know some basic R this can very easily be achieved:</p>
+<pre class="r"><code>data_df = data.frame(data_matrix)
+data_df[,ncol(data_df)+1] = rowSums(data_df)
+data_df[nrow(data_df)+1,] = colMeans(data_df)
+data_df</code></pre>
+<pre><code>X1   X2   X3   X4   X5    V6</code></pre>
+<p>1 1.0 19.0 37.0 55.0 73.0 185.0 2 4.0 22.0 40.0 58.0 76.0 200.0 3 7.0 25.0 43.0 61.0 79.0 215.0 4 10.0 28.0 46.0 64.0 82.0 230.0 5 13.0 31.0 49.0 67.0 85.0 245.0 6 16.0 34.0 52.0 70.0 88.0 260.0 7 8.5 26.5 44.5 62.5 80.5 222.5</p>
+<p>But how can we do this “tidy” way? Turns out this is more complicated than I originally thought.</p>
+<p>First let’s breath some context into our data so we don’t get too bored:<br />
+Let’s say we had an exam in a class of 100 students. The exam consists of 10 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 20 columns, each for a question and 100 rows, each for a student. Now we want to calculate:<br />
+1. Total score for each student (row sums)<br />
+2. Class average for each question (col means)</p>
+<p>Let’s first creat this “spreadsheet”</p>
+<pre class="r"><code>scores_df = data.frame(matrix(sample(1:10,10000, replace = TRUE), nrow = 100, ncol = 10))
+head(scores_df)</code></pre>
+<pre><code>##   X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
+## 1  7  9  3 10  3  5  6  1  4   6
+## 2  9 10  1  1 10 10  8  4  4   5
+## 3  1  6  7  7 10  7  2  8  5   2
+## 4  1  3  5  3 10  6  4  7 10   7
+## 5  8  6  7  7  9  6  1  6  3   8
+## 6 10  7  6  9  5  6  2 10  2   4</code></pre>
+<p>Here we have a data frame with 10 colmuns (10 questions) and 100 rows (100 students).<br />
+Now the next step is to for tidy data: key-value pairs.<br />
+First we need to identify the keys: in our dataset, each student-question pair uniquely identifies a value (score). So we can gather our date like this:</p>
+<pre class="r"><code>library(tidyverse)
+scores_tibble = gather(rownames_to_column(scores_df, var = &quot;student&quot;), question, score, -student)
+head(scores_tibble)</code></pre>
+<pre><code>##   student question score
+## 1       1       X1     7
+## 2       2       X1     9
+## 3       3       X1     1
+## 4       4       X1     1
+## 5       5       X1     8
+## 6       6       X1    10</code></pre>
+<p>Here I did not <code>unite()</code> <code>student</code> and <code>question</code> into a single column so that later I can group by either student or question to calculate mean and sum.<br />
+Now to calculate question means:</p>
+<pre class="r"><code>summarise(group_by(scores_tibble, question), mean = mean(score))</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    question  mean
+##    &lt;chr&gt;    &lt;dbl&gt;
+##  1 X1        5.35
+##  2 X10       5.24
+##  3 X2        5.47
+##  4 X3        5.3 
+##  5 X4        5.48
+##  6 X5        5.47
+##  7 X6        5.06
+##  8 X7        5.29
+##  9 X8        5.9 
+## 10 X9        5.52</code></pre>
+<p>Student sum scores:</p>
+<pre class="r"><code>summarise(group_by(scores_tibble, student), total = sum(score))</code></pre>
+<pre><code>## # A tibble: 100 x 2
+##    student total
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 1          54
+##  2 10         48
+##  3 100        58
+##  4 11         51
+##  5 12         41
+##  6 13         48
+##  7 14         53
+##  8 15         43
+##  9 16         52
+## 10 17         42
+## # ... with 90 more rows</code></pre>
+<p>Let’s get a single table with all information</p>
+<pre class="r"><code>scores_complete = group_by(scores_tibble, question) %&gt;%
+  mutate(question_average = mean(score)) %&gt;%
+    group_by(student) %&gt;%
+      mutate(student_total = sum(score))
+scores_complete</code></pre>
+<pre><code>## # A tibble: 1,000 x 5
+## # Groups:   student [100]
+##    student question score question_average student_total
+##    &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;            &lt;dbl&gt;         &lt;int&gt;
+##  1 1       X1           7             5.35            54
+##  2 2       X1           9             5.35            62
+##  3 3       X1           1             5.35            55
+##  4 4       X1           1             5.35            56
+##  5 5       X1           8             5.35            61
+##  6 6       X1          10             5.35            61
+##  7 7       X1          10             5.35            55
+##  8 8       X1          10             5.35            58
+##  9 9       X1           5             5.35            40
+## 10 10      X1           1             5.35            48
+## # ... with 990 more rows</code></pre>
+<p>With a tidy table we can easily calculate stats we want and add them to the original data frame:</p>
+<pre class="r"><code>scores_df_complete = spread(scores_tibble, question, score) %&gt;%
+  left_join(summarise(group_by(scores_tibble, student), student_total = sum(score)), by = &quot;student&quot;) %&gt;%
+    bind_rows(spread(summarise(group_by(scores_tibble, question), question_mean = mean(score)), question, question_mean))
+head(scores_df_complete)</code></pre>
+<pre><code>##   student X1 X10 X2 X3 X4 X5 X6 X7 X8 X9 student_total
+## 1       1  7   6  9  3 10  3  5  6  1  4            54
+## 2      10  1   3 10  7  4  5 10  5  2  1            48
+## 3     100  9   4 10  8 10  2  1  4  1  9            58
+## 4      11  1   9 10  7  9  2  2  2  4  5            51
+## 5      12  3   5  2  3  5  3  5  3  5  7            41
+## 6      13  1   8  3  8  3  6  3  1  5 10            48</code></pre>
+<pre class="r"><code>tail(scores_df_complete)</code></pre>
+<pre><code>##     student    X1  X10   X2  X3   X4   X5   X6    X7  X8    X9
+## 96       95 10.00 7.00 8.00 6.0 9.00 6.00 7.00  6.00 9.0  7.00
+## 97       96  4.00 7.00 9.00 1.0 3.00 6.00 1.00  2.00 3.0 10.00
+## 98       97  9.00 9.00 6.00 8.0 8.00 1.00 6.00  4.00 4.0  6.00
+## 99       98  1.00 3.00 2.00 8.0 3.00 6.00 2.00  3.00 4.0  3.00
+## 100      99  7.00 4.00 2.00 4.0 7.00 9.00 1.00 10.00 1.0  2.00
+## 101    &lt;NA&gt;  5.35 5.24 5.47 5.3 5.48 5.47 5.06  5.29 5.9  5.52
+##     student_total
+## 96             75
+## 97             46
+## 98             61
+## 99             35
+## 100            47
+## 101            NA</code></pre>

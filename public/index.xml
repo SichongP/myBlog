@@ -6,8 +6,159 @@
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Sep 2018 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Calculate row sums and col means with tidyR</title>
+      <link>/post/calculate-row-sums-and-col-means-with-tidyr/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/calculate-row-sums-and-col-means-with-tidyr/</guid>
+      <description>
+
+
+&lt;p&gt;Recently Someone asked a question on reddit: &lt;a href=&#34;https://www.reddit.com/r/Rlanguage/comments/azwcs5/adding_a_row_and_a_column_that_are_means_for_a/&#34;&gt;Adding a row and a column that are means for a set matrix&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?&lt;/p&gt;
+&lt;p&gt;Let’s give it a try.&lt;/p&gt;
+&lt;p&gt;Here is the question:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I have the following sequence:&lt;br /&gt;
+&lt;code&gt;S&amp;lt;-seq(1,90, by=3)&lt;/code&gt;&lt;br /&gt;
+I make a matrix that is the following:&lt;br /&gt;
+&lt;code&gt;matrix(S, nrow = 6, ncol = 5)&lt;/code&gt;&lt;br /&gt;
+Now I am trying to do the following:&lt;br /&gt;
+I want to calculate the means of the columns of the matrix and add them as a new row under the columns.&lt;br /&gt;
+Next I want to calculate the sum of the rows of the matrix and add them as a new column on the right of the matrix.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here is what their data looks like:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data_matrix = matrix(seq(1, 90, by = 3), nrow = 6, ncol = 5)
+data_matrix&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1   19   37   55   73
+## [2,]    4   22   40   58   76
+## [3,]    7   25   43   61   79
+## [4,]   10   28   46   64   82
+## [5,]   13   31   49   67   85
+## [6,]   16   34   52   70   88&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;They want to calculate the mean of each column and sum of each row.&lt;br /&gt;
+Now if you know some basic R this can very easily be achieved:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data_df = data.frame(data_matrix)
+data_df[,ncol(data_df)+1] = rowSums(data_df)
+data_df[nrow(data_df)+1,] = colMeans(data_df)
+data_df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;X1   X2   X3   X4   X5    V6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1 1.0 19.0 37.0 55.0 73.0 185.0 2 4.0 22.0 40.0 58.0 76.0 200.0 3 7.0 25.0 43.0 61.0 79.0 215.0 4 10.0 28.0 46.0 64.0 82.0 230.0 5 13.0 31.0 49.0 67.0 85.0 245.0 6 16.0 34.0 52.0 70.0 88.0 260.0 7 8.5 26.5 44.5 62.5 80.5 222.5&lt;/p&gt;
+&lt;p&gt;But how can we do this “tidy” way? Turns out this is more complicated than I originally thought.&lt;/p&gt;
+&lt;p&gt;First let’s breath some context into our data so we don’t get too bored:&lt;br /&gt;
+Let’s say we had an exam in a class of 100 students. The exam consists of 10 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 20 columns, each for a question and 100 rows, each for a student. Now we want to calculate:&lt;br /&gt;
+1. Total score for each student (row sums)&lt;br /&gt;
+2. Class average for each question (col means)&lt;/p&gt;
+&lt;p&gt;Let’s first creat this “spreadsheet”&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores_df = data.frame(matrix(sample(1:10,10000, replace = TRUE), nrow = 100, ncol = 10))
+head(scores_df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
+## 1  7  9  3 10  3  5  6  1  4   6
+## 2  9 10  1  1 10 10  8  4  4   5
+## 3  1  6  7  7 10  7  2  8  5   2
+## 4  1  3  5  3 10  6  4  7 10   7
+## 5  8  6  7  7  9  6  1  6  3   8
+## 6 10  7  6  9  5  6  2 10  2   4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we have a data frame with 10 colmuns (10 questions) and 100 rows (100 students).&lt;br /&gt;
+Now the next step is to for tidy data: key-value pairs.&lt;br /&gt;
+First we need to identify the keys: in our dataset, each student-question pair uniquely identifies a value (score). So we can gather our date like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+scores_tibble = gather(rownames_to_column(scores_df, var = &amp;quot;student&amp;quot;), question, score, -student)
+head(scores_tibble)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   student question score
+## 1       1       X1     7
+## 2       2       X1     9
+## 3       3       X1     1
+## 4       4       X1     1
+## 5       5       X1     8
+## 6       6       X1    10&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here I did not &lt;code&gt;unite()&lt;/code&gt; &lt;code&gt;student&lt;/code&gt; and &lt;code&gt;question&lt;/code&gt; into a single column so that later I can group by either student or question to calculate mean and sum.&lt;br /&gt;
+Now to calculate question means:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summarise(group_by(scores_tibble, question), mean = mean(score))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 10 x 2
+##    question  mean
+##    &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt;
+##  1 X1        5.35
+##  2 X10       5.24
+##  3 X2        5.47
+##  4 X3        5.3 
+##  5 X4        5.48
+##  6 X5        5.47
+##  7 X6        5.06
+##  8 X7        5.29
+##  9 X8        5.9 
+## 10 X9        5.52&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Student sum scores:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summarise(group_by(scores_tibble, student), total = sum(score))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 100 x 2
+##    student total
+##    &amp;lt;chr&amp;gt;   &amp;lt;int&amp;gt;
+##  1 1          54
+##  2 10         48
+##  3 100        58
+##  4 11         51
+##  5 12         41
+##  6 13         48
+##  7 14         53
+##  8 15         43
+##  9 16         52
+## 10 17         42
+## # ... with 90 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s get a single table with all information&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores_complete = group_by(scores_tibble, question) %&amp;gt;%
+  mutate(question_average = mean(score)) %&amp;gt;%
+    group_by(student) %&amp;gt;%
+      mutate(student_total = sum(score))
+scores_complete&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1,000 x 5
+## # Groups:   student [100]
+##    student question score question_average student_total
+##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;int&amp;gt;            &amp;lt;dbl&amp;gt;         &amp;lt;int&amp;gt;
+##  1 1       X1           7             5.35            54
+##  2 2       X1           9             5.35            62
+##  3 3       X1           1             5.35            55
+##  4 4       X1           1             5.35            56
+##  5 5       X1           8             5.35            61
+##  6 6       X1          10             5.35            61
+##  7 7       X1          10             5.35            55
+##  8 8       X1          10             5.35            58
+##  9 9       X1           5             5.35            40
+## 10 10      X1           1             5.35            48
+## # ... with 990 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With a tidy table we can easily calculate stats we want and add them to the original data frame:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores_df_complete = spread(scores_tibble, question, score) %&amp;gt;%
+  left_join(summarise(group_by(scores_tibble, student), student_total = sum(score)), by = &amp;quot;student&amp;quot;) %&amp;gt;%
+    bind_rows(spread(summarise(group_by(scores_tibble, question), question_mean = mean(score)), question, question_mean))
+head(scores_df_complete)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   student X1 X10 X2 X3 X4 X5 X6 X7 X8 X9 student_total
+## 1       1  7   6  9  3 10  3  5  6  1  4            54
+## 2      10  1   3 10  7  4  5 10  5  2  1            48
+## 3     100  9   4 10  8 10  2  1  4  1  9            58
+## 4      11  1   9 10  7  9  2  2  2  4  5            51
+## 5      12  3   5  2  3  5  3  5  3  5  7            41
+## 6      13  1   8  3  8  3  6  3  1  5 10            48&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tail(scores_df_complete)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     student    X1  X10   X2  X3   X4   X5   X6    X7  X8    X9
+## 96       95 10.00 7.00 8.00 6.0 9.00 6.00 7.00  6.00 9.0  7.00
+## 97       96  4.00 7.00 9.00 1.0 3.00 6.00 1.00  2.00 3.0 10.00
+## 98       97  9.00 9.00 6.00 8.0 8.00 1.00 6.00  4.00 4.0  6.00
+## 99       98  1.00 3.00 2.00 8.0 3.00 6.00 2.00  3.00 4.0  3.00
+## 100      99  7.00 4.00 2.00 4.0 7.00 9.00 1.00 10.00 1.0  2.00
+## 101    &amp;lt;NA&amp;gt;  5.35 5.24 5.47 5.3 5.48 5.47 5.06  5.29 5.9  5.52
+##     student_total
+## 96             75
+## 97             46
+## 98             61
+## 99             35
+## 100            47
+## 101            NA&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Example Page</title>
@@ -89,57 +240,6 @@
 &lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
 
 &lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>
-
-
-&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 </description>
     </item>
     
