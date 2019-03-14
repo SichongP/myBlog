@@ -49,7 +49,7 @@ data_df
 But how can we do this "tidy" way? Turns out this is more complicated than I originally thought.
 
 First let's breath some context into our data so we don't get too bored:  
-Let's say we had an exam in a class of 50 students. The exam consists of 5 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 20 columns, each for a question and 100 rows, each for a student. Now we want to calculate:  
+Let's say we had an exam in a class of 50 students. The exam consists of 5 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 5 columns, each for a question and 50 rows, each for a student. Now we want to calculate:  
 1. Total score for each student (row sums)  
 2. Class average for each question (col means)  
 
