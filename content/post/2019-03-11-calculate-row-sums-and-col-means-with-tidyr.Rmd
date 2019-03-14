@@ -49,17 +49,17 @@ data_df
 But how can we do this "tidy" way? Turns out this is more complicated than I originally thought.
 
 First let's breath some context into our data so we don't get too bored:  
-Let's say we had an exam in a class of 100 students. The exam consists of 10 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 20 columns, each for a question and 100 rows, each for a student. Now we want to calculate:  
+Let's say we had an exam in a class of 50 students. The exam consists of 5 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 20 columns, each for a question and 100 rows, each for a student. Now we want to calculate:  
 1. Total score for each student (row sums)  
 2. Class average for each question (col means)  
 
 Let's first creat this "spreadsheet"
 ```{r}
-scores_df = data.frame(matrix(sample(1:10,10000, replace = TRUE), nrow = 100, ncol = 10))
+scores_df = data.frame(matrix(sample(1:20,250, replace = TRUE), nrow = 50, ncol = 5))
 head(scores_df)
 ```
 
-Here we have a data frame with 10 colmuns (10 questions) and 100 rows (100 students).  
+Here we have a data frame with 5 colmuns (5 questions) and 50 rows (50 students).  
 Now the next step is to for tidy data: key-value pairs.  
 First we need to identify the keys: in our dataset, each student-question pair uniquely identifies a value (score). So we can gather our date like this:
 ```{r warning=FALSE, message=FALSE}
