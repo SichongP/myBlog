@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -30,10 +28,15 @@
   
     
   
-  <meta name="description" content="PhD student">
+  <meta name="description" content="I want to split sequences in a fasta file at Ns.
+Here is what an example file looks like:
+&gt;1_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATNNNNNNNNNNNNNNNNNNNNGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN &gt;2_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN  There are two common formats for FASTA files:
+- Single line FASTA
+Each record consists of two line: a name line (starts with &ldquo;&gt;&rdquo;) and a sequence line. - Multiline FASTA
+Each records consists of multiple lines, First line is a name line (starts with &ldquo;&gt;&rdquo;), followed by multiple lines of sequences.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/tags/deep-learning/">
+  <link rel="alternate" hreflang="en-us" href="/post/split-a-fasta-record-by-ns/">
 
   
 
@@ -100,15 +103,15 @@
   
 
   
-  <link rel="alternate" href="/tags/deep-learning/index.xml" type="application/rss+xml" title="Academic">
-  <link rel="feed" href="/tags/deep-learning/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Academic">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/deep-learning/">
+  <link rel="canonical" href="/post/split-a-fasta-record-by-ns/">
 
   
   
@@ -123,19 +126,26 @@
   <meta property="twitter:creator" content="@Sichong93">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/tags/deep-learning/">
-  <meta property="og:title" content="Deep Learning | Academic">
-  <meta property="og:description" content="PhD student"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/split-a-fasta-record-by-ns/">
+  <meta property="og:title" content="Split a FASTA record by Ns | Academic">
+  <meta property="og:description" content="I want to split sequences in a fasta file at Ns.
+Here is what an example file looks like:
+&gt;1_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATNNNNNNNNNNNNNNNNNNNNGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN &gt;2_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN  There are two common formats for FASTA files:
+- Single line FASTA
+Each record consists of two line: a name line (starts with &ldquo;&gt;&rdquo;) and a sequence line. - Multiline FASTA
+Each records consists of multiple lines, First line is a name line (starts with &ldquo;&gt;&rdquo;), followed by multiple lines of sequences."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2016-04-27T00:00:00-07:00">
+  <meta property="article:published_time" content="2019-03-20T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-03-20T00:00:00&#43;00:00">
   
 
   
 
   
 
-  <title>Deep Learning | Academic</title>
+  <title>Split a FASTA record by Ns | Academic</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -276,7 +286,9 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
 
+  
 
 
 
@@ -293,37 +305,235 @@
 
   
   
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Split a FASTA record by Ns</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name">Deep Learning</h1>
+
+
+
+<meta content="2019-03-20 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-03-20 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
 
   
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Mar 20, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/python/">Python</a>
+    
+  </span>
+  
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Split%20a%20FASTA%20record%20by%20Ns&amp;url=%2fpost%2fsplit-a-fasta-record-by-ns%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fsplit-a-fasta-record-by-ns%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsplit-a-fasta-record-by-ns%2f&amp;title=Split%20a%20FASTA%20record%20by%20Ns"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsplit-a-fasta-record-by-ns%2f&amp;title=Split%20a%20FASTA%20record%20by%20Ns"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Split%20a%20FASTA%20record%20by%20Ns&amp;body=%2fpost%2fsplit-a-fasta-record-by-ns%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
 
-  
-  
-  <div>
-    <h2><a href="/project/internal-project/">Internal Project</a></h2>
-    <div class="article-style">
-      
-      An example of using the in-built project page.
-      
+    <div class="article-style" itemprop="articleBody">
+      <p>I want to split sequences in a fasta file at Ns.</p>
+
+<p>Here is what an example file looks like:</p>
+
+<pre><code>&gt;1_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT
+ACACACGTAGCAGCATCAGCATNNNNNNNNNNNNNNNNNNNNGTTGGACGG
+NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN
+&gt;2_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT
+ACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG
+NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN
+</code></pre>
+
+<p>There are two common formats for FASTA files:<br />
+- Single line FASTA<br />
+    Each record consists of two line: a name line (starts with &ldquo;&gt;&rdquo;) and a sequence line.
+- Multiline FASTA<br />
+    Each records consists of multiple lines, First line is a name line (starts with &ldquo;&gt;&rdquo;), followed by multiple lines of sequences.</p>
+
+<p>Here I assume I&rsquo;m dealing with multiline FASTA because if a script can work with multiline fasta, it&rsquo;s generally easy to make it work with single line files.</p>
+
+<p>Here is how I approach it:</p>
+
+<pre><code class="language-python">import sys
+
+with open('test','r') as f:
+    seq = []
+    for line in f:
+        if line.startswith(&quot;&gt;&quot;):
+            if seq: #seq not empty, process it
+                trim = '\n'.join(''.join(seq).replace(&quot;N&quot;,&quot; &quot;).split())
+                print(trim)
+                seq = []
+            print(line.strip())
+        else:
+            #Read lines into a single seq
+            seq.append(line.strip())
+    if seq: #seq not empty, process it
+                trim = '\n'.join(''.join(seq).replace(&quot;N&quot;,&quot; &quot;).split())
+                print(trim)
+                seq = []
+</code></pre>
+
+<pre><code>&gt;1_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGTACACACGTAGCAGCATCAGCAT
+GTTGGACGG
+GGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCG
+&gt;2_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGTACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG
+GGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCG
+</code></pre>
+
     </div>
-  </div>
-  
 
-  
+    
 
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tags/bioinformatics/">bioinformatics</a>
+  
+  <a class="badge badge-light" href="/tags/fasta/">FASTA</a>
+  
 </div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <div class="container">
   <footer class="site-footer">
   
@@ -482,6 +692,4 @@
 
   </body>
 </html>
-
-
 

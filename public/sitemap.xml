@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>/post/split-a-fasta-record-by-ns/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/post/calculate-row-sums-and-col-means-with-tidyr/</loc>
       <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     </url>
@@ -68,7 +76,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -118,8 +126,17 @@
     
     <url>
     
+      <loc>/tags/fasta/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/post/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -150,8 +167,17 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <loc>/categories/python/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/python/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -160,6 +186,15 @@
     <url>
     
       <loc>/categories/r/</loc>
+      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/r/</loc>
       <lastmod>2019-03-11T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -201,6 +236,15 @@
     <url>
     
       <loc>/authors/admin/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/bioinformatics/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

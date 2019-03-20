@@ -6,8 +6,75 @@
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Split a FASTA record by Ns</title>
+      <link>/post/split-a-fasta-record-by-ns/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/split-a-fasta-record-by-ns/</guid>
+      <description>&lt;p&gt;I want to split sequences in a fasta file at Ns.&lt;/p&gt;
+
+&lt;p&gt;Here is what an example file looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;1_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT
+ACACACGTAGCAGCATCAGCATNNNNNNNNNNNNNNNNNNNNGTTGGACGG
+NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN
+&amp;gt;2_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT
+ACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG
+NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two common formats for FASTA files:&lt;br /&gt;
+- Single line FASTA&lt;br /&gt;
+    Each record consists of two line: a name line (starts with &amp;ldquo;&amp;gt;&amp;rdquo;) and a sequence line.
+- Multiline FASTA&lt;br /&gt;
+    Each records consists of multiple lines, First line is a name line (starts with &amp;ldquo;&amp;gt;&amp;rdquo;), followed by multiple lines of sequences.&lt;/p&gt;
+
+&lt;p&gt;Here I assume I&amp;rsquo;m dealing with multiline FASTA because if a script can work with multiline fasta, it&amp;rsquo;s generally easy to make it work with single line files.&lt;/p&gt;
+
+&lt;p&gt;Here is how I approach it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sys
+
+with open(&#39;test&#39;,&#39;r&#39;) as f:
+    seq = []
+    for line in f:
+        if line.startswith(&amp;quot;&amp;gt;&amp;quot;):
+            if seq: #seq not empty, process it
+                trim = &#39;\n&#39;.join(&#39;&#39;.join(seq).replace(&amp;quot;N&amp;quot;,&amp;quot; &amp;quot;).split())
+                print(trim)
+                seq = []
+            print(line.strip())
+        else:
+            #Read lines into a single seq
+            seq.append(line.strip())
+    if seq: #seq not empty, process it
+                trim = &#39;\n&#39;.join(&#39;&#39;.join(seq).replace(&amp;quot;N&amp;quot;,&amp;quot; &amp;quot;).split())
+                print(trim)
+                seq = []
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;1_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGTACACACGTAGCAGCATCAGCAT
+GTTGGACGG
+GGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCG
+&amp;gt;2_name
+ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGTACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG
+GGTGACACACGAGATATATFAGATCAACGTAAGGGATGA
+AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCG
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Calculate row sums and col means with tidyR</title>

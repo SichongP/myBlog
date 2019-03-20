@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Academic</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Academic</description>
+    <title>Python on Academic</title>
+    <link>/tags/python/</link>
+    <description>Recent content in Python on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,19 +23,6 @@ Here is what an example file looks like:
 - Single line FASTA
 Each record consists of two line: a name line (starts with &amp;ldquo;&amp;gt;&amp;rdquo;) and a sequence line. - Multiline FASTA
 Each records consists of multiple lines, First line is a name line (starts with &amp;ldquo;&amp;gt;&amp;rdquo;), followed by multiple lines of sequences.</description>
-    </item>
-    
-    <item>
-      <title>Calculate row sums and col means with tidyR</title>
-      <link>/post/calculate-row-sums-and-col-means-with-tidyr/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/calculate-row-sums-and-col-means-with-tidyr/</guid>
-      <description>Recently Someone asked a question on reddit: Adding a row and a column that are means for a set matrix
-This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?
-Let’s give it a try.
-Here is the question:
-I have the following sequence:</description>
     </item>
     
   </channel>

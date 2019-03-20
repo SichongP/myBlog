@@ -33,7 +33,7 @@
   <meta name="description" content="PhD student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/tags/deep-learning/">
+  <link rel="alternate" hreflang="en-us" href="/tags/fasta/">
 
   
 
@@ -100,15 +100,15 @@
   
 
   
-  <link rel="alternate" href="/tags/deep-learning/index.xml" type="application/rss+xml" title="Academic">
-  <link rel="feed" href="/tags/deep-learning/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="alternate" href="/tags/fasta/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="feed" href="/tags/fasta/index.xml" type="application/rss+xml" title="Academic">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/deep-learning/">
+  <link rel="canonical" href="/tags/fasta/">
 
   
   
@@ -123,19 +123,19 @@
   <meta property="twitter:creator" content="@Sichong93">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/tags/deep-learning/">
-  <meta property="og:title" content="Deep Learning | Academic">
+  <meta property="og:url" content="/tags/fasta/">
+  <meta property="og:title" content="FASTA | Academic">
   <meta property="og:description" content="PhD student"><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2016-04-27T00:00:00-07:00">
+  <meta property="og:updated_time" content="2019-03-20T00:00:00&#43;00:00">
   
 
   
 
   
 
-  <title>Deep Learning | Academic</title>
+  <title>FASTA | Academic</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -297,7 +297,7 @@
     
   
 <div class="universal-wrapper pt-3">
-  <h1 itemprop="name">Deep Learning</h1>
+  <h1 itemprop="name">FASTA</h1>
 
   
 
@@ -312,10 +312,15 @@
   
   
   <div>
-    <h2><a href="/project/internal-project/">Internal Project</a></h2>
+    <h2><a href="/post/split-a-fasta-record-by-ns/">Split a FASTA record by Ns</a></h2>
     <div class="article-style">
       
-      An example of using the in-built project page.
+      I want to split sequences in a fasta file at Ns.
+Here is what an example file looks like:
+&gt;1_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATNNNNNNNNNNNNNNNNNNNNGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN &gt;2_name ACGTTGCGGCATTCGATCGACGATCGATGCAAACGGTCACGGACTGACTGT ACACACGTAGCAGCATCAGCATATTCGATGGCATCGATACCGGTTGGACGG NNNNNNNNNNNNGGTGACACACGAGATATATFAGATCAACGTAAGGGATGA NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN AGTCGCTAGCATGCATGGCATATACGCGATCGATTCGATAGCTAGCGNNNN  There are two common formats for FASTA files:
+- Single line FASTA
+Each record consists of two line: a name line (starts with &ldquo;&gt;&rdquo;) and a sequence line. - Multiline FASTA
+Each records consists of multiple lines, First line is a name line (starts with &ldquo;&gt;&rdquo;), followed by multiple lines of sequences.
       
     </div>
   </div>
