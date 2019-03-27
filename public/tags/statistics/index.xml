@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Academic</title>
+    <link>/tags/statistics/</link>
+    <description>Recent content in Statistics on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Haplotype, LD, and Association Tests</title>
+      <link>/post/haplotype-ld-and-association-tests/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/haplotype-ld-and-association-tests/</guid>
+      <description>This is the first post of my QE prep series. I&amp;rsquo;ll be taking notes on my study for general knowledge section of my QE. I&amp;rsquo;m gonna start this off with my favorite topic in our GGG series classes: population genetics
+Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequilibrium, I want to go back to the &amp;ldquo;Dark Age&amp;rdquo; of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis.</description>
+    </item>
+    
+  </channel>
+</rss>
