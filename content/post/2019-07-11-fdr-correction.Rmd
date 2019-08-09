@@ -12,6 +12,7 @@ tags:
 image:
   caption: ''
   focal_point: ''
+draft: true
 ---
 
 ```{r include=FALSE}
@@ -67,7 +68,7 @@ for (i in c(1:1000))
 ggplot(data.frame(means)) + geom_histogram(aes(x=means), binwidth = 0.1)
 ```
 
-It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should be follow a normal distribution and the majority of results should be near where the mean of this normal distribution ($\mu=0$) is. Is it possible that we get a mean of 0.6 from a fair coin? **Yes, possible but not likely!**
+It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should follow a normal distribution and the majority of results should be near where the mean of this normal distribution ($\mu=0$) is. Is it possible that we get a mean of 0.6 from a fair coin? **Yes, possible but not likely!**
 
 Of course, in reality we normally only run an experiment once and therefore, won't get a distribution of means. But intuitively, we know if our mean is too far away from the center of this normal distribution, our true mean is probably not 0! 
 
@@ -91,3 +92,12 @@ legend("topright", inset=.05, title="Distributions",
   labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
 ```
 
+For our data from coin flips, we can perform a t-test, with the null hypothesis being that the true mean is zero:
+```{r}
+t.test(flips, mu = 0)
+```
+
+In the above output, we can see the result of the t-test: the p-value is 1. This means that if we assume null hypothesis ($\mu=0$), we can expect to see our data or more extreme with a probability of 1. This is as high as it gets, meaning we are very confident that we have a fair coin (as we know).
+
+Now what if the coin is slightly unbalanced?
+Let's say 

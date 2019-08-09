@@ -16,7 +16,9 @@
       <guid>/post/2019-08-07-write-scientific-paper-in-markdown/</guid>
       <description>
 
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;h1 id=&#34;write-scientific-paper-in-markdown&#34;&gt;Write scientific paper in markdown&lt;/h1&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;If you have ever written a scientific paper in MS Word (or any other word processing software) then you&amp;rsquo;re probably experienced frustrations like me: Word constantly crashing when loaded with too many high-resolution figures, citations getting messed up when working with others that use different citation managers, or hard to keep track of hundreds of versions of the draft, etc.&lt;/p&gt;
 
@@ -26,13 +28,110 @@
 
 &lt;p&gt;That led me to think: markdown is a fantastic format that is both intuitive and powerful. Why not write in markdown? After a short search, I&amp;rsquo;m happy to report that this is indeed possible!&lt;/p&gt;
 
-&lt;h1 id=&#34;what-does-writing-a-scientific-paper-require&#34;&gt;What does writing a scientific paper require?&lt;/h1&gt;
+&lt;h2 id=&#34;what-does-writing-a-scientific-paper-require&#34;&gt;What does writing a scientific paper require?&lt;/h2&gt;
 
 &lt;p&gt;Content aside, to write a scientific paper efficiently, one needs at least the following elements:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Easy way to insert and manage&lt;/li&gt;
+&lt;li&gt;Easy way to insert and manage citations.&lt;/li&gt;
+&lt;li&gt;Easy way to insert and manage high resolution figures&lt;/li&gt;
+&lt;li&gt;Easy way to format tables&lt;/li&gt;
+&lt;li&gt;Can be converted to other formats (pdf, html, etc)&lt;/li&gt;
+&lt;li&gt;Allows collaborative writing&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;Atom is an excellent text editor that with packages can do almost all of the above!&lt;/p&gt;
+
+&lt;h2 id=&#34;required-software-and-packages&#34;&gt;Required software and packages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://atom.io/&#34; target=&#34;_blank&#34;&gt;Atom&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://atom.io/packages/markdown-preview-enhanced&#34; target=&#34;_blank&#34;&gt;markdown-preview-enhanced&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://atom.io/packages/zotero-citations&#34; target=&#34;_blank&#34;&gt;zotero-citations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://pandoc.org/&#34; target=&#34;_blank&#34;&gt;Pandoc&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.latex-project.org/get/&#34; target=&#34;_blank&#34;&gt;A Tex distribution for your OS&lt;/a&gt; (I used Tex Live for my linux system)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.zotero.org/&#34; target=&#34;_blank&#34;&gt;Zotero citation manager&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://retorque.re/zotero-better-bibtex/installation/&#34; target=&#34;_blank&#34;&gt;Bbibtex Add-on&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once you have all required packages installed, it&amp;rsquo;s time to start writing!&lt;/p&gt;
+
+&lt;h2 id=&#34;write-a-paper&#34;&gt;Write a paper&lt;/h2&gt;
+
+&lt;p&gt;Writing a paper in markdown is as easy as it sounds: use &lt;code&gt;#&lt;/code&gt; for titles and subtitles, use &lt;code&gt;|&lt;/code&gt; to format a table, among other things.&lt;/p&gt;
+
+&lt;h3 id=&#34;write-math-equations&#34;&gt;Write math equations&lt;/h3&gt;
+
+&lt;p&gt;You can use Latex syntax to write a math equation, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$f_A^2+2f_Af_B+f_B^2=1$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;$f_A^2+2f_Af_B+f_B^2=1$&lt;/p&gt;
+
+&lt;h3 id=&#34;import-figures&#34;&gt;Import figures:&lt;/h3&gt;
+
+&lt;p&gt;The way you would import a figure is a little different from the standard markdown way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@import &amp;quot;figure.png&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Would import the figure at current location. You can even further configure the figure like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@import &amp;quot;figure.png&amp;quot; {width=&amp;quot;300px&amp;quot; height=&amp;quot;200px&amp;quot; title=&amp;quot;my title&amp;quot; alt=&amp;quot;my alt&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;insert-citations&#34;&gt;Insert citations:&lt;/h3&gt;
+
+&lt;p&gt;In order to insert a citation, you need to have zotero open. With zotero open, you can call up zotero citation picker by either pressing &lt;code&gt;ctrl&lt;/code&gt; + &lt;code&gt;alt&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt; or pressing &lt;code&gt;ctrl&lt;/code&gt; + &lt;code&gt;shift&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt; to call up the command palate and search for &amp;ldquo;zotero citations: pick&amp;rdquo;. In the citation picker window like below: &lt;img src=&#34;/img/zotero_picker.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;type in the reference you wish to insert and hit &lt;code&gt;enter&lt;/code&gt;. A string of citation key should appear in your document:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@bryoisEvaluationChromatinAccessibility2018
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Surround this reference key with &lt;code&gt;[]&lt;/code&gt; and you&amp;rsquo;re good to go! Once you export this document to a pdf, word, or html format, the reference will be automatically appended to the end of your document and the ref key will be replaced with corresponding references, like so: &lt;img src=&#34;/img/citation_eg.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To add multiple citations, use &lt;code&gt;;&lt;/code&gt; to separate ref keys, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[@bintuSuperresolutionChromatinTracing2018; @bryoisEvaluationChromatinAccessibility2018]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly, in order for pandoc to render citations correctly, you must provide a &lt;code&gt;bib&lt;/code&gt; file that contains all your citations and their corresponding ref keys.&lt;/p&gt;
+
+&lt;p&gt;To do this, head on to zotero and click &lt;code&gt;File&lt;/code&gt; -&amp;gt; &lt;code&gt;Export library&lt;/code&gt;, in the format section, choose &lt;code&gt;Better Bibtex&lt;/code&gt;. If you want the exported library up to date with your zotero library, check &lt;code&gt;Keep updated&lt;/code&gt;. Once you have the exported library, add yaml frontmatter to the beginning of your document, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+bibliography: My Library.bib
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;export-to-other-formats&#34;&gt;Export to other formats&lt;/h3&gt;
+
+&lt;p&gt;With pandoc, you can easily convert the markdown format to other text formats like pdf, word, and tex. To do this, first add &lt;code&gt;output: word_document&lt;/code&gt; to your document&amp;rsquo;s frontmatter, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+bibliography: My Library.bib
+output: word_document
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and then you can right clock on the preview panel on the right to export the document through pandoc: &lt;img src=&#34;/img/pandoc_right_click.png&#34; alt=&#34;&#34; /&gt; This will output your document to a Word document. To output to PDF, simple change the value of &lt;code&gt;output&lt;/code&gt; in frontmatter to &lt;code&gt;pdf_document&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Markdown is an incredibly intuitive text format and yet still versatile and powerful enough for productive writing. It has recently surged to new favorite of many among developers, scientists, and journalists. It will certainly keep raising in popularity due to its friendliness and expandability.&lt;/p&gt;
+
+&lt;p&gt;Writing a scientific document in markdown has freed me of many frustrations caused by Word and with incredible &lt;code&gt;pandoc&lt;/code&gt;, I never have to wrestle with any of my collaborators over which text editor we are to use. It has been a life saver!&lt;/p&gt;
 </description>
     </item>
     
@@ -62,10 +161,10 @@
 &lt;p&gt;In the coin flip example, if we record 1 everytime we get a head and -1 everytime we get a tail, after many times of flips, we would expect to get a mean score of 0. Let’s simulate this process in R:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;flips = sample(c(-1,1), 20, replace = TRUE, prob = c(0.5, 0.5))
 flips&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  1  1  1 -1  1 -1  1 -1 -1 -1 -1 -1  1  1 -1  1 -1 -1 -1  1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] -1 -1  1 -1 -1 -1 -1  1 -1 -1 -1 -1  1  1 -1  1  1 -1 -1 -1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the above code, by setting &lt;code&gt;prob=c(0.5, 0.5)&lt;/code&gt;, we’re saying this is a fair coin. Now let’s see what the mean we got from this simulation is:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(flips)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -0.1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] -0.4&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It’s not 0 as we expected it to be, even though we know we’re flipping a fair coin!
 Now you probably know this is normal - The probability of getting 9 heads out of 20 flips is &lt;span class=&#34;math inline&#34;&gt;\(P_{9/20}=C_{20}^9(\frac{1}{2})^9(\frac{1}{2})^{11}=16%\)&lt;/span&gt;, not a very low chance at all! This is called sampling variablity.&lt;/p&gt;
 &lt;p&gt;Therefore, just because observed data isn’t identical to our expected data, doesn’t mean we should reject our null hypothesis. Now how can we make this decision then?&lt;/p&gt;
@@ -77,7 +176,7 @@ for (i in c(1:1000))
 }
 ggplot(data.frame(means)) + geom_histogram(aes(x=means), binwidth = 0.1)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-07-11-fdr-correction_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should be follow a normal distribution and the majority of results should be near where the mean of this normal distribution (&lt;span class=&#34;math inline&#34;&gt;\(\mu=0\)&lt;/span&gt;) is. Is it possible that we get a mean of 0.6 from a fair coin? &lt;strong&gt;Yes, possible but not likely!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should follow a normal distribution and the majority of results should be near where the mean of this normal distribution (&lt;span class=&#34;math inline&#34;&gt;\(\mu=0\)&lt;/span&gt;) is. Is it possible that we get a mean of 0.6 from a fair coin? &lt;strong&gt;Yes, possible but not likely!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Of course, in reality we normally only run an experiment once and therefore, won’t get a distribution of means. But intuitively, we know if our mean is too far away from the center of this normal distribution, our true mean is probably not 0!&lt;/p&gt;
 &lt;p&gt;In practice, we compare our sample mean to a &lt;em&gt;t&lt;/em&gt;-distribution. This is because our sample size is relatively small (20 flips) and there is some deviation from normal distribution when we calculate mean based on a small sample size. The shape of a &lt;em&gt;t&lt;/em&gt;-distribution depends on sample size, or degree of freedom (df):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- seq(-4, 4, length=100)
@@ -97,6 +196,22 @@ for (i in 1:4){
 legend(&amp;quot;topright&amp;quot;, inset=.05, title=&amp;quot;Distributions&amp;quot;,
   labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-07-11-fdr-correction_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For our data from coin flips, we can perform a t-test, with the null hypothesis being that the true mean is zero:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(flips, mu = 0)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  flips
+## t = -1.9024, df = 19, p-value = 0.07239
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.8400855  0.0400855
+## sample estimates:
+## mean of x 
+##      -0.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the above output, we can see the result of the t-test: the p-value is 1. This means that if we assume null hypothesis (&lt;span class=&#34;math inline&#34;&gt;\(\mu=0\)&lt;/span&gt;), we can expect to see our data or more extreme with a probability of 1. This is as high as it gets, meaning we are very confident that we have a fair coin (as we know).&lt;/p&gt;
+&lt;p&gt;Now what if the coin is slightly unbalanced?
+Let’s say&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

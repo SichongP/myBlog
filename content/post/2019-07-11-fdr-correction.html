@@ -12,6 +12,7 @@ tags:
 image:
   caption: ''
   focal_point: ''
+draft: true
 ---
 
 
@@ -33,10 +34,10 @@ image:
 <p>In the coin flip example, if we record 1 everytime we get a head and -1 everytime we get a tail, after many times of flips, we would expect to get a mean score of 0. Let’s simulate this process in R:</p>
 <pre class="r"><code>flips = sample(c(-1,1), 20, replace = TRUE, prob = c(0.5, 0.5))
 flips</code></pre>
-<pre><code>##  [1]  1  1  1 -1  1 -1  1 -1 -1 -1 -1 -1  1  1 -1  1 -1 -1 -1  1</code></pre>
+<pre><code>##  [1] -1 -1  1 -1 -1 -1 -1  1 -1 -1 -1 -1  1  1 -1  1  1 -1 -1 -1</code></pre>
 <p>In the above code, by setting <code>prob=c(0.5, 0.5)</code>, we’re saying this is a fair coin. Now let’s see what the mean we got from this simulation is:</p>
 <pre class="r"><code>mean(flips)</code></pre>
-<pre><code>## [1] -0.1</code></pre>
+<pre><code>## [1] -0.4</code></pre>
 <p>It’s not 0 as we expected it to be, even though we know we’re flipping a fair coin!
 Now you probably know this is normal - The probability of getting 9 heads out of 20 flips is <span class="math inline">\(P_{9/20}=C_{20}^9(\frac{1}{2})^9(\frac{1}{2})^{11}=16%\)</span>, not a very low chance at all! This is called sampling variablity.</p>
 <p>Therefore, just because observed data isn’t identical to our expected data, doesn’t mean we should reject our null hypothesis. Now how can we make this decision then?</p>
@@ -48,7 +49,7 @@ for (i in c(1:1000))
 }
 ggplot(data.frame(means)) + geom_histogram(aes(x=means), binwidth = 0.1)</code></pre>
 <p><img src="/post/2019-07-11-fdr-correction_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should be follow a normal distribution and the majority of results should be near where the mean of this normal distribution (<span class="math inline">\(\mu=0\)</span>) is. Is it possible that we get a mean of 0.6 from a fair coin? <strong>Yes, possible but not likely!</strong></p>
+<p>It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should follow a normal distribution and the majority of results should be near where the mean of this normal distribution (<span class="math inline">\(\mu=0\)</span>) is. Is it possible that we get a mean of 0.6 from a fair coin? <strong>Yes, possible but not likely!</strong></p>
 <p>Of course, in reality we normally only run an experiment once and therefore, won’t get a distribution of means. But intuitively, we know if our mean is too far away from the center of this normal distribution, our true mean is probably not 0!</p>
 <p>In practice, we compare our sample mean to a <em>t</em>-distribution. This is because our sample size is relatively small (20 flips) and there is some deviation from normal distribution when we calculate mean based on a small sample size. The shape of a <em>t</em>-distribution depends on sample size, or degree of freedom (df):</p>
 <pre class="r"><code>x &lt;- seq(-4, 4, length=100)
@@ -68,5 +69,21 @@ for (i in 1:4){
 legend(&quot;topright&quot;, inset=.05, title=&quot;Distributions&quot;,
   labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)</code></pre>
 <p><img src="/post/2019-07-11-fdr-correction_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>For our data from coin flips, we can perform a t-test, with the null hypothesis being that the true mean is zero:</p>
+<pre class="r"><code>t.test(flips, mu = 0)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  flips
+## t = -1.9024, df = 19, p-value = 0.07239
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.8400855  0.0400855
+## sample estimates:
+## mean of x 
+##      -0.4</code></pre>
+<p>In the above output, we can see the result of the t-test: the p-value is 1. This means that if we assume null hypothesis (<span class="math inline">\(\mu=0\)</span>), we can expect to see our data or more extreme with a probability of 1. This is as high as it gets, meaning we are very confident that we have a fair coin (as we know).</p>
+<p>Now what if the coin is slightly unbalanced?
+Let’s say</p>
 </div>
 </div>
