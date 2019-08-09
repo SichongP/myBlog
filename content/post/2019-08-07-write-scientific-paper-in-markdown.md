@@ -61,17 +61,19 @@ $f_A^2+2f_Af_B+f_B^2=1$
 
 ### Import figures:
 
-The way you would import a figure is a little different from the standard markdown way:
+You can insert a figure in typical markdown way:
 
 ```
-@import "figure.png"
+![alt text](figure.png)
 ```
 
-Would import the figure at current location. You can even further configure the figure like so:
+his wWould import the figure at current location. You can even further configure the figure like so:
 
 ```
-@import "figure.png" {width="300px" height="200px" title="my title" alt="my alt"}
+![alt tex](figure.png){#id .class width=300px height=200px}
 ```
+
+Note: Because `markdown preview enhanced` by default uses a different render engine to render the preview, you will not see change to figure size in the preview but it will be rendered when converting to another output. You can also change its default markdown render engine to pandoc to see size change in preview.
 
 ### Insert citations:
 
