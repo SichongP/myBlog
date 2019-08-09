@@ -7,8 +7,6 @@ image:
   focal_point: ''
 ---
 
-# Write scientific paper in markdown
-
 ## Introduction
 
 If you have ever written a scientific paper in MS Word (or any other word processing software) then you're probably experienced frustrations like me: Word constantly crashing when loaded with too many high-resolution figures, citations getting messed up when working with others that use different citation managers, or hard to keep track of hundreds of versions of the draft, etc.
@@ -34,7 +32,6 @@ Atom is an excellent text editor that with packages can do almost all of the abo
 ## Required software and packages
 
 - [Atom](https://atom.io/)
-
   - [markdown-preview-enhanced](https://atom.io/packages/markdown-preview-enhanced)
   - [zotero-citations](https://atom.io/packages/zotero-citations)
 
@@ -43,7 +40,6 @@ Atom is an excellent text editor that with packages can do almost all of the abo
 - [A Tex distribution for your OS](https://www.latex-project.org/get/) (I used Tex Live for my linux system)
 
 - [Zotero citation manager](https://www.zotero.org/)
-
   - [Bbibtex Add-on](https://retorque.re/zotero-better-bibtex/installation/)
 
 Once you have all required packages installed, it's time to start writing!
