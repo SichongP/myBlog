@@ -1,7 +1,7 @@
 +++
 # Projects widget.
 widget = "projects"  # Do not modify this line!
-active = false  # Activate this widget? true/false
+active = true  # Activate this widget? true/false
 
 title = "Projects"
 subtitle = ""
@@ -39,14 +39,6 @@ filter_default = 0
 [[filter]]
   name = "All"
   tag = "*"
-
-[[filter]]
-  name = "Deep Learning"
-  tag = "Deep Learning"
-
-[[filter]]
-  name = "Other"
-  tag = "Demo"
 
 +++
 

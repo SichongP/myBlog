@@ -5,8 +5,67 @@
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 14:11:14 -0700</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>EzProtocol</title>
+      <link>/project/ezprotocol/</link>
+      <pubDate>Fri, 09 Aug 2019 14:11:14 -0700</pubDate>
+      
+      <guid>/project/ezprotocol/</guid>
+      <description>
+
+&lt;p&gt;ezProtocol is a program designed for Opentrons OT2 robot. It handles writing detailed script for you so you can spend your time on things that matter. It can be found &lt;a href=&#34;https://github.com/SichongP/ezProtocol&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;ezProtocol can read protocol file in a format designed to be easy but versatile.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/ucdavis/VGL_OT-2/blob/protocolWriter/dev/protocolWriter/How_to_write_a_protocol.md&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; on how to make a protocol file.&lt;/p&gt;
+
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;ezProtocol relies on below packages:
+- PyYAML
+- Pandas
+- python-frontmatter
+- regex
+- opentrons&lt;/p&gt;
+
+&lt;h2 id=&#34;installation-pip-deploy-pending&#34;&gt;Installation (pip deploy pending)&lt;/h2&gt;
+
+&lt;p&gt;Clone this repo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/SichongP/ezProtocol
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ezProtocol
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Or&lt;/strong&gt;, use install.sh script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Test installation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ezprotocol -h
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;Once you have protocol and deck layout file ready (see &lt;a href=&#34;https://github.com/ucdavis/VGL_OT-2/blob/protocolWriter/dev/protocolWriter/How_to_write_a_protocol.md&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; for more detail on protocol and layout format), on commandline, type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ezprotocol -p protocol.txt -d deck_layout.csv -o ot2_script.py
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Write scientific paper in markdown</title>
@@ -78,15 +137,17 @@
 
 &lt;h3 id=&#34;import-figures&#34;&gt;Import figures:&lt;/h3&gt;
 
-&lt;p&gt;The way you would import a figure is a little different from the standard markdown way:&lt;/p&gt;
+&lt;p&gt;You can insert a figure in typical markdown way:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;@import &amp;quot;figure.png&amp;quot;
+&lt;pre&gt;&lt;code&gt;![alt text](figure.png)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Would import the figure at current location. You can even further configure the figure like so:&lt;/p&gt;
+&lt;p&gt;This would import the figure at current location. You can even further configure the figure like so:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;@import &amp;quot;figure.png&amp;quot; {width=&amp;quot;300px&amp;quot; height=&amp;quot;200px&amp;quot; title=&amp;quot;my title&amp;quot; alt=&amp;quot;my alt&amp;quot;}
+&lt;pre&gt;&lt;code&gt;![alt tex](figure.png){#id .class width=300px height=200px}
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note: Because &lt;code&gt;markdown preview enhanced&lt;/code&gt; by default uses a different render engine to render the preview, you will not see change to figure size in the preview but it will be rendered when converting to another output. You can also change its default markdown render engine to pandoc to see size change in preview.&lt;/p&gt;
 
 &lt;h3 id=&#34;insert-citations&#34;&gt;Insert citations:&lt;/h3&gt;
 
@@ -944,33 +1005,6 @@ Click on the **Slides** button above to view the built-in slides feature.
 &lt;/ul&gt;
 
 &lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/project/external-project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Internal Project</title>
-      <link>/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/project/internal-project/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
 </description>
     </item>
     

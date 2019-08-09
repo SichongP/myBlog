@@ -254,6 +254,25 @@ Of course, Latex is always an excellent solution to all those problems."><meta p
         
 
         <li class="nav-item">
+          <a class="nav-link" href="/project">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
           <a class="nav-link" href="/#contact">
             
             <span>Contact</span>
@@ -488,15 +507,17 @@ Of course, Latex is always an excellent solution to all those problems."><meta p
 
 <h3 id="import-figures">Import figures:</h3>
 
-<p>The way you would import a figure is a little different from the standard markdown way:</p>
+<p>You can insert a figure in typical markdown way:</p>
 
-<pre><code>@import &quot;figure.png&quot;
+<pre><code>![alt text](figure.png)
 </code></pre>
 
-<p>Would import the figure at current location. You can even further configure the figure like so:</p>
+<p>This would import the figure at current location. You can even further configure the figure like so:</p>
 
-<pre><code>@import &quot;figure.png&quot; {width=&quot;300px&quot; height=&quot;200px&quot; title=&quot;my title&quot; alt=&quot;my alt&quot;}
+<pre><code>![alt tex](figure.png){#id .class width=300px height=200px}
 </code></pre>
+
+<p>Note: Because <code>markdown preview enhanced</code> by default uses a different render engine to render the preview, you will not see change to figure size in the preview but it will be rendered when converting to another output. You can also change its default markdown render engine to pandoc to see size change in preview.</p>
 
 <h3 id="insert-citations">Insert citations:</h3>
 

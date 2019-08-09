@@ -4,7 +4,24 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+      <lastmod>2019-08-09T14:11:14-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/ezprotocol/</loc>
+      <lastmod>2019-08-09T14:11:14-07:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/</loc>
+      <lastmod>2019-08-09T14:11:14-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -63,7 +80,7 @@
     
     <url>
     
-      <loc>/categories/statistics/</loc>
+      <loc>/tags/statistics/</loc>
       <lastmod>2019-07-11T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -72,7 +89,7 @@
     
     <url>
     
-      <loc>/tags/statistics/</loc>
+      <loc>/categories/statistics/</loc>
       <lastmod>2019-07-11T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -125,7 +142,7 @@
     
     <url>
     
-      <loc>/categories/python/</loc>
+      <loc>/tags/python/</loc>
       <lastmod>2019-03-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -134,7 +151,7 @@
     
     <url>
     
-      <loc>/tags/python/</loc>
+      <loc>/categories/python/</loc>
       <lastmod>2019-03-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -220,49 +237,6 @@
     
       <loc>/talk/</loc>
       <lastmod>2017-01-01T00:00:00-08:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/demo/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/external-project/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/internal-project/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-      <priority>0</priority>
     </url>
     
   
