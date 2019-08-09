@@ -5,6 +5,7 @@ date: '2019-08-07'
 image:
   caption: ''
   focal_point: ''
+math: true
 ---
 
 ## Introduction
