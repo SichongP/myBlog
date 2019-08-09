@@ -1,7 +1,7 @@
 +++
 title = "EzProtocol"
 date = 2019-08-09T14:11:14-07:00
-draft = true
+draft = false
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
