@@ -6,53 +6,35 @@
     <description>Recent content in Tags on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Deep Learning</title>
-      <link>/tags/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Demo</title>
-      <link>/tags/demo/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/tags/demo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>FASTA</title>
-      <link>/tags/fasta/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/fasta/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Population Genetics</title>
       <link>/tags/population-genetics/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 11 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/population-genetics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Thu, 11 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/python/</guid>
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Thu, 11 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     
@@ -66,20 +48,20 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>FASTA</title>
+      <link>/tags/fasta/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r/</guid>
+      <guid>/tags/fasta/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Statistics</title>
-      <link>/tags/statistics/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/statistics/</guid>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
@@ -98,6 +80,24 @@
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>/tags/demo/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/demo/</guid>
       <description></description>
     </item>
     

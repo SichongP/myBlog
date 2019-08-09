@@ -6,10 +6,30 @@
     <description>Recent content in Posts on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Write scientific paper in markdown</title>
+      <link>/post/2019-08-07-write-scientific-paper-in-markdown/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-07-write-scientific-paper-in-markdown/</guid>
+      <description>Introduction If you have ever written a scientific paper in MS Word (or any other word processing software) then you&amp;rsquo;re probably experienced frustrations like me: Word constantly crashing when loaded with too many high-resolution figures, citations getting messed up when working with others that use different citation managers, or hard to keep track of hundreds of versions of the draft, etc.
+Of course, Latex is always an excellent solution to all those problems.</description>
+    </item>
+    
+    <item>
+      <title>Hypothesis testing and multiple test correction</title>
+      <link>/post/fdr-correction/</link>
+      <pubDate>Thu, 11 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fdr-correction/</guid>
+      <description>Why multiple testing correction? Multiple testing refers to a practice where we apply the same statistical test independantly multiple times. This raises a problem that’s related to hypothesis testing: the more independant tests we do, the more inflated our false positive rate becomes. Here I’m gonna use a simple example to explain why multiple testing correction is crucial for hypothesis testing.
+An example - Are you being cheated? Imagine that you’re playing a game where the host lets you flip a coin, if it’s a head, you get a point.</description>
+    </item>
     
     <item>
       <title>Haplotype, LD, and Association Tests</title>
@@ -17,8 +37,7 @@
       <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/haplotype-ld-and-association-tests/</guid>
-      <description>This is the first post of my QE prep series. I&amp;rsquo;ll be taking notes on my study for general knowledge section of my QE. I&amp;rsquo;m gonna start this off with my favorite topic in our GGG series classes: population genetics
-Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequilibrium, I want to go back to the &amp;ldquo;Dark Age&amp;rdquo; of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis.</description>
+      <description>Table of content  Table of content What Are Haplotype and Linkage Disequilibrium (LD) Quantify LD  Linkage Disequilibrium Coefficient ($D$): Standardized Linkage Disequilibrium Coefficient ($D&amp;rsquo;$) Correlation coefficient ($\gamma^2$)  Now why do we care about LD and haplotype?  LD is an indication of deviation from Hardy-Weinberg equilibrium.   This is the first post of my QE prep series. I&amp;rsquo;ll be taking notes on my study for general knowledge section of my QE.</description>
     </item>
     
     <item>
@@ -45,16 +64,7 @@ Each records consists of multiple lines, First line is a name line (starts with 
 This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?
 Let’s give it a try.
 Here is the question:
-I have the following sequence:</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/post/2019-03-21-haplotype-ld-and-association-tests/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-03-21-haplotype-ld-and-association-tests/</guid>
-      <description>Haplotype, LD, and Association Testscode{white-space: pre;}pre:not([class]) {background-color: white;}if (window.hljs) {hljs.configure({languages: []});hljs.initHighlightingOnLoad();if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) {window.setTimeout(function() { hljs.initHighlighting(); }, 0);}}h1 {font-size: 34px;}h1.title {font-size: 38px;}h2 {font-size: 30px;}h3 {font-size: 24px;}h4 {font-size: 18px;}h5 {font-size: 16px;}h6 {font-size: 12px;}.</description>
+ I have the following sequence:</description>
     </item>
     
   </channel>

@@ -1,4 +1,4 @@
 theme = "hugo-academic"
-baseURL = ""
+baseURL = "http://127.0.0.1:5435/"
 languageCode = "en-us"
 title = "Sichong Peng"

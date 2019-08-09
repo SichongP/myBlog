@@ -39,12 +39,13 @@ data_matrix
 
 They want to calculate the mean of each column and sum of each row.  
 Now if you know some basic R this can very easily be achieved:
-```{r, results='asis'}
+```{r}
 data_df = data.frame(data_matrix)
 data_df[,ncol(data_df)+1] = rowSums(data_df)
 data_df[nrow(data_df)+1,] = colMeans(data_df)
-data_df
+head(data_df)
 ```
+
 
 But how can we do this "tidy" way? Turns out this is more complicated than I originally thought.
 

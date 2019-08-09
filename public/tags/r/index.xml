@@ -6,10 +6,20 @@
     <description>Recent content in R on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hypothesis testing and multiple test correction</title>
+      <link>/post/fdr-correction/</link>
+      <pubDate>Thu, 11 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fdr-correction/</guid>
+      <description>Why multiple testing correction? Multiple testing refers to a practice where we apply the same statistical test independantly multiple times. This raises a problem that’s related to hypothesis testing: the more independant tests we do, the more inflated our false positive rate becomes. Here I’m gonna use a simple example to explain why multiple testing correction is crucial for hypothesis testing.
+An example - Are you being cheated? Imagine that you’re playing a game where the host lets you flip a coin, if it’s a head, you get a point.</description>
+    </item>
     
     <item>
       <title>Calculate row sums and col means with tidyR</title>
@@ -21,7 +31,7 @@
 This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?
 Let’s give it a try.
 Here is the question:
-I have the following sequence:</description>
+ I have the following sequence:</description>
     </item>
     
   </channel>

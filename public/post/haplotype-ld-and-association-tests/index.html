@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.0.0">
-  <meta name="generator" content="Hugo 0.54.0" />
+  <meta name="generator" content="Hugo 0.55.6" />
 
   
 
@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="This is the first post of my QE prep series. I&rsquo;ll be taking notes on my study for general knowledge section of my QE. I&rsquo;m gonna start this off with my favorite topic in our GGG series classes: population genetics
-Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequilibrium, I want to go back to the &ldquo;Dark Age&rdquo; of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis.">
+  <meta name="description" content="Table of content  Table of content What Are Haplotype and Linkage Disequilibrium (LD) Quantify LD  Linkage Disequilibrium Coefficient ($D$): Standardized Linkage Disequilibrium Coefficient ($D&rsquo;$) Correlation coefficient ($\gamma^2$)  Now why do we care about LD and haplotype?  LD is an indication of deviation from Hardy-Weinberg equilibrium.   This is the first post of my QE prep series. I&rsquo;ll be taking notes on my study for general knowledge section of my QE.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/haplotype-ld-and-association-tests/">
@@ -96,6 +95,20 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
 
   
   
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-137015268-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
   
 
   
@@ -124,8 +137,7 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
   <meta property="og:site_name" content="Academic">
   <meta property="og:url" content="/post/haplotype-ld-and-association-tests/">
   <meta property="og:title" content="Haplotype, LD, and Association Tests | Academic">
-  <meta property="og:description" content="This is the first post of my QE prep series. I&rsquo;ll be taking notes on my study for general knowledge section of my QE. I&rsquo;m gonna start this off with my favorite topic in our GGG series classes: population genetics
-Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequilibrium, I want to go back to the &ldquo;Dark Age&rdquo; of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Table of content  Table of content What Are Haplotype and Linkage Disequilibrium (LD) Quantify LD  Linkage Disequilibrium Coefficient ($D$): Standardized Linkage Disequilibrium Coefficient ($D&rsquo;$) Correlation coefficient ($\gamma^2$)  Now why do we care about LD and haplotype?  LD is an indication of deviation from Hardy-Weinberg equilibrium.   This is the first post of my QE prep series. I&rsquo;ll be taking notes on my study for general knowledge section of my QE."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-03-21T00:00:00&#43;00:00">
@@ -331,7 +343,7 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    11 min read
   </span>
   
 
@@ -423,21 +435,459 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
     <div class="article-style" itemprop="articleBody">
       
 
+<h1 id="table-of-content">Table of content</h1>
+
+<hr />
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+<ul>
+<li><a href="#table-of-content">Table of content</a></li>
+<li><a href="#what-are-haplotype-and-linkage-disequilibrium-ld">What Are Haplotype and Linkage Disequilibrium (LD)</a></li>
+<li><a href="#quantify-ld">Quantify LD</a>
+
+<ul>
+<li><a href="#linkage-disequilibrium-coefficient-d">Linkage Disequilibrium Coefficient ($D$):</a></li>
+<li><a href="#standardized-linkage-disequilibrium-coefficient-d">Standardized Linkage Disequilibrium Coefficient ($D&rsquo;$)</a></li>
+<li><a href="#correlation-coefficient-gamma2">Correlation coefficient ($\gamma^2$)</a></li>
+</ul></li>
+<li><a href="#now-why-do-we-care-about-ld-and-haplotype">Now why do we care about LD and haplotype?</a>
+
+<ul>
+<li><a href="#ld-is-an-indication-of-deviation-from-hardy-weinberg-equilibrium">LD is an indication of deviation from Hardy-Weinberg equilibrium.</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<hr />
+
 <p><em>This is the first post of my QE prep series. I&rsquo;ll be taking notes on my study for general knowledge section of my QE. I&rsquo;m gonna start this off with my favorite topic in our GGG series classes: population genetics</em></p>
 
-<h2 id="haplotype-and-linkage-disequilibrium-ld">Haplotype and Linkage Disequilibrium (LD)</h2>
+<h1 id="what-are-haplotype-and-linkage-disequilibrium-ld">What Are Haplotype and Linkage Disequilibrium (LD)</h1>
 
 <p>To properly understand linkage disequilibrium, I want to go back to the &ldquo;Dark Age&rdquo; of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis.</p>
 
 <ul>
-<li><p>The First Mendelian Law (Law of Segregation) states that each organism has two alleles for each trait and one of the two alleles is randomly passed on to the next generation during sexual reproduction.</p>
+<li><p>The First Mendelian Law (Law of Segregation) states that each organism has two alleles for each trait and one of the two alleles is randomly passed on to an offspring during sexual reproduction.</p>
 
-<p>For example, an individual with an AB genotype is eqaully likely to pass an A allele or a B allele to its offspring (there are many assumption being made in this statement but I&rsquo;ll roll with it for now).</p></li>
+<ul>
+<li>For example, an individual with an AB genotype is eqaully likely to pass an <code>A</code> allele or a <code>B</code> allele to its offspring (there are many assumption being made in this statement but I&rsquo;ll roll with it for now).</li>
+</ul></li>
 
-<li><p>The Second Mendelian Law (Law of Independant Assortment) states that alleles for different traits are passed on independantly from each other during sexual reproduction.</p></li>
+<li><p>The Second Mendelian Law (Law of Independent Assortment) states that alleles for different traits are passed on independantly from each other during sexual reproduction.</p>
+
+<ul>
+<li><p>For example, if allelea <code>A/a</code> controls for trait 1 and alleles <code>B/b</code> controls for trait 2 (assuming they are not at the same locus), then whether an individual passes on allele <code>A</code> or <code>a</code> is independent of wheter it passes on <code>B</code> or <code>b</code>. The Independent Assortment implicts the product rule:</p>
+
+<blockquote>
+<p>Suppose an individual with <code>AaBb</code> genotype (<code>Aa</code> at locus 1 and <code>Bb</code> at locus 2) mates with another individual with same <code>AaBb</code> genotype, the probability of their offspring being <code>aabb</code> is <code>1/16</code></p>
+</blockquote></li>
+
+<li><p>In case you&rsquo;re wondering how to get this number, here is my favorite way to calculate:</p></li>
+</ul></li>
 </ul>
 
-<p>For example, if allelea A/a controls for trait 1 and alleles B/b controls for trait 2 (assuming they are not at the same locus), then whether an individual passes on allele A or a is independant of wheter it passes on B or b. The Independant Assortment implicts the product rule:</p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSI0NDJweCIgaGVpZ2h0PSIzOTJweCIgdmlld0JveD0iLTAuNSAtMC41IDQ0MiAzOTIiPjxkZWZzLz48Zz48cmVjdCB4PSIxMzAiIHk9IjAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNzQuNSwyMy41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxMiIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAzMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5BYUJiPC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjE1IiB5PSIxMiIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5BYUJiPC90ZXh0Pjwvc3dpdGNoPjwvZz48cmVjdCB4PSIzMjAiIHk9IjAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNjQuNSwyMy41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxMiIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAzMHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5BYUJiPC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjE1IiB5PSIxMiIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5BYUJiPC90ZXh0Pjwvc3dpdGNoPjwvZz48cGF0aCBkPSJNIDE5MC4xNCA2MC4yOSBMIDE5MC4wMiAxMDMuNjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMTkwIDEwOC44OCBMIDE4Ni41MiAxMDEuODcgTCAxOTAuMDIgMTAzLjYzIEwgMTkzLjUyIDEwMS44OSBaIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzMuNSwxMTMuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IiBwb2ludGVyLWV2ZW50cz0iYWxsIiB3aWR0aD0iMzIiIGhlaWdodD0iMTIiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMzJweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+QTogMS8yPC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjE2IiB5PSIxMiIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5BOiAxLzI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEzNC41LDE1My41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxMiIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAzMXB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5hOiAxLzI8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTUiIHk9IjEyIiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEycHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPmE6IDEvMjwvdGV4dD48L3N3aXRjaD48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjA5LjUsMTUzLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjEyIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDMxcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmI6IDEvMjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNSIgeT0iMTIiIGZpbGw9IiMwMDAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTJweCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSI+YjogMS8yPC90ZXh0Pjwvc3dpdGNoPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDguNSwxMTMuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IiBwb2ludGVyLWV2ZW50cz0iYWxsIiB3aWR0aD0iMzIiIGhlaWdodD0iMTIiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMzJweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+QjogMS8yPC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjE2IiB5PSIxMiIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5COiAxLzI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyNi41LDExMy41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIzMiIgaGVpZ2h0PSIxMiIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAzMnB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5BOiAxLzI8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTYiIHk9IjEyIiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEycHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPkE6IDEvMjwvdGV4dD48L3N3aXRjaD48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzI3LjUsMTUzLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjEyIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDMxcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmE6IDEvMjwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxNSIgeT0iMTIiIGZpbGw9IiMwMDAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTJweCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSI+YTogMS8yPC90ZXh0Pjwvc3dpdGNoPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MDIuNSwxNTMuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IiBwb2ludGVyLWV2ZW50cz0iYWxsIiB3aWR0aD0iMzAiIGhlaWdodD0iMTIiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMzFweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgb3ZlcmZsb3ctd3JhcDogbm9ybWFsOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+YjogMS8yPC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjE1IiB5PSIxMiIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5iOiAxLzI8L3RleHQ+PC9zd2l0Y2g+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwMS41LDExMy41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIzMiIgaGVpZ2h0PSIxMiIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEycHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdpZHRoOiAzMnB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5COiAxLzI8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTYiIHk9IjEyIiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEycHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPkI6IDEvMjwvdGV4dD48L3N3aXRjaD48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC41LDEyMC41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIxMTgiIGhlaWdodD0iMzgiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxN3B4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMTE4cHg7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgZm9udC13ZWlnaHQ6IGJvbGQ7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt0ZXh0LWFsaWduOmluaGVyaXQ7dGV4dC1kZWNvcmF0aW9uOmluaGVyaXQ7Ij5MYXcgb2YgU2VncmVnYXRpb248L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iNTkiIHk9IjI4IiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGZvbnQtd2VpZ2h0PSJib2xkIj5MYXcgb2YgU2VncmVnYXRpb248L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMzgwIDYwIEwgMzgwIDEwMy42MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PHBhdGggZD0iTSAzODAgMTA4Ljg4IEwgMzc2LjUgMTAxLjg4IEwgMzgwIDEwMy42MyBMIDM4My41IDEwMS44OCBaIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTYwIiByeD0iMjIuNSIgcnk9IjE1LjAwMDAwMDAwMDAwMDAwMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmYwMDAwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxlbGxpcHNlIGN4PSIyMjUiIGN5PSIxNjAiIHJ4PSIyMi41IiByeT0iMTUuMDAwMDAwMDAwMDAwMDAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjAwMDAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGVsbGlwc2UgY3g9IjM0NSIgY3k9IjE2MCIgcng9IjIyLjUiIHJ5PSIxNS4wMDAwMDAwMDAwMDAwMDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmMDAwMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZWxsaXBzZSBjeD0iNDE1IiBjeT0iMTYwIiByeD0iMjIuNSIgcnk9IjE1LjAwMDAwMDAwMDAwMDAwMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmYwMDAwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMTUwIDE3NSBMIDE4NS43NyAyMTUuMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMTg5LjI2IDIxOS4xNiBMIDE4MS45OSAyMTYuMjYgTCAxODUuNzcgMjE1LjI0IEwgMTg3LjIyIDIxMS42MSBaIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDIyNC40MyAxNzQuNTcgTCAxOTMuODUgMjE0LjkyIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDE5MC42OCAyMTkuMTEgTCAxOTIuMTEgMjExLjQyIEwgMTkzLjg1IDIxNC45MiBMIDE5Ny42OSAyMTUuNjQgWiIgZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGVsbGlwc2UgY3g9IjE5MCIgY3k9IjI0MCIgcng9IjMxLjQ5OTk5OTk5OTk5OTk5NiIgcnk9IjIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTY1LjUsMjMwLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjE4IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTdweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDUzcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmFiOiAxLzQ8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMjYiIHk9IjE4IiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPmFiOiAxLzQ8L3RleHQ+PC9zd2l0Y2g+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDguNSwxOTAuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IiBwb2ludGVyLWV2ZW50cz0iYWxsIiB3aWR0aD0iMTE4IiBoZWlnaHQ9IjU4IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTdweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDExOHB4OyB3aGl0ZS1zcGFjZTogbm9ybWFsOyBvdmVyZmxvdy13cmFwOiBub3JtYWw7IGZvbnQtd2VpZ2h0OiBib2xkOyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+TGF3IG9mIEluZGVwZW5kZW50IEFzc29ydG1lbnTCoDwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI1OSIgeT0iMzgiIGZpbGw9IiMwMDAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTdweCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC13ZWlnaHQ9ImJvbGQiPltOb3Qgc3VwcG9ydGVkIGJ5IHZpZXdlcl08L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMzQ1IDE3NSBMIDM4MC43NyAyMTUuMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMzg0LjI2IDIxOS4xNiBMIDM3Ni45OSAyMTYuMjYgTCAzODAuNzcgMjE1LjI0IEwgMzgyLjIyIDIxMS42MSBaIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDQxOS43NiAxNzQuNDcgTCAzODguODYgMjE0Ljk0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDM4NS42OCAyMTkuMTEgTCAzODcuMTQgMjExLjQyIEwgMzg4Ljg2IDIxNC45NCBMIDM5Mi43MSAyMTUuNjcgWiIgZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGVsbGlwc2UgY3g9IjM4NSIgY3k9IjI0MCIgcng9IjMxLjQ5OTk5OTk5OTk5OTk5NiIgcnk9IjIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzU5LjUsMjMwLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjE4IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTdweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDUzcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmFiOiAxLzQ8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMjYiIHk9IjE4IiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPmFiOiAxLzQ8L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMTkxLjUgMjYwIEwgMjc1LjI4IDMzNS43MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PHBhdGggZD0iTSAyNzkuMTcgMzM5LjI1IEwgMjcxLjYzIDMzNy4xNSBMIDI3NS4yOCAzMzUuNzMgTCAyNzYuMzIgMzMxLjk2IFoiIGZpbGw9IiMwMDAwMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMzg1IDI2MCBMIDI4NS4wNyAzMzYuMTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMjgwLjg5IDMzOS4zMiBMIDI4NC4zNCAzMzIuMyBMIDI4NS4wNyAzMzYuMTQgTCAyODguNTggMzM3Ljg2IFoiIGZpbGw9IiMwMDAwMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxlbGxpcHNlIGN4PSIyODAiIGN5PSIzNjUiIHJ4PSI2MC4wMDAwMDAwMDAwMDAwMSIgcnk9IjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjM5LjUsMzU1LjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjgxIiBoZWlnaHQ9IjE4IiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTdweDsgZm9udC1mYW1pbHk6IEhlbHZldGljYTsgY29sb3I6IHJnYigwLCAwLCAwKTsgbGluZS1oZWlnaHQ6IDEuMjsgdmVydGljYWwtYWxpZ246IHRvcDsgd2lkdGg6IDgycHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPmFhYmI6IDEvMTY8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iNDEiIHk9IjE4IiBmaWxsPSIjMDAwMDAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPmFhYmI6IDEvMTY8L3RleHQ+PC9zd2l0Y2g+PC9nPjwvZz48L3N2Zz4=" /></p>
+
+<p><em>In the above diagram, first step involves the Law of Segregation, by which I calculated the probability of each gamete containing each allele separately. The second step is where the Law of Independent Assortment comes into play: The probability of each combination of two alleles is the product of the probabilities of each allele (in one gamete). And the last step is just random combination of two gametes (for a diploid organism).</em></p>
+
+<p>However, just as every law has an exception, it was discovered that many of traits in various species didn&rsquo;t really follow the Law of Independent Assortment. The following example shows a case of &ldquo;dependent assortment&rdquo;:</p>
+
+<blockquote>
+<p>Sweet peas have purple (<code>P</code>) or red (<code>p</code>) flowers and long (<code>L</code>) or short (<code>l</code>) pollen grains. Peas from two pure lines (<code>PPLL</code> and <code>ppll</code>) were crossed. The offspring (F1) are all purple flower and long grain (PpLl). They are then self crossed (<code>PpLl</code> X <code>PpLl</code>).</p>
+
+<p>Assuming indenpendent assortment, we expect to observe all 4 phenotypes in F2 with the following frequencies:</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th>Phenotype</th>
+<th>Frequency</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Purple (P<em>), Long (L</em>)</td>
+<td><sup>9</sup>&frasl;<sub>16</sub></td>
+</tr>
+
+<tr>
+<td>Purple (P_), Short (ll)</td>
+<td><sup>3</sup>&frasl;<sub>16</sub></td>
+</tr>
+
+<tr>
+<td>Red (pp), Long (L_)</td>
+<td><sup>3</sup>&frasl;<sub>16</sub></td>
+</tr>
+
+<tr>
+<td>Red (pp), Short (ll)</td>
+<td><sup>1</sup>&frasl;<sub>16</sub></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>However, large deviations from expected phenotype frequency were observed:</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th>Phenotype</th>
+<th>Exp. Count</th>
+<th>Obs. Count</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Purple, Long (P_L_)</td>
+<td>216</td>
+<td>284</td>
+</tr>
+
+<tr>
+<td>Purple, Short (P_ll)</td>
+<td>72</td>
+<td>21</td>
+</tr>
+
+<tr>
+<td>Red, Long (ppL_)</td>
+<td>72</td>
+<td>21</td>
+</tr>
+
+<tr>
+<td>Red, Short (ppll)</td>
+<td>24</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+
+<p><em>Data from Bateson et al.</em></p>
+
+<p>We know that in the parent line (<code>PPLL x ppll</code>) <code>P</code> and <code>L</code> as well as <code>p</code> and <code>l</code> are always together because they are both homozygotes. But as the Mendel&rsquo;s second law predicts, they should&rsquo;ve independently assorted from F1 to F2. We, however, see that instead of random combination, <code>P</code> still appear more often together with <code>L</code> and so does <code>p</code> and <code>l</code>. It&rsquo;s as if <code>P</code> and <code>L</code> were somehow linked. This phenomenon is termed <a href="https://en.wikipedia.org/wiki/Genetic_linkage" target="_blank"><code>Linkage</code></a>. We now know that this is because the two loci are closeby on the same chromsome and that during <a href="https://en.wikipedia.org/wiki/Meiosis" target="_blank">meiosis</a>, DNA on one chromsome are largely segregated together (except some <a href="https://en.wikipedia.org/wiki/Genetic_recombination" target="_blank">recombination</a>).</p>
+
+<p>When two loci are linked, product rule no longer applies. This causes a non-random association of alleles at different loci in a <strong>given population</strong>. This is termed <code>Linkage Disequilibrium</code> or <code>LD</code>. (Technically LD does not always mean physical linkage. More on this later.)</p>
+
+<p>When we talk about linkage, knowing genotype of an individual alone is no longer enough: we wish to know which alleles are &ldquo;linked&rdquo; or belong to the same chromsome. In genetics, we call alleles that are on the same chromsome and likely to be inherited together a haplotype. For example, an individual with a <code>PpLl</code> genotype may have these different haplotypes:</p>
+
+<ul>
+<li><code>PL</code> and <code>pl</code></li>
+<li><code>Pl</code> and <code>pL</code></li>
+</ul>
+
+<h1 id="quantify-ld">Quantify LD</h1>
+
+<p>There are several different ways to quntify the extent of linkage between any <strong>two</strong> loci:</p>
+
+<ul>
+<li>Coefficient of Linkage Disequilibrium (D)</li>
+<li>Normalized coefficient of Linkage Disequilibrium (D&rsquo;)</li>
+<li>Correlation coefficient ($r^2$) and $\chi^2$ test</li>
+</ul>
+
+<p>I&rsquo;ll briefly go over them below.</p>
+
+<h2 id="linkage-disequilibrium-coefficient-d">Linkage Disequilibrium Coefficient ($D$):</h2>
+
+<p>As mentioned before, if two loci are independent, their frequencies follow product rule:</p>
+
+<p>For two independent loci A and B, each with two alleles ($A_1$, $A_2$ and $B_1$, $B_2$, respectively), we have:
+    $$f_{A_1B_1} = f_{A_1}f_{B_1}$$
+   Now if A and B are not independent, this equation no longer stands true. In that case we have:
+    $$f_{A_1B_1} = f_{A_1}f_{B_1} + D$$
+  Here we have D as a <em>measurement</em> of the extent of linkage disequilibrium between $A_1$ and $B_1$. We can calculate the same for all 4 haplotypes:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>$A_1$</th>
+<th>$A_2$</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>B</td>
+<td>frequency</td>
+<td>$f_{A_1}$</td>
+<td>$f_{A_2}$</td>
+</tr>
+
+<tr>
+<td>$B_1$</td>
+<td>$f_{B_1}$</td>
+<td>$f_{A_1}f_{B_1} + D_{A_1B_1}$</td>
+<td>$f_{A_2}f_{B_1} + D_{A_2B_1}$</td>
+</tr>
+
+<tr>
+<td>$B_2$</td>
+<td>$f_{B_2}$</td>
+<td>$f_{A_1}f_{B_2} + D_{A_1B_2}$</td>
+<td>$f_{A_2}f_{B_2} + D_{A_2B_2}$</td>
+</tr>
+</tbody>
+</table>
+
+<p>Solve above equations and we get:</p>
+
+<blockquote>
+<p>$D_{A_1B_1} = f_{A_1B_1} - f_{A_1}f_{B_1}$</p>
+
+<p>$D_{A_1B_2} = f_{A_1B_2} - f_{A_1}f_{B_2}$</p>
+
+<p>$D_{A_2B_1} = f_{A_2B_1} - f_{A_2}f_{B_1}$</p>
+
+<p>$D_{A_2B_2} = f_{A_2B_2} - f_{A_2}f_{B_2}$</p>
+</blockquote>
+
+<p>For a given population, we have</p>
+
+<blockquote>
+<p>$f_{A_1} + f_{A_2} = 1$</p>
+
+<p>$f_{B_1} + f_{B_2} = 1$</p>
+
+<p>$f_{A_1B_1} + f_{A_1B_2} = f_{A_1}$</p>
+
+<p>$f_{A_1B_1} + f_{A_2B_1} = f_{B_1}$</p>
+
+<p>$f_{A_2B_1} + f_{A_2B_2} = f_{A_2} = 1 - f_{A_1}$</p>
+
+<p>$f_{A_1B_2} + f_{A_2B_2} = f_{B_2} = 1 - f_{B_1}$</p>
+</blockquote>
+
+<p>We can then further derive above equations:</p>
+
+<blockquote>
+<p>$D_{A_2B_2} \\\ = f_{A_2B_2} - (1 - f_{A_1})(1 - f_{B_1})
+ \\\\ = 1 - f_{B_1} - f_{A_1B_2} - (1 - f_{A_1})(1 - f_{B_1}) \\\ = 1 - f_{B_1} - f_{A_1} - f_{A_1B_1} - (1 - f_{A_1})(1 - f_{B_1}) \\\ = 1 - f_{B_1} - f_{A_1} + f_{A_1B_1} - 1 + f_{B_1} + f_{A_1} - f_{A_1}f_{B_1} \\\ = f_{A_1B_1} - f_{A_1}f_{B_1} = D_{A_1B_1}$</p>
+</blockquote>
+
+<p>Similarly we can prove that $D_{A_1B_1} = - D_{A_1B_2} = - D_{A_2B_1} = D_{A_2B_2} = D$ (note that this is only true for diallelic loci. For loci with more than two alleles, we need to calculate D for each allele pair separately.)</p>
+
+<p>This makes sense because linkage disequilibrium should be a measurement of two loci not any two specific alleles in those loci. Therefore the D for any haplotype between the two given loci should be the same (or at least the absolute value of it).
+We then have:</p>
+
+<blockquote>
+<p>$D = D_{A_1B_1} = f_{A_1B_1} - f_{A_1}f_{B_1}$</p>
+
+<p>$D = -D_{A_1B_2} = -f_{A_1B_2} + f_{A_1}f_{B_2}$</p>
+
+<p>$D = -D_{A_2B_1} = -f_{A_2B_1} + f_{A_2}f_{B_1}$</p>
+
+<p>$D = D_{A_2B_2} = f_{A_2B_2} - f_{A_2}f_{B_2}$</p>
+</blockquote>
+
+<p>Next we can prove that $D = f_{A_1B_1}f_{A_2B_2} - f_{A_1B_2}f_{A_2B_1}$:</p>
+
+<blockquote>
+<p>$f_{A_1B_1}f_{A_2B_2} \\\ = (f_{A_1}f_{B_1} + D)(f_{A_2}f_{B_2} + D) \\\ = f_{A_1}f_{A_2}f_{B_1}f_{B_2} + D(f_{A_1}f_{B_1} + f_{A_2}f_{B_2}) + D^2$</p>
+
+<p>$f_{A_1B_2}f_{A_2B_1} \\\ = (f_{A_1}f_{B_2} - D)(f_{A_2}f_{B_1} - D) \\\ = f_{A_1}f_{A_2}f_{B_1}f_{B_2} - D(f_{A_1}f_{B_2} + f_{A_2}f_{B_1}) + D^2$</p>
+</blockquote>
+
+<p>Taske substraction:</p>
+
+<blockquote>
+<p>$f_{A_1B_1}f_{A_2B_2} - f_{A_1B_2}f_{A_2B_1} \\\ = f_{A_1}f_{A_2}f_{B_1}f_{B_2} + D(f_{A_1}f_{B_1} + f_{A_2}f_{B_2}) + D^2 - (f_{A_1}f_{A_2}f_{B_1}f_{B_2} - D(f_{A_1}f_{B_2} + f_{A_2}f_{B_1}) + D^2) \\\ = D(f_{A_1}f_{B_1} + f_{A_2}f_{B_2} + f_{A_1}f_{B_2} + f_{A_2}f_{B_1}) = D * 1 = D$</p>
+</blockquote>
+
+<p>Now we have a measure of linkage disequilibrium. By definition, we know that $D=0$ indicates independent loci (no linkage). What should the maxium value of D be?</p>
+
+<blockquote>
+<p>Say we have a population with following genotype frequency:
+  $f_{A_1} = f_{A_2} = 0.5 \\\ f_{B_1} = f_{B_2} = 0.5$</p>
+
+<p>Suppose there is complete linkage between $A_1$ and $B_1$, meaning we have following haplotype frequencies:
+  $f_{A_1B_1} = f_{A_2B_2} = 0.5 \\\ f_{A_1B_2} = f_{A_2B_1} = 0$</p>
+
+<p>We can then calculate $D = f_{A_1B_1}f_{A_2B_2} - f_{A_1B_2}f_{A_2B_1} = 0.5 * 0.5 - 0 = 0.25$</p>
+</blockquote>
+
+<p>When two loci are in complete linkage, we have $D=0.25$.
+For any two loci, we always have $D \in [-0.25,0.25]$.</p>
+
+<p>This scale is not very intuitive but we can work with it. Now next question is, does equal $D$ mean equal linkage disequilibrium?</p>
+
+<blockquote>
+<p>Consider the following two populations:</p>
+
+<ol>
+<li>Pop 1 has haplotype frequencies as follow: $$f_{A_1B_1} = f_{A_2B_2} = 0.34 \\\ f_{A_1B_2} = f_{A_2B_1} = 0.16$$
+We can calculate $D = 0.34^2 - 0.16^2 = 0.09$</li>
+<li>Pop 2 has haplotype frequencies as follow: $$f_{A_1B_1} = 0.9 \\\ f_{A_2B_2} = 0.1 \\\ f_{A_1B_2} = f_{A_2B_1} = 0$$
+We can calculate $D = 0.9 * 0.1 - 0 = 0.09$</li>
+</ol>
+</blockquote>
+
+<p>Even though $D$ at these loci for both populations is exactly the same, we can clearly see that pop 2 has comlete linkage between these two loci while pop 1 does not.</p>
+
+<p>This example shows a major problem of $D$ for measuring linkage disequilibrium: It&rsquo;s ignorant of allele frequencies in a given population.</p>
+
+<h2 id="standardized-linkage-disequilibrium-coefficient-d">Standardized Linkage Disequilibrium Coefficient ($D&rsquo;$)</h2>
+
+<p>To address this problem, we can standardize $D$ against allele frequency:
+  $$D&rsquo; = \frac{D}{D_{max}}$$</p>
+
+<p>$D_{max}$ is the maxium possible $D$ in a population with same allele frequencies (but different haplotype frequencies). We have $$D_{max} = f_{maxA_1B_1} - f_{A_1}f_{B_1} \\\ = min(f_{A_1},f_{B_1}) - f_{A_1}f_{B_1}$$
+<em>We can also prove that for every haplotype between two given loci, we can get the same $D&rsquo;$.</em></p>
+
+<p>For example, in the above two populations:</p>
+
+<blockquote>
+<ol>
+<li>Pop 1: $$f_{A_1} = f_{A_2} = f_{B_1} = f_{B_2} = 0.5 \\\ D_{max} = 0.5 - 0.5 * 0.5 = 0.25 \\\ D&rsquo; = \frac{D}{D_{max}} = \frac{0.09}{0.25} = \frac{9}{25} $$</li>
+<li>Pop 2: $$f_{A_1} = f_{B_1} = 0.9 \\\ f_{A_2} = f_{B_2} = 0.1 \\\ D_{max} = 0.9 - 0.9 * 0.9 = 0.09 \\\ D&rsquo; = \frac{D}{D_{max}} = \frac{0.09}{0.09} = 1$$</li>
+</ol>
+</blockquote>
+
+<p>Now we can see that $D&rsquo;$ for population 2 is much higher than that of population 1, indicating a much higher linkage disequilibrium between these loci in pop 2. By definition, we know $D&rsquo; \in [0,1]$</p>
+
+<p>However, $D&rsquo;$ also has its own problem. Consider the following scenario:</p>
+
+<blockquote>
+<p>Suppose we genotyped 100 individuals in a population, and count occurrance of each haplotype between loci A and B as follow:</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Count</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>$A_1B_1$</td>
+<td>50</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_1B_2$</td>
+<td>49</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_2B_1$</td>
+<td>0</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_2B_2$</td>
+<td>1</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>We can get haplotype and allele frequencies:
+  $$f_{A_1B_1} = 0.5, f_{A_1B_2} = 0.49 \\\ f_{A_2B_1} = 0, f_{A_2B_2} = 0.01 \\\ f_{A_1} = 0.99, f_{A_2} = 0.01 \\\ f_{B_1} = 0.5, f_{B_2} = 0.5$$
+And calculate $D&rsquo;$:
+  $$D&rsquo; = \frac{f_{A_1B_1} * f_{A_2B_2} - f_{A_1B_2} * f_{A_2B_1}}{min(f_{A_1}, f_{B_1}) - f_{A_1}f_{B_1}} = \frac{0.5 * 0.01 - 0.49 * 0}{0.5 - 0.5 * 0.99} = 1$$</p>
+</blockquote>
+
+<p>In this case, $D&rsquo;$ indicates strong linkage between the two loci. However, looking at data, we can&rsquo;t confidently make any conclusions regarding the linkage between the two loci. The reason is that in all samples but one, they have either $A_1B_1$ or $A_1B_2$ haplotype. The only one that has an $A_2$ allele can simply be a result of a spontaneous mutaion rather than inheriting from a parent <strong>We do not have enough information to say whether or not A locus is linked with B locus because $A_2$ is mostly missing from data.</strong></p>
+
+<p>In other words, $D&rsquo;$ does not tell us how significant a linkage is or how confident we are in decalring a linkage disequilibrium. For this purpose, we turn to Pearson&rsquo;s correlation coefficient.</p>
+
+<h2 id="correlation-coefficient-gamma-2">Correlation coefficient ($\gamma^2$)</h2>
+
+<p>Consider the population above:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Count</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>$A_1B_1$</td>
+<td>50</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_1B_2$</td>
+<td>49</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_2B_1$</td>
+<td>0</td>
+<td>100</td>
+</tr>
+
+<tr>
+<td>$A_2B_2$</td>
+<td>1</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+
+<p>We calculated that $D=0.005$, now instead of  standardizing it like what we did with $D&rsquo;$, we try a different approach:
+  $$\gamma^2 = \frac{D^2}{f_{A_1}f_{A_2}f_{B_1}f_{B_2}}$$</p>
+
+<p>We have $\gamma^2 = \frac{0.005^2}{0.99 * 0.01 * 0.5 * 0.5} = 0.01$</p>
+
+<p>Now this seems to align well with our assessment of the data! As a matter of fact, this is actually the correlation coefficient of the two variables in this population!</p>
+
+<p>Let&rsquo;s arbitratrily assign 1 to an $A_1$ allele and -1 to an $A_2$ allele. And 1 to $B_1$, -1 to $B_2$. Now we can plot the data and calculate $\gamma$:</p>
+
+
+
+
+  
+
+<figure>
+
+<img src="/img/QE1_corrPlot.jpeg" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Correlation plot</h4>
+  
+</figcaption>
+
+</figure>
+
+<p>In the above plot we have $R=0.1$ this is exactly what we calculated above ($\gamma^2 = 0.01$)! Now that we have a correlation coefficient, we can use a $\chi^2$ test on our dataset:</p>
+
+<p>$$\chi_S^2=\gamma^2*N=0.01*100=1\\\ P(\chi^2&gt;\chi_S^2, df=1) = 0.317 $$</p>
+
+<p>The p-value is also shown in the above plot. Clearly, we don&rsquo;t see a significant correlation (i.e linkage) between the two loci.</p>
+
+<p>This is the beauty of $\gamma^2$: it not only tells us the strength of a linkage ($\gamma^2$) but only indicates confidence in such linkage given data ($\chi^2$)!</p>
+
+<p>Now remember, <strong>the absence of significance is NOT evidence of insignificance!</strong> Look at the above figure and we notice that the confidence interval of the plot is very large towards $x=-1$. This is because we have only a single data point at $x=-1$. This could easily be a sampling error or like mentioned above, a spontaneous mutation. It is possible, that there are more individuals with $A_2$ allele but we just didn&rsquo;t include them in our samples for unknown reasons. In this case, since we can&rsquo;t estimate frequencies of $A_2$ in haplotype $A_2B_1$ or $A_2B_2$, we can&rsquo;t conclude with any confidence whether or not there is linkage between the two loci.</p>
+
+<h1 id="now-why-do-we-care-about-ld-and-haplotype">Now why do we care about LD and haplotype?</h1>
+
+<h2 id="ld-is-an-indication-of-deviation-from-hardy-weinberg-equilibrium">LD is an indication of deviation from Hardy-Weinberg equilibrium.</h2>
 
     </div>
 
@@ -446,7 +896,7 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/population-genetics/">Population Genetics</a>
+  <a class="badge badge-light" href="">Population Genetics</a>
   
   <a class="badge badge-light" href="/tags/qe/">QE</a>
   
@@ -470,6 +920,88 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
 
 
 
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_huf42217ef482ec6d9ed01c9369be33d4c_889160_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Sichong Peng</a></h5>
+    <h6 class="card-subtitle">PhD student</h6>
+    <p class="card-text" itemprop="description">I study equine genetics/genomics at UC Davis Veterinary school. My primary interest is functional annotation of non-model organisms and its applications.</p>
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:scpeng@ucdavis.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/Sichong93" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.co.uk/citations?user=amDGUp4AAAAJ" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/SichongP" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 
 
@@ -544,6 +1076,9 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
 
     
     
+    
+    <script src="/js/mathjax-config.js"></script>
+    
 
     
     
@@ -567,6 +1102,8 @@ Haplotype and Linkage Disequilibrium (LD) To properly understand linkage disequi
       
 
       
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
       
     
 

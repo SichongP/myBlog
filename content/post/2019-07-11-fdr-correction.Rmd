@@ -1,0 +1,93 @@
+---
+title: Hypothesis testing and multiple test correction
+author: Sichong Peng
+date: '2019-07-11'
+slug: fdr-correction
+categories:
+  - Statistics
+tags:
+  - R
+  - Statistics
+  - Population Genetics
+image:
+  caption: ''
+  focal_point: ''
+---
+
+```{r include=FALSE}
+library(ggplot2)
+```
+
+
+## Why multiple testing correction?
+
+Multiple testing refers to a practice where we apply the same statistical test *independantly* multiple times. This raises a problem that's related to hypothesis testing: the more independant tests we do, the more inflated our false positive rate becomes. Here I'm gonna use a simple example to explain why multiple testing correction is crucial for hypothesis testing.
+
+### An example - Are you being cheated?
+
+Imagine that you're playing a game where the host lets you flip a coin, if it's a head, you get a point. If it's a tail, the host gets a point. Whoever gets 20 points first wins the game. Does this sound like a fair game to you?
+
+In this scenario, when we say the game is "fair", we are implying that the coin is an average, normal coin, which gives you 50/50 chance for a head or a tail. But is this true? 
+
+Intuitively, we may find a coin that flips tail 10 times in a row quite suspicious. But what about 6 times in a row? 3 times? 9 out of 10 times? 3 out of 4 times? At which point do we decide to call it a fraud? Here is where hypothesis testing comes into play.
+
+When we look at this scenario, we first assume that coin is normal, which gives us an expectation: the percentages of heads and tails are roughly 50% each. Then we flip the coin multiple times, observe the frequency of heads and tails and make a decision based on our observed data: does it comply with our expectation or does it deviate so much that we feel safe to say that our assumption of fairness was wrong?
+
+The process above is essentially a hypothesis testing:
+1. For a question, we formulate a null hypothesis and its alternative hypothesis
+2. Based on our hypothesis, we draw some expectations of data assuming null hypothesis true
+3. Carry out experiment, collect data and compare observed data to our expected data.
+4. Make a decision - are we able to reject our null hypothesis or not?
+
+In the coin flip example, if we record 1 everytime we get a head and -1 everytime we get a tail, after many times of flips, we would expect to get a mean score of 0. Let's simulate this process in R:
+
+```{r}
+flips = sample(c(-1,1), 20, replace = TRUE, prob = c(0.5, 0.5))
+flips
+```
+
+In the above code, by setting `prob=c(0.5, 0.5)`, we're saying this is a fair coin. Now let's see what the mean we got from this simulation is:
+
+```{r}
+mean(flips)
+```
+
+It's not 0 as we expected it to be, even though we know we're flipping a fair coin!
+Now you probably know this is normal - The probability of getting 9 heads out of 20 flips is $P_{9/20}=C_{20}^9(\frac{1}{2})^9(\frac{1}{2})^{11}=16%$, not a very low chance at all! This is called sampling variablity.
+
+Therefore, just because observed data isn't identical to our expected data, doesn't mean we should reject our null hypothesis. Now how can we make this decision then?
+
+Let's see if we do the same simulation over and over, what the mean looks like:
+```{r}
+means=c()
+for (i in c(1:1000))
+{
+  means = c(means, mean(sample(c(-1,1), 20, replace = TRUE, prob = c(0.5, 0.5))))
+}
+ggplot(data.frame(means)) + geom_histogram(aes(x=means), binwidth = 0.1)
+```
+
+It looks like a normal distribution (sort of)! This tells us that if we do the same experiment over and over again, the mean should be follow a normal distribution and the majority of results should be near where the mean of this normal distribution ($\mu=0$) is. Is it possible that we get a mean of 0.6 from a fair coin? **Yes, possible but not likely!**
+
+Of course, in reality we normally only run an experiment once and therefore, won't get a distribution of means. But intuitively, we know if our mean is too far away from the center of this normal distribution, our true mean is probably not 0! 
+
+In practice, we compare our sample mean to a *t*-distribution. This is because our sample size is relatively small (20 flips) and there is some deviation from normal distribution when we calculate mean based on a small sample size. The shape of a *t*-distribution depends on sample size, or degree of freedom (df):
+```{r}
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+
+degf <- c(1, 3, 8, 30)
+colors <- c("red", "blue", "darkgreen", "gold", "black")
+labels <- c("df=1", "df=3", "df=8", "df=30", "normal")
+
+plot(x, hx, type="l", lty=2, xlab="x value",
+  ylab="Density", main="Comparison of t Distributions")
+
+for (i in 1:4){
+  lines(x, dt(x,degf[i]), lwd=2, col=colors[i])
+}
+
+legend("topright", inset=.05, title="Distributions",
+  labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
+```
+

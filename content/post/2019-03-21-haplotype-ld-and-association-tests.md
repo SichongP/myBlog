@@ -15,11 +15,29 @@ image:
 math: true
 toc: true
 ---
+# Table of content
 
+---
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Table of content](#table-of-content)
+- [What Are Haplotype and Linkage Disequilibrium (LD)](#what-are-haplotype-and-linkage-disequilibrium-ld)
+- [Quantify LD](#quantify-ld)
+	- [Linkage Disequilibrium Coefficient ($D$):](#linkage-disequilibrium-coefficient-d)
+	- [Standardized Linkage Disequilibrium Coefficient ($D'$)](#standardized-linkage-disequilibrium-coefficient-d)
+	- [Correlation coefficient ($\gamma^2$)](#correlation-coefficient-gamma2)
+- [Now why do we care about LD and haplotype?](#now-why-do-we-care-about-ld-and-haplotype)
+	- [LD is an indication of deviation from Hardy-Weinberg equilibrium.](#ld-is-an-indication-of-deviation-from-hardy-weinberg-equilibrium)
+
+<!-- /TOC -->
+
+---
 
 _This is the first post of my QE prep series. I'll be taking notes on my study for general knowledge section of my QE. I'm gonna start this off with my favorite topic in our GGG series classes: population genetics_
 
-## Haplotype and Linkage Disequilibrium (LD)
+# What Are Haplotype and Linkage Disequilibrium (LD)
+
 To properly understand linkage disequilibrium, I want to go back to the "Dark Age" of genetics, when Gregor Mendel brilliantly discovered (Mendelian) laws of inheritance without any knowledge of the molecular basis.
 
 - The First Mendelian Law (Law of Segregation) states that each organism has two alleles for each trait and one of the two alleles is randomly passed on to an offspring during sexual reproduction.
@@ -65,12 +83,14 @@ _Data from Bateson et al._
 
 We know that in the parent line (`PPLL x ppll`) `P` and `L` as well as `p` and `l` are always together because they are both homozygotes. But as the Mendel's second law predicts, they should've independently assorted from F1 to F2. We, however, see that instead of random combination, `P` still appear more often together with `L` and so does `p` and `l`. It's as if `P` and `L` were somehow linked. This phenomenon is termed [`Linkage`](https://en.wikipedia.org/wiki/Genetic_linkage). We now know that this is because the two loci are closeby on the same chromsome and that during [meiosis](https://en.wikipedia.org/wiki/Meiosis), DNA on one chromsome are largely segregated together (except some [recombination](https://en.wikipedia.org/wiki/Genetic_recombination)).
 
-When two loci are linked, product rule no longer applies. This causes a non-random association of alleles at different loci in a **given population**. This is termed `Linkage Disequilibrium` or `LD`.
+When two loci are linked, product rule no longer applies. This causes a non-random association of alleles at different loci in a **given population**. This is termed `Linkage Disequilibrium` or `LD`. (Technically LD does not always mean physical linkage. More on this later.)
 
 When we talk about linkage, knowing genotype of an individual alone is no longer enough: we wish to know which alleles are "linked" or belong to the same chromsome. In genetics, we call alleles that are on the same chromsome and likely to be inherited together a haplotype. For example, an individual with a `PpLl` genotype may have these different haplotypes:
 
   - `PL` and `pl`
   - `Pl` and `pL`
+
+# Quantify LD
 
 There are several different ways to quntify the extent of linkage between any **two** loci:
 
@@ -80,7 +100,7 @@ There are several different ways to quntify the extent of linkage between any **
 
 I'll briefly go over them below.
 
-### Linkage Disequilibrium Coefficient (D):
+## Linkage Disequilibrium Coefficient ($D$):
 As mentioned before, if two loci are independent, their frequencies follow product rule:
 
    For two independent loci A and B, each with two alleles ($A_1$, $A_2$ and $B_1$, $B_2$, respectively), we have:
@@ -123,7 +143,7 @@ We can then further derive above equations:
 > $D\_{A\_2B\_2} \\\\\\ = f\_{A\_2B\_2} - (1 - f\_{A\_1})(1 - f\_{B\_1})
  \\\\\\\ = 1 - f\_{B\_1} - f\_{A\_1B\_2} - (1 - f\_{A\_1})(1 - f\_{B\_1}) \\\\\\ = 1 - f\_{B\_1} - f\_{A\_1} - f\_{A\_1B\_1} - (1 - f\_{A\_1})(1 - f\_{B\_1}) \\\\\\ = 1 - f\_{B\_1} - f\_{A\_1} + f\_{A\_1B\_1} - 1 + f\_{B\_1} + f\_{A\_1} - f\_{A\_1}f\_{B\_1} \\\\\\ = f\_{A\_1B\_1} - f\_{A\_1}f\_{B\_1} = D\_{A\_1B\_1}$
 
- Similarly we can prove that $D\_{A\_1B\_1} = - D\_{A\_1B\_2} = - D\_{A\_2B\_1} = D\_{A\_2B\_2} = D$
+ Similarly we can prove that $D\_{A\_1B\_1} = - D\_{A\_1B\_2} = - D\_{A\_2B\_1} = D\_{A\_2B\_2} = D$ (note that this is only true for diallelic loci. For loci with more than two alleles, we need to calculate D for each allele pair separately.)
 
 This makes sense because linkage disequilibrium should be a measurement of two loci not any two specific alleles in those loci. Therefore the D for any haplotype between the two given loci should be the same (or at least the absolute value of it).
 We then have:
@@ -172,7 +192,7 @@ Even though $D$ at these loci for both populations is exactly the same, we can c
 
 This example shows a major problem of $D$ for measuring linkage disequilibrium: It's ignorant of allele frequencies in a given population.
 
-### Standardized Linkage Disequilibrium Coefficient ($D'$)
+## Standardized Linkage Disequilibrium Coefficient ($D'$)
 
 To address this problem, we can standardize $D$ against allele frequency:
   $$D' = \frac{D}{D_{max}}$$
@@ -207,7 +227,7 @@ In this case, $D'$ indicates strong linkage between the two loci. However, looki
 
 In other words, $D'$ does not tell us how significant a linkage is or how confident we are in decalring a linkage disequilibrium. For this purpose, we turn to Pearson's correlation coefficient.
 
-### Correlation coefficient ($\gamma^2$)
+## Correlation coefficient ($\gamma^2$)
 
 Consider the population above:
 
@@ -235,4 +255,10 @@ In the above plot we have $R=0.1$ this is exactly what we calculated above ($\ga
 
 The p-value is also shown in the above plot. Clearly, we don't see a significant correlation (i.e linkage) between the two loci.
 
+This is the beauty of $\gamma^2$: it not only tells us the strength of a linkage ($\gamma^2$) but only indicates confidence in such linkage given data ($\chi^2$)!
+
 Now remember, **the absence of significance is NOT evidence of insignificance!** Look at the above figure and we notice that the confidence interval of the plot is very large towards $x=-1$. This is because we have only a single data point at $x=-1$. This could easily be a sampling error or like mentioned above, a spontaneous mutation. It is possible, that there are more individuals with $A_2$ allele but we just didn't include them in our samples for unknown reasons. In this case, since we can't estimate frequencies of $A_2$ in haplotype $A_2B_1$ or $A_2B_2$, we can't conclude with any confidence whether or not there is linkage between the two loci.
+
+# Now why do we care about LD and haplotype?
+
+## LD is an indication of deviation from Hardy-Weinberg equilibrium.

@@ -1,11 +1,142 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    
+    <url>
+    
+      <loc>/</loc>
+      <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/</loc>
+      <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/2019-08-07-write-scientific-paper-in-markdown/</loc>
+      <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/fdr-correction/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/population-genetics/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/r/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/statistics/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/statistics/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/</loc>
+      <lastmod>2019-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/genetics/</loc>
+      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
   
     
     <url>
     
       <loc>/post/haplotype-ld-and-association-tests/</loc>
       <lastmod>2019-03-21T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/qe/</loc>
+      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/fasta/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/python/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/python/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
     </url>
     
   
@@ -20,8 +151,35 @@
     
     <url>
     
+      <loc>/tags/bioinformatics/</loc>
+      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/post/calculate-row-sums-and-col-means-with-tidyr/</loc>
       <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/r/</loc>
+      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/tidyverse/</loc>
+      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
     </url>
     
   
@@ -60,63 +218,8 @@
     
     <url>
     
-      <loc>/project/external-project/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/internal-project/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/author/admin/</loc>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/post/2019-03-21-haplotype-ld-and-association-tests/</loc>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/author/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/authors/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/categories/</loc>
-      <priority>0</priority>
+      <loc>/talk/</loc>
+      <lastmod>2017-01-01T00:00:00-08:00</lastmod>
     </url>
     
   
@@ -141,35 +244,16 @@
     
     <url>
     
-      <loc>/tags/fasta/</loc>
-      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-      <priority>0</priority>
+      <loc>/project/external-project/</loc>
+      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
     </url>
     
   
     
     <url>
     
-      <loc>/categories/genetics/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/population-genetics/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/post/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
+      <loc>/project/internal-project/</loc>
+      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
     </url>
     
   
@@ -178,6 +262,29 @@
     
       <loc>/project/</loc>
       <lastmod>2016-04-27T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/author/admin/</loc>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/author/</loc>
       <priority>0</priority>
     </url>
     
@@ -200,59 +307,6 @@
     
     <url>
     
-      <loc>/tags/python/</loc>
-      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/categories/python/</loc>
-      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/qe/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/r/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/categories/r/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/talk/</loc>
-      <lastmod>2017-01-01T00:00:00-08:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/slides/</loc>
       <priority>0</priority>
     </url>
@@ -268,43 +322,7 @@
     
     <url>
     
-      <loc>/tags/statistics/</loc>
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/</loc>
-      <lastmod>2016-04-27T00:00:00-07:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/authors/admin/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/bioinformatics/</loc>
-      <lastmod>2019-03-20T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/tidyverse/</loc>
-      <lastmod>2019-03-11T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

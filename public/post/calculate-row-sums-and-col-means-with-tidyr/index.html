@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.0.0">
-  <meta name="generator" content="Hugo 0.54.0" />
+  <meta name="generator" content="Hugo 0.55.6" />
 
   
 
@@ -32,7 +32,7 @@
 This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?
 Let’s give it a try.
 Here is the question:
-I have the following sequence:">
+ I have the following sequence:">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/calculate-row-sums-and-col-means-with-tidyr/">
@@ -99,6 +99,20 @@ Here is the question:
 
   
   
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-137015268-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
   
 
   
@@ -131,7 +145,7 @@ Here is the question:
 This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?
 Let’s give it a try.
 Here is the question:
-I have the following sequence:"><meta property="og:image" content="/img/icon-192.png">
+ I have the following sequence:"><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-03-11T00:00:00&#43;00:00">
@@ -430,7 +444,8 @@ Here is the question:
       
 
 
-<p>Recently Someone asked a question on reddit: <a href="https://www.reddit.com/r/Rlanguage/comments/azwcs5/adding_a_row_and_a_column_that_are_means_for_a/">Adding a row and a column that are means for a set matrix</a></p>
+<p>Recently Someone asked a question on reddit:
+<a href="https://www.reddit.com/r/Rlanguage/comments/azwcs5/adding_a_row_and_a_column_that_are_means_for_a/">Adding a row and a column that are means for a set matrix</a></p>
 <p>This is a very simple problem that many of us learned how to do only a few hours in to basic R. But since I’ve been learning tidyverse package, I figured why not do it tidy-fashion?</p>
 <p>Let’s give it a try.</p>
 <p>Here is the question:</p>
@@ -458,9 +473,14 @@ Now if you know some basic R this can very easily be achieved:</p>
 <pre class="r"><code>data_df = data.frame(data_matrix)
 data_df[,ncol(data_df)+1] = rowSums(data_df)
 data_df[nrow(data_df)+1,] = colMeans(data_df)
-data_df</code></pre>
-<pre><code>X1   X2   X3   X4   X5    V6</code></pre>
-<p>1 1.0 19.0 37.0 55.0 73.0 185.0 2 4.0 22.0 40.0 58.0 76.0 200.0 3 7.0 25.0 43.0 61.0 79.0 215.0 4 10.0 28.0 46.0 64.0 82.0 230.0 5 13.0 31.0 49.0 67.0 85.0 245.0 6 16.0 34.0 52.0 70.0 88.0 260.0 7 8.5 26.5 44.5 62.5 80.5 222.5</p>
+head(data_df)</code></pre>
+<pre><code>##   X1 X2 X3 X4 X5  V6
+## 1  1 19 37 55 73 185
+## 2  4 22 40 58 76 200
+## 3  7 25 43 61 79 215
+## 4 10 28 46 64 82 230
+## 5 13 31 49 67 85 245
+## 6 16 34 52 70 88 260</code></pre>
 <p>But how can we do this “tidy” way? Turns out this is more complicated than I originally thought.</p>
 <p>First let’s breath some context into our data so we don’t get too bored:<br />
 Let’s say we had an exam in a class of 50 students. The exam consists of 5 questions. TAs recorded the score of each question for each student on an excel sheet. The spreadsheet data has 5 columns, each for a question and 50 rows, each for a student. Now we want to calculate:<br />
@@ -470,12 +490,12 @@ Let’s say we had an exam in a class of 50 students. The exam consists of 5 que
 <pre class="r"><code>scores_df = data.frame(matrix(sample(1:20,250, replace = TRUE), nrow = 50, ncol = 5))
 head(scores_df)</code></pre>
 <pre><code>##   X1 X2 X3 X4 X5
-## 1 11  9 20 18 14
-## 2  3 11 10 12  8
-## 3 16 11  4 15 12
-## 4  5 16  6 18  3
-## 5  5  9 19  3 13
-## 6  1 12  2 11 20</code></pre>
+## 1 19 13  7  9 16
+## 2  5 11 12 14 19
+## 3  5 11  6  8 20
+## 4  8  9  8  9  6
+## 5  3 14  4  7  6
+## 6  8 12  6 15 15</code></pre>
 <p>Here we have a data frame with 5 colmuns (5 questions) and 50 rows (50 students).<br />
 Now the next step is to for tidy data: key-value pairs.<br />
 First we need to identify the keys: in our dataset, each student-question pair uniquely identifies a value (score). So we can gather our date like this:</p>
@@ -483,39 +503,39 @@ First we need to identify the keys: in our dataset, each student-question pair u
 scores_tibble = gather(rownames_to_column(scores_df, var = &quot;student&quot;), question, score, -student)
 head(scores_tibble)</code></pre>
 <pre><code>##   student question score
-## 1       1       X1    11
-## 2       2       X1     3
-## 3       3       X1    16
-## 4       4       X1     5
-## 5       5       X1     5
-## 6       6       X1     1</code></pre>
+## 1       1       X1    19
+## 2       2       X1     5
+## 3       3       X1     5
+## 4       4       X1     8
+## 5       5       X1     3
+## 6       6       X1     8</code></pre>
 <p>Here I did not <code>unite()</code> <code>student</code> and <code>question</code> into a single column so that later I can group by either student or question to calculate mean and sum.<br />
 Now to calculate question means:</p>
 <pre class="r"><code>summarise(group_by(scores_tibble, question), mean = mean(score))</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   question  mean
 ##   &lt;chr&gt;    &lt;dbl&gt;
-## 1 X1        8.88
-## 2 X2        9.28
-## 3 X3        8.54
-## 4 X4       11.1 
-## 5 X5       10.5</code></pre>
+## 1 X1       11   
+## 2 X2       11.1 
+## 3 X3        9.7 
+## 4 X4        9.78
+## 5 X5       10.8</code></pre>
 <p>Student sum scores:</p>
 <pre class="r"><code>summarise(group_by(scores_tibble, student), total = sum(score))</code></pre>
 <pre><code>## # A tibble: 50 x 2
 ##    student total
 ##    &lt;chr&gt;   &lt;int&gt;
-##  1 1          72
-##  2 10         52
-##  3 11         52
-##  4 12         67
-##  5 13         72
-##  6 14         45
-##  7 15         38
-##  8 16         52
-##  9 17         40
-## 10 18         65
-## # ... with 40 more rows</code></pre>
+##  1 1          64
+##  2 10         46
+##  3 11         78
+##  4 12         63
+##  5 13         50
+##  6 14         56
+##  7 15         44
+##  8 16         40
+##  9 17         64
+## 10 18         43
+## # … with 40 more rows</code></pre>
 <p>Let’s get a single table with all information</p>
 <pre class="r"><code>scores_complete = group_by(scores_tibble, question) %&gt;%
   mutate(question_average = mean(score)) %&gt;%
@@ -526,37 +546,37 @@ scores_complete</code></pre>
 ## # Groups:   student [50]
 ##    student question score question_average student_total
 ##    &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;            &lt;dbl&gt;         &lt;int&gt;
-##  1 1       X1          11             8.88            72
-##  2 2       X1           3             8.88            44
-##  3 3       X1          16             8.88            58
-##  4 4       X1           5             8.88            48
-##  5 5       X1           5             8.88            49
-##  6 6       X1           1             8.88            46
-##  7 7       X1          13             8.88            59
-##  8 8       X1           2             8.88            42
-##  9 9       X1           7             8.88            53
-## 10 10      X1           7             8.88            52
-## # ... with 240 more rows</code></pre>
+##  1 1       X1          19               11            64
+##  2 2       X1           5               11            61
+##  3 3       X1           5               11            50
+##  4 4       X1           8               11            40
+##  5 5       X1           3               11            34
+##  6 6       X1           8               11            56
+##  7 7       X1           2               11            53
+##  8 8       X1           1               11            42
+##  9 9       X1          17               11            63
+## 10 10      X1           8               11            46
+## # … with 240 more rows</code></pre>
 <p>With a tidy table we can easily calculate stats we want and add them to the original data frame:</p>
 <pre class="r"><code>scores_df_complete = spread(scores_tibble, question, score) %&gt;%
   left_join(summarise(group_by(scores_tibble, student), student_total = sum(score)), by = &quot;student&quot;) %&gt;%
     bind_rows(spread(summarise(group_by(scores_tibble, question), question_mean = mean(score)), question, question_mean))
 head(scores_df_complete)</code></pre>
 <pre><code>##   student X1 X2 X3 X4 X5 student_total
-## 1       1 11  9 20 18 14            72
-## 2      10  7 18  6 20  1            52
-## 3      11 11 19 12  2  8            52
-## 4      12  8 17 11 12 19            67
-## 5      13 15 11 12 17 17            72
-## 6      14 19  3  5  3 15            45</code></pre>
+## 1       1 19 13  7  9 16            64
+## 2      10  8 20  4  1 13            46
+## 3      11 15 19 10 18 16            78
+## 4      12  6 14 13 20 10            63
+## 5      13  3  6 13 19  9            50
+## 6      14 10 19 10 15  2            56</code></pre>
 <pre class="r"><code>tail(scores_df_complete)</code></pre>
-<pre><code>##    student    X1    X2    X3    X4    X5 student_total
-## 46      50  5.00  4.00 17.00  9.00 13.00            48
-## 47       6  1.00 12.00  2.00 11.00 20.00            46
-## 48       7 13.00 14.00 12.00  9.00 11.00            59
-## 49       8  2.00  1.00 14.00 14.00 11.00            42
-## 50       9  7.00  9.00  1.00 18.00 18.00            53
-## 51    &lt;NA&gt;  8.88  9.28  8.54 11.12 10.52            NA</code></pre>
+<pre><code>##    student X1    X2   X3    X4    X5 student_total
+## 46      50 12 20.00 17.0 19.00  1.00            69
+## 47       6  8 12.00  6.0 15.00 15.00            56
+## 48       7  2  9.00 18.0 15.00  9.00            53
+## 49       8  1 16.00 11.0  3.00 11.00            42
+## 50       9 17  8.00  9.0 11.00 18.00            63
+## 51    &lt;NA&gt; 11 11.08  9.7  9.78 10.84            NA</code></pre>
 
     </div>
 
@@ -587,6 +607,88 @@ head(scores_df_complete)</code></pre>
 
 
 
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_huf42217ef482ec6d9ed01c9369be33d4c_889160_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Sichong Peng</a></h5>
+    <h6 class="card-subtitle">PhD student</h6>
+    <p class="card-text" itemprop="description">I study equine genetics/genomics at UC Davis Veterinary school. My primary interest is functional annotation of non-model organisms and its applications.</p>
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:scpeng@ucdavis.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/Sichong93" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.co.uk/citations?user=amDGUp4AAAAJ" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/SichongP" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 
 
