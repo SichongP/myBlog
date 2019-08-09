@@ -67,7 +67,7 @@ You can insert a figure in typical markdown way:
 ![alt text](figure.png)
 ```
 
-his wWould import the figure at current location. You can even further configure the figure like so:
+This would import the figure at current location. You can even further configure the figure like so:
 
 ```
 ![alt tex](figure.png){#id .class width=300px height=200px}
