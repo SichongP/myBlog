@@ -29,6 +29,7 @@ Once run-on reaction is completed, 3 rounds of streptavidin bead purification ar
 
 ## What does ChRO-seq tell me
 Like any run-on sequencing techique, ChRO-seq precisely captures nascent RNA when compared to general RNAseq. This means that:
+
 1. ChRO-seq gives a more accurate quantification of DNA transcription, as opposed to RNAseq, which describes a result of DNA transcription and RNA degradation.
 2. The fact that ChROseq is not noised by RNA degradation also means that it is able to capture many non-coding RNAs that have a short life span in cells and thus difficult for RNAseq to capture.
 3. ChRO-seq provides a snap shot of transcription activity. As revealed by other run-on sequencing, it can identify RNA polII pausing sites.
