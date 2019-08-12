@@ -6,10 +6,20 @@
     <description>Recent content in bioinformatics on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What is ChROseq and how does it work</title>
+      <link>/post/what-is-chroseq-and-how-does-it-work/</link>
+      <pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/what-is-chroseq-and-how-does-it-work/</guid>
+      <description>At the moment of writing this post, I&amp;rsquo;m sitting on the plane flying to Cornell. There I will learn a beautiful technique called Chromatin Run-On and Sequencing, or ChRO-seq.
+Thirteen hours of travel is getting to the point of breaking my soul &amp;ndash; I have finished most of work I can comfortablely do with one screen on a samll laptop. So I decided to write down what I know so far about ChRO-seq in preparation for my upcoming training tomorrow.</description>
+    </item>
     
     <item>
       <title>Split a FASTA record by Ns</title>

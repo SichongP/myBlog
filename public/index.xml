@@ -5,8 +5,32 @@
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Aug 2019 14:11:14 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 11 Aug 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What is ChROseq and how does it work</title>
+      <link>/post/what-is-chroseq-and-how-does-it-work/</link>
+      <pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/what-is-chroseq-and-how-does-it-work/</guid>
+      <description>
+
+&lt;p&gt;At the moment of writing this post, I&amp;rsquo;m sitting on the plane flying to Cornell. There I will learn a beautiful technique called Chromatin Run-On and Sequencing, or ChRO-seq.&lt;/p&gt;
+
+&lt;p&gt;Thirteen hours of travel is getting to the point of breaking my soul &amp;ndash; I have finished most of work I can comfortablely do with one screen on a samll laptop. So I decided to write down what I know so far about ChRO-seq in preparation for my upcoming training tomorrow. I will keep updating this post as I learn more about this technique.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-chroseq&#34;&gt;What is ChROseq&lt;/h2&gt;
+
+&lt;p&gt;ChRO-seq is a variant of Run-On sequencing developed by Danko lab at Cornell (Chu et. al., 2018). In essence, it profiles nascent RNA by capturing RNA polII and DNA interaction. Below is a diagram from the authors decipiting the major steps of a ChRO-seq experiment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/ChROseq.png&#34; alt=&#34;Summary of ChROseq methods&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As shown above, insoluble chromatin is first isolated from tissues or cell culture. Isolated chromatin then gets re-suspended through sonication. Run-on reaction is done by incubating RNA polII and DNA complex with biotinylated rNTP. A complementary biotinylated NTP gets added on to the attached nascent RNA and prevents any further elongation.&lt;/p&gt;
+
+&lt;p&gt;Once run-on reaction is completed, 3 rounds of streptavidin bead purification are performed to purify extended nascent RNA, add 3&amp;rsquo; adapter, remove 5&amp;rsquo;cap and add 5&amp;rsquo; adapter. After adapters are added to both ends, a cDNA library is constructed from the nascent RNAs and a single end illumina sequencing is performed from 3&amp;rsquo;end.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>EzProtocol</title>
