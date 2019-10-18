@@ -28,11 +28,11 @@
   
     
   
-  <meta name="description" content="At the moment of writing this post, I&rsquo;m sitting on the plane flying to Cornell. There I will learn a beautiful technique called Chromatin Run-On and Sequencing, or ChRO-seq.
-Thirteen hours of travel is getting to the point of breaking my soul &ndash; I have finished most of work I can comfortablely do with one screen on a samll laptop. So I decided to write down what I know so far about ChRO-seq in preparation for my upcoming training tomorrow.">
+  <meta name="description" content="Why use Snakemake on HPC Snakemake is a handy workflow manager written in Python. It handles workflow based on predefined job dependencies. One of the great features of Snakemake is that it can manage a workflow on both a standalone computer, or a clustered HPC system. HPC, or &ldquo;cluster&rdquo; as it&rsquo;s often referred to, requires additional considerations.
+On HPC, all computing jobs should be submitted to &ldquo;compute nodes&rdquo; through a workload manager (for example, Slurm).">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/what-is-chroseq-and-how-does-it-work/">
+  <link rel="alternate" hreflang="en-us" href="/post/how-to-run-snakemake-pipeline-on-hpc/">
 
   
 
@@ -121,7 +121,7 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/what-is-chroseq-and-how-does-it-work/">
+  <link rel="canonical" href="/post/how-to-run-snakemake-pipeline-on-hpc/">
 
   
   
@@ -136,22 +136,22 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   <meta property="twitter:creator" content="@Sichong93">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/post/what-is-chroseq-and-how-does-it-work/">
-  <meta property="og:title" content="What is ChROseq and how does it work | Academic">
-  <meta property="og:description" content="At the moment of writing this post, I&rsquo;m sitting on the plane flying to Cornell. There I will learn a beautiful technique called Chromatin Run-On and Sequencing, or ChRO-seq.
-Thirteen hours of travel is getting to the point of breaking my soul &ndash; I have finished most of work I can comfortablely do with one screen on a samll laptop. So I decided to write down what I know so far about ChRO-seq in preparation for my upcoming training tomorrow."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/how-to-run-snakemake-pipeline-on-hpc/">
+  <meta property="og:title" content="How to run snakemake pipeline on HPC | Academic">
+  <meta property="og:description" content="Why use Snakemake on HPC Snakemake is a handy workflow manager written in Python. It handles workflow based on predefined job dependencies. One of the great features of Snakemake is that it can manage a workflow on both a standalone computer, or a clustered HPC system. HPC, or &ldquo;cluster&rdquo; as it&rsquo;s often referred to, requires additional considerations.
+On HPC, all computing jobs should be submitted to &ldquo;compute nodes&rdquo; through a workload manager (for example, Slurm)."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2019-08-11T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2019-10-17T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2019-08-11T00:00:00&#43;00:00">
-  
-
+  <meta property="article:modified_time" content="2019-10-17T00:00:00&#43;00:00">
   
 
   
 
-  <title>What is ChROseq and how does it work | Academic</title>
+  
+
+  <title>How to run snakemake pipeline on HPC | Academic</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -332,7 +332,7 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">What is ChROseq and how does it work</h1>
+  <h1 itemprop="name">How to run snakemake pipeline on HPC</h1>
 
   
 
@@ -341,8 +341,8 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
 
 
 
-<meta content="2019-08-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-<meta content="2019-08-11 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+<meta content="2019-10-17 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-10-17 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -355,7 +355,7 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
     
       
     
-    <time>Aug 11, 2019</time>
+    <time>Oct 17, 2019</time>
   </span>
   
 
@@ -364,7 +364,7 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    6 min read
   </span>
   
 
@@ -378,7 +378,7 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   <span class="article-categories">
     <i class="fas fa-folder"></i>
     
-    <a href="/categories/genetics/">Genetics</a>
+    <a href="/categories/workflow/">Workflow</a>
     
   </span>
   
@@ -390,35 +390,35 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=What%20is%20ChROseq%20and%20how%20does%20it%20work&amp;url=%2fpost%2fwhat-is-chroseq-and-how-does-it-work%2f"
+         href="https://twitter.com/intent/tweet?text=How%20to%20run%20snakemake%20pipeline%20on%20HPC&amp;url=%2fpost%2fhow-to-run-snakemake-pipeline-on-hpc%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2fwhat-is-chroseq-and-how-does-it-work%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fhow-to-run-snakemake-pipeline-on-hpc%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-facebook-f"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fwhat-is-chroseq-and-how-does-it-work%2f&amp;title=What%20is%20ChROseq%20and%20how%20does%20it%20work"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fhow-to-run-snakemake-pipeline-on-hpc%2f&amp;title=How%20to%20run%20snakemake%20pipeline%20on%20HPC"
          target="_blank" rel="noopener">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2fwhat-is-chroseq-and-how-does-it-work%2f&amp;title=What%20is%20ChROseq%20and%20how%20does%20it%20work"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fhow-to-run-snakemake-pipeline-on-hpc%2f&amp;title=How%20to%20run%20snakemake%20pipeline%20on%20HPC"
          target="_blank" rel="noopener">
         <i class="fab fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=What%20is%20ChROseq%20and%20how%20does%20it%20work&amp;body=%2fpost%2fwhat-is-chroseq-and-how-does-it-work%2f">
+         href="mailto:?subject=How%20to%20run%20snakemake%20pipeline%20on%20HPC&amp;body=%2fpost%2fhow-to-run-snakemake-pipeline-on-hpc%2f">
         <i class="fas fa-envelope"></i>
       </a>
     </li>
@@ -456,82 +456,226 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
     <div class="article-style" itemprop="articleBody">
       
 
-<p>At the moment of writing this post, I&rsquo;m sitting on the plane flying to Cornell. There I will learn a beautiful technique called Chromatin Run-On and Sequencing, or ChRO-seq.</p>
+<h2 id="why-use-snakemake-on-hpc">Why use Snakemake on HPC</h2>
 
-<p>Thirteen hours of travel is getting to the point of breaking my soul &ndash; I have finished most of work I can comfortablely do with one screen on a samll laptop. So I decided to write down what I know so far about ChRO-seq in preparation for my upcoming training tomorrow. I will keep updating this post as I learn more about this technique.</p>
+<p>Snakemake is a handy workflow manager written in Python. It handles workflow based on predefined job dependencies. One of the great features of Snakemake is that it can manage a workflow on both a standalone computer, or a clustered HPC system. HPC, or &ldquo;cluster&rdquo; as it&rsquo;s often referred to, requires additional considerations.</p>
 
-<h2 id="what-is-chroseq">What is ChROseq</h2>
+<p>On HPC, all computing jobs should be submitted to &ldquo;compute nodes&rdquo; through a workload manager (for example, Slurm). Running jobs on &ldquo;heaed nodes&rdquo;, or log-in nodes, is a big no-no: doing so risks exhausting computing resources of head node computer (which is very limited) and slowing down everyone else on that same head node.</p>
 
-<p>ChRO-seq is a variant of Run-On sequencing developed by Danko lab at Cornell (Chu et. al., 2018). In essence, it profiles nascent RNA by capturing RNA polII and DNA interaction. Below is a diagram from the authors depicting the major steps of a ChRO-seq experiment:</p>
+<p>File system is another thing that requires consideration when computing on HPC. Many HPC systems use NFS (Network File System) to have storage system accessible to all computing and head nodes. But some HPC systems also have dedicated local storage for each compute node. This is to help offload I/Os from major storage drives when users are running jobs with intensive I/O. It is important that users make use of these local storage spaces, as well as clean up their temporary files.</p>
 
-<p><img src="/img/ChROseq.png" alt="Summary of ChROseq methods" /></p>
+<p>Below I will show how to achieve responsible computing on HPC with a few tweaks to your Snakemake workflow.</p>
 
-<p>As shown above, insoluble chromatin is first isolated from tissues or cell culture. Isolated chromatin then gets re-suspended through sonication. Run-on reaction is done by incubating RNA polII and DNA complex with biotinylated rNTP. A complementary biotinylated NTP gets added on to the attached nascent RNA and prevents any further elongation.</p>
+<h2 id="how-to-run-snakemake-on-hpc">How to run snakemake on HPC</h2>
 
-<p>Once run-on reaction is completed, 3 rounds of streptavidin bead purification are performed to purify extended nascent RNA, add 3&rsquo; adapter, remove 5&rsquo;cap and add 5&rsquo; adapter. After adapters are added to both ends, a cDNA library is constructed from the nascent RNAs and a single end illumina sequencing is performed from 3&rsquo;end.</p>
+<p>Snakemake natively supports managing job submission on HPC. Take a look at their <a href="https://snakemake.readthedocs.io/en/stable/executable.html#cluster-execution" target="_blank">documentation here</a>.</p>
 
-<h2 id="what-does-chro-seq-tell-me">What does ChRO-seq tell me</h2>
+<p>Let&rsquo;s assume I have a Snakefile with following minimal rules:</p>
 
-<p>Like any run-on sequencing techique, ChRO-seq precisely captures nascent RNA when compared to general RNAseq. This means that:</p>
+<pre><code class="language-python">rule all:
+    input: &quot;RawData/Sample.fastq.gz&quot;
+
+rule compressFASTQ:
+    input: &quot;RawData/Sample.fastq&quot;
+    output: &quot;RawData/Sample.fastq.gz&quot;
+    shell:
+     &quot;&quot;&quot;
+     gzip {input}
+     &quot;&quot;&quot;
+</code></pre>
+
+<p>To execute this workflow locally, we can simply invoke <code>snakemake -s path/to/Snakefile</code> (or <code>snakemake</code> if you&rsquo;re in the same directory as <code>Snakefile</code>).</p>
+
+<p>Now if we want to run this on HPC on compute nodes, Snakemake allows us to do so by:</p>
+
+<pre><code>snakemake -s Snakefile --cluster 'sbatch -t 60 --mem=2g -c 1'
+</code></pre>
+
+<p>In the above command, we use <code>--cluster</code> to hand Snakemake a command that it can use to submit a job script. Snakemake creates a job script for each job to be run and uses this command to submit that job to HPC. That simple!
+Notice that here we use <code>sbatch</code> because it&rsquo;s the command you would use to submit a shell script on HPC managed by Slurm. Replace this with <code>qsub</code> commands if your HPC uses SGE.</p>
+
+<h2 id="decorate-your-job-submission">Decorate your job submission</h2>
+
+<h3 id="claim-different-resources-based-on-rules">Claim different resources based on rules</h3>
+
+<p>Now suppose we have a slightly more complicated workflow:</p>
+
+<pre><code class="language-python">samples = ['sample1', 'sample2', 'sample3', 'sample4']
+rule all:
+    input: expand(&quot;Alignment/{sample}.bam&quot;, sample = samples)
+
+rule downloadFASTQ:
+    output: &quot;RawData/{sample}_1.fastq.gz&quot;, &quot;RawData/{sample}_2.fastq.gz&quot;
+    shell:
+     &quot;&quot;&quot;
+     ascp username@host:path/to/file/{wildcards.sample} RawData/
+     &quot;&quot;&quot;
+
+rule mapFASTQ:
+    input: 
+        f1 = &quot;RawData/{sample}_1.fastq.gz&quot;, 
+        f2 =&quot;RawData/{sample}_2.fastq.gz&quot;, 
+        ref = &quot;Ref/ref.fa&quot;
+    output: temp(&quot;Alignment/{sample}.sam&quot;)
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -R &quot;@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}&quot; {input.ref} {input.f1} {input.f2} &gt; {output}
+     &quot;&quot;&quot;
+
+rule convertSAM:
+    input: &quot;Alignment/{sample}.sam&quot;
+    output: &quot;Alignment/{sample}.bam&quot;
+    shell:
+     &quot;&quot;&quot;
+     samtools view -bh {input} &gt; {output}
+     &quot;&quot;&quot;
+</code></pre>
+
+<p>Now in this workflow, different jobs require different computing resources: <code>mapFASTQ</code> probably requires more RAM than <code>downloadFASTQ</code> does. And more threads would probably speed up <code>mapFASTQ</code> but change little to <code>downloadFASTQ</code>. Using <code>--cluster</code> like shown above will cause all jobs to request same amount of resources from HPC. How can we make Snakemake request different amount of resources based on each job?</p>
+
+<p>This can be easily achieved by two ways:</p>
 
 <ol>
-<li>ChRO-seq gives a more accurate quantification of DNA transcription, as opposed to RNAseq, which describes a result of DNA transcription and RNA degradation.</li>
-<li>The fact that ChROseq is not noised by RNA degradation also means that it is able to capture many non-coding RNAs that have a short life span in cells and thus difficult for RNAseq to capture.</li>
-<li>ChRO-seq provides a snap shot of transcription activity. As revealed by other run-on sequencing, it can identify RNA polII pausing sites.</li>
-<li>Like other run-on sequencing, ChRO-seq can also be used to identify different types of transcriptions, as observed by Core et. al., 2008.</li>
+<li>Define resources in rule parameters:</li>
 </ol>
 
-<h2 id="what-does-chro-seq-not-tell-me">What does ChRO-seq not tell me</h2>
+<p>The string following <code>--cluster</code> can access all variables within a rule like we could do in a shell command within a rule. For example, we can define <code>rule mapFASTQ</code> shown above as this instead:</p>
 
-<p>Because ChRO-seq captures nascent RNA, naturally, it does not contain any post-transcriptional level information like splicing, polyadenylation, and other RNA or protein modifications.</p>
+<pre><code class="language-python">rule mapFASTQ:
+    input: 
+        f1 = &quot;RawData/{sample}_1.fastq.gz&quot;, 
+        f2 =&quot;RawData/{sample}_2.fastq.gz&quot;, 
+        ref = &quot;Ref/ref.fa&quot;
+    output: temp(&quot;Alignment/{sample}.sam&quot;)
+    threads: 8
+    params: time = 120, mem = &quot;8g&quot;
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -@ {threads} -R &quot;@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}&quot; {input.ref} {input.f1} {input.f2} &gt; {output}
+     &quot;&quot;&quot;
+</code></pre>
 
-<h2 id="how-does-chro-seq-compare-to-other-rna-related-techniques">How does ChRO-seq compare to other RNA-related techniques?</h2>
+<p>And then we can revoke the workflow by:</p>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th>RNAseq</th>
-<th>ChRO-seq</th>
-<th>PRO-seq</th>
-<th>GRO-seq</th>
-</tr>
-</thead>
+<pre><code>snakemake -s Snakefile --cluster 'sbatch -t {params.time} --mem={params.mem} -c {threads}'
+</code></pre>
 
-<tbody>
-<tr>
-<td>RNA captured</td>
-<td>mature RNA</td>
-<td>Nascent RNA</td>
-<td>Nascent RNA</td>
-<td>Nascent RNA</td>
-</tr>
+<p>Notice that you must define these params for all rules or you will get an error when Snakemake tries to submit a job from a rule that doesn&rsquo;t have one or more of these params defined.</p>
 
-<tr>
-<td>Quantify transcription</td>
-<td>Yes(with degradation)</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
+<p>Another more convinient way involves using a separate cluster config file:</p>
 
-<tr>
-<td>Single base resolution</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
+<ol>
+<li>Define resources in cluster.config:</li>
+</ol>
 
-<tr>
-<td>Material type</td>
-<td>RNA</td>
-<td>Insoluble chromatin</td>
-<td>Nuclei</td>
-<td>Nuclei</td>
-</tr>
-</tbody>
-</table>
+<p>Instead of putting parameters for cluster submission into each individual rule, you can write a separate config file that contains these parameters:</p>
+
+<p><em>cluster.yaml</em>:</p>
+
+<pre><code>__default__:
+  partition: &quot;high&quot;
+  cpus: &quot;{threads}&quot;
+  time: 60
+  mem: &quot;2g&quot;
+
+mapFASTQ:
+  mem: &quot;8g&quot;
+  time: 120
+  
+convertSAM:
+  mem: &quot;4g&quot;
+</code></pre>
+
+<p>This file defines dafault parameters Snakemake will use for job submissions for all rules, <em>unless</em> they are overridden by specific parameters defined below.</p>
+
+<p>Now in our rule definition, we only need to specify <code>threads</code>:</p>
+
+<pre><code class="language-python">rule mapFASTQ:
+    input: 
+        f1 = &quot;RawData/{sample}_1.fastq.gz&quot;, 
+        f2 =&quot;RawData/{sample}_2.fastq.gz&quot;, 
+        ref = &quot;Ref/ref.fa&quot;
+    output: temp(&quot;Alignment/{sample}.sam&quot;)
+    threads: 8
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -@ {threads} -R &quot;@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}&quot; {input.ref} {input.f1} {input.f2} &gt; {output}
+     &quot;&quot;&quot;
+</code></pre>
+
+<p>The reason I keep <code>threads</code> in rule definition is because when running on a local machine Snakemake can still utilize this paramter for multi-threading</p>
+
+<p>Then we can revoke by:</p>
+
+<pre><code>snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus}'
+</code></pre>
+
+<h3 id="redirect-cluster-output">Redirect cluster output</h3>
+
+<p>When running a job on cluster, stdout and stderr are not immediately obvious. Slurm managed systems redirect them to <code>slurm-JOBID.txt</code> in working directory by default. This can be hard to tracked down when you&rsquo;re using Snakemake to manage more than a few dozen jobs. Luckily, with Snakemake this can be very easily changed. Let&rsquo;s modify out <code>cluster.yaml</code> file:</p>
+
+<pre><code>__default__:
+  partition: &quot;high&quot;
+  cpus: &quot;{threads}&quot;
+  time: 60
+  mem: &quot;2g&quot;
+  output: &quot;logs_slurm/{rule}.{wildcards}.out&quot;
+</code></pre>
+
+<p>And then we revoke Snakemake by:</p>
+
+<pre><code>snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output}'
+</code></pre>
+
+<p>This will redirect stdout and stderr of every job to their corresponding log files named as by rule and wildcards (eg. <code>downloadFASTQ.sample1.out</code>) under <code>logs_slurm</code> directory. If a particular job fails, it&rsquo;s super easy to find its log file!</p>
+
+<h3 id="email-notification-when-a-job-fails">Email notification when a job fails</h3>
+
+<p>Often times it&rsquo;s desirable to know when a job fails. You can have cluster notify you by email simply by modifying <code>cluster.yaml</code> to include cluster params for email notifications. For example:</p>
+
+<pre><code>__default__:
+  partition: &quot;high&quot;
+  cpus: &quot;{threads}&quot;
+  time: 60
+  mem: &quot;2g&quot;
+  output: &quot;logs_slurm/{rule}.{wildcards}.out&quot;
+  email: &quot;user@host.com&quot;
+  email_type: &quot;FAIL&quot;
+</code></pre>
+
+<p>And then revoke Snakemake with:</p>
+
+<pre><code>snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}'
+</code></pre>
+
+<h3 id="put-snakemake-command-in-a-scheduler-script">Put Snakemake command in a &ldquo;scheduler&rdquo; script</h3>
+
+<p>Evidently, as our cluster config parameters grow, the command to revoke Snakemake also grows and it becomes tedious to type every time. To avoid this, you can simply put this command in a sbtach script like so:</p>
+
+<p><em>scheduler.sh</em></p>
+
+<pre><code>#! /bin/bash -login
+#SBATCH -J scheduler
+#SBATCH -t 7-00:00:00
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH -p high
+#SBATCH --mem=2gb
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=user@host.com
+
+cd /path/to/snakemake/piepeline
+
+mkdir -p logs_slurm
+snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}'
+</code></pre>
+
+<p>And then submit this script to cluster using <code>sbatch scheduler.sh</code>. Then all you need to do is sit back and wait for it to finish (or error out).</p>
+
+<h2 id="best-practice-on-cluster">Best practice on cluster</h2>
+
+<p>(To be updated)</p>
 
     </div>
 
@@ -540,9 +684,9 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/sequencing/">Sequencing</a>
-  
   <a class="badge badge-light" href="/tags/bioinformatics/">bioinformatics</a>
+  
+  <a class="badge badge-light" href="/tags/workflow/">Workflow</a>
   
 </div>
 
@@ -653,6 +797,8 @@ Thirteen hours of travel is getting to the point of breaking my soul &ndash; I h
         <div class="hr-light"></div>
         <h3>Related</h3>
         <ul>
+          
+          <li><a href="/post/what-is-chroseq-and-how-does-it-work/">What is ChROseq and how does it work</a></li>
           
           <li><a href="/post/split-a-fasta-record-by-ns/">Split a FASTA record by Ns</a></li>
           

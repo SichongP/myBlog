@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workflow on Academic</title>
+    <link>/tags/workflow/</link>
+    <description>Recent content in Workflow on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to run snakemake pipeline on HPC</title>
+      <link>/post/how-to-run-snakemake-pipeline-on-hpc/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/how-to-run-snakemake-pipeline-on-hpc/</guid>
+      <description>Why use Snakemake on HPC Snakemake is a handy workflow manager written in Python. It handles workflow based on predefined job dependencies. One of the great features of Snakemake is that it can manage a workflow on both a standalone computer, or a clustered HPC system. HPC, or &amp;ldquo;cluster&amp;rdquo; as it&amp;rsquo;s often referred to, requires additional considerations.
+On HPC, all computing jobs should be submitted to &amp;ldquo;compute nodes&amp;rdquo; through a workload manager (for example, Slurm).</description>
+    </item>
+    
+  </channel>
+</rss>
