@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -332,6 +331,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -515,9 +515,10 @@ convertSAM:
 </div>
 <div id="put-snakemake-command-in-a-scheduler-script" class="section level3">
 <h3>Put Snakemake command in a “scheduler” script</h3>
-<p>Evidently, as our cluster config parameters grow, the command to revoke Snakemake also grows and it becomes tedious to type every time. To avoid this, you can simply put this command in a sbtach script like so: <em>scheduler.sh</em></p>
+<p>Evidently, as our cluster config parameters grow, the command to revoke Snakemake also grows and it becomes tedious to type every time. To avoid this, you can simply put this command in a sbtach script like so:</p>
+<p><em>scheduler.sh</em></p>
 <pre><code>#! /bin/bash -login
-#SBATCH -J SRA_search
+#SBATCH -J scheduler
 #SBATCH -t 7-00:00:00
 #SBATCH -N 1
 #SBATCH -n 1
@@ -531,8 +532,12 @@ cd /path/to/snakemake/piepeline
 
 mkdir -p logs_slurm
 snakemake -s Snakefile --cluster-config cluster.yaml --cluster &#39;sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}&#39;</code></pre>
-<p>And then submit this script to cluster using <code>sbatch scheduler.sh</code>. Then all you need to do is sit back and wait for it to finish (or error out :))</p>
+<p>And then submit this script to cluster using <code>sbatch scheduler.sh</code>. Then all you need to do is sit back and wait for it to finish (or error out).</p>
 </div>
+</div>
+<div id="best-practice-on-cluster" class="section level2">
+<h2>Best practice on cluster</h2>
+<p>(To be updated)</p>
 </div>
 
 

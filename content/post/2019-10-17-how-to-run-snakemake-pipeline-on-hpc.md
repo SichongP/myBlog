@@ -208,7 +208,7 @@ Evidently, as our cluster config parameters grow, the command to revoke Snakemak
 #SBATCH -t 7-00:00:00
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH -c 1
+#SBATCH -c 1  
 #SBATCH -p high
 #SBATCH --mem=2gb
 #SBATCH --mail-type=ALL

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -31,7 +33,7 @@
   <meta name="description" content="PhD student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/404.html">
+  <link rel="alternate" hreflang="en-us" href="/categories/linux/">
 
   
 
@@ -112,15 +114,15 @@
   
 
   
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Academic">
-  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="alternate" href="/categories/linux/index.xml" type="application/rss+xml" title="Academic">
+  <link rel="feed" href="/categories/linux/index.xml" type="application/rss+xml" title="Academic">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/404.html">
+  <link rel="canonical" href="/categories/linux/">
 
   
   
@@ -135,19 +137,19 @@
   <meta property="twitter:creator" content="@Sichong93">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/404.html">
-  <meta property="og:title" content="404 Page not found | Academic">
+  <meta property="og:url" content="/categories/linux/">
+  <meta property="og:title" content="Linux | Academic">
   <meta property="og:description" content="PhD student"><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  
-  
-
+  <meta property="og:updated_time" content="2020-01-09T00:00:00&#43;00:00">
   
 
   
 
-  <title>404 Page not found | Academic</title>
+  
+
+  <title>Linux | Academic</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -306,58 +308,53 @@
   </div>
 </nav>
 
-<div class="container">
 
-  <h1>Page not found</h1>
-  <p>Perhaps you were looking for one of these?</p>
 
-  
-  
-  <h2>Posts</h2>
-  
-  <ul>
-    <li><a href="/post/dev-stdout-vs-2-a-dive-into-linux-stdio/">/dev/stderr vs &gt;&amp;2: a dive into Linux STDIO</a></li>
-  </ul>
-  
-  <ul>
-    <li><a href="/post/how-to-run-snakemake-pipeline-on-hpc/">How to run snakemake pipeline on HPC</a></li>
-  </ul>
-  
-  <ul>
-    <li><a href="/post/what-is-chroseq-and-how-does-it-work/">What is ChROseq and how does it work</a></li>
-  </ul>
-  
-  <ul>
-    <li><a href="/post/2019-08-07-write-scientific-paper-in-markdown/">Write scientific paper in markdown</a></li>
-  </ul>
-  
-  <ul>
-    <li><a href="/post/fdr-correction/">Hypothesis testing and multiple test correction</a></li>
-  </ul>
-  
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   
   
+  
+    
+  
+<div class="universal-wrapper pt-3">
+  <h1 itemprop="name">Linux</h1>
 
-  
-  
-  <h2>Talks</h2>
-  
-  <ul>
-    <li><a href="/talk/example/">Example Talk</a></li>
-  </ul>
-  
   
 
   
+</div>
+
+
+
+<div class="universal-wrapper">
   
-  <h2>Projects</h2>
+
   
-  <ul>
-    <li><a href="/project/ezprotocol/">EzProtocol</a></li>
-  </ul>
   
+  <div>
+    <h2><a href="/post/dev-stdout-vs-2-a-dive-into-linux-stdio/">/dev/stderr vs &gt;&amp;2: a dive into Linux STDIO</a></h2>
+    <div class="article-style">
+      
+      I was assisting a bioinformatics workshop for FAANG group at Plant and Animal Genome (PAG) and I ran into an interesting question with an example provided by one of the instructors on the topic of Linux output redirecting. Take a look at this simplified example script print_stderr.sh:
+#!/usr/bin/bash echo &quot;first line of stderr&quot; &gt; /dev/stderr echo &quot;second line of stderr&quot; &gt; /dev/stderr echo &quot;third line of stderr&quot; &gt; /dev/stderr echo &quot;A line of stdout&quot;  Now if we redirect the stderr of this script to a file, instead of all three lines of stderr messages, we only see the last line!
+      
+    </div>
+  </div>
+  
+
   
 
 </div>
@@ -519,4 +516,6 @@
 
   </body>
 </html>
+
+
 
