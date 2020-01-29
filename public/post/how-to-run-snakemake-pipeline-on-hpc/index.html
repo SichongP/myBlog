@@ -364,7 +364,7 @@ On HPC, all computing jobs should be submitted to &ldquo;compute nodes&rdquo; th
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    9 min read
   </span>
   
 
@@ -675,7 +675,62 @@ snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {clust
 
 <h2 id="best-practice-on-cluster">Best practice on cluster</h2>
 
-<p>(To be updated)</p>
+<h3 id="use-local-temp-directory">Use local temp directory</h3>
+
+<p>Because of the unique structures of HPC systems, many utilize local storage to speed up I/O intensive jobs. Therefore, whenever you have jobs that read/write (especially in small chunks) intensively to hard disks, you should try to have them I/O on these local storage and move your files once the job is finished.</p>
+
+<p>Suppose we have <code>/scratch/</code> as local space for each node on our HPC system. Reading from and writing to <code>/scratch/</code> will be significantly faster than any other directories. But you can&rsquo;t access this space from any other nodes except this one, including your head node. Therefore you should always move your desired files afterwards. And these storage spaces are usually very limited (~1Tb), you should also always clean up after your job so others can make use of it as well.</p>
+
+<p>To utilize this space, in your bash script, define a cleanup function and call it upon exit:</p>
+
+<pre><code>export MYTMP=/scratch/$USER/$SLURM_JOBID
+cleanup() {{ rm -rf $MYTMP; }}
+trap cleanup EXIT
+mkdir -p $MYTMP
+... 
+
+</code></pre>
+
+<p>In the above code, we defined our temp directory inside <code>/scratch/</code> using <code>$USER</code> and <code>$SLURM_JOBID</code>. This allows anyone, including yourself, to be able to know immediately which directory belongs to you and whether or not it is currently in use (depending on the state of associated job).</p>
+
+<p>You can add this code to your Snakefile whenever you use <code>shell</code> directive. <code>trap</code> keyword will ensure that <code>cleanup()</code> function is always called to remove all temp files associated with a job whenever said job exits, either successfully or due to a failure.</p>
+
+<h3 id="run-interactive-jobs-on-compute-nodes">Run interactive jobs on compute nodes</h3>
+
+<p>When analyzing data, we often need to run commands interactively, either testing out commands before deploying at a large scale or run some preliminary data exploration and visualization through Rstudio or Jupyter Notebook. When working on HPC systems, a rule of thumb is to not run any jobs other than simple commands like <code>cp</code>, <code>mv</code>, <code>nano</code>, etc on head nodes because head nodes usually have very limited resources and are not suitable for resource-intensive computing. To run commands interactively, you need to start an interactive job:</p>
+
+<pre><code>srun -t 240 --mem=10g --pty bash
+</code></pre>
+
+<p>This will request 10g RAM and 1 thread for 240 minutes (4 hours) to start an interactive bash shell. You can also use <code>--pty R</code> and <code>--pty python</code> to start R and Python shells respectively.</p>
+
+<h3 id="run-rstudio-interactively-on-hpc">Run RStudio interactively on HPC</h3>
+
+<p>I&rsquo;m a big fan of RStudio for its user friendly interface and versatile functionality and I use R notebooks with RStudio for most of my data analysis work and I often run out of RAM on my PC for large data-set. Is it possible to move my RStudio workflow to HPC as well? Yes!</p>
+
+<p>First let&rsquo;s install RStudio on HPC. I use conda but many other methods will do as well.</p>
+
+<pre><code>conda create -n rstudio rstudio
+</code></pre>
+
+<p>And then fresh log in to HPC through ssh with X11 forwarding enabled:</p>
+
+<pre><code>ssh -X username@host
+</code></pre>
+
+<p>You can test X11 forwarding with your connection with <code>xclock</code>. If it&rsquo;s working, you should see an analog clock app pop up on your local machine.
+Now we can start RStudio. <em>First request an interactive session</em>:</p>
+
+<pre><code>srun -t 240 --mem=10g --pty bash
+</code></pre>
+
+<p>And start RStudio:</p>
+
+<pre><code>conda activate rstudio
+rstudio
+</code></pre>
+
+<p>Now you should be able to use it on your local machine!</p>
 
     </div>
 

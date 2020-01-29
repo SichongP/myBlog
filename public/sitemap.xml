@@ -319,22 +319,6 @@
     
     <url>
     
-      <loc>/post/2019-10-17-how-to-run-snakemake-pipeline-on-hpc/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/post/2020-01-09-dev-stdout-vs-2-a-dive-into-linux-stdio/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/authors/</loc>
       <priority>0</priority>
     </url>
