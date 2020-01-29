@@ -220,6 +220,54 @@ mkdir -p logs_slurm
 snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}'
 ```
 And then submit this script to cluster using `sbatch scheduler.sh`. Then all you need to do is sit back and wait for it to finish (or error out).
-
 ## Best practice on cluster
-(To be updated)
+
+### Use local temp directory
+Because of the unique structures of HPC systems, many utilize local storage to speed up I/O intensive jobs. Therefore, whenever you have jobs that read/write (especially in small chunks) intensively to hard disks, you should try to have them I/O on these local storage and move your files once the job is finished. 
+
+Suppose we have `/scratch/` as local space for each node on our HPC system. Reading from and writing to `/scratch/` will be significantly faster than any other directories. But you can't access this space from any other nodes except this one, including your head node. Therefore you should always move your desired files afterwards. And these storage spaces are usually very limited (~1Tb), you should also always clean up after your job so others can make use of it as well.
+
+To utilize this space, in your bash script, define a cleanup function and call it upon exit:
+```
+export MYTMP=/scratch/$USER/$SLURM_JOBID
+cleanup() {{ rm -rf $MYTMP; }}
+trap cleanup EXIT
+mkdir -p $MYTMP
+... 
+
+```
+In the above code, we defined our temp directory inside `/scratch/` using `$USER` and `$SLURM_JOBID`. This allows anyone, including yourself, to be able to know immediately which directory belongs to you and whether or not it is currently in use (depending on the state of associated job).
+
+You can add this code to your Snakefile whenever you use `shell` directive. `trap` keyword will ensure that `cleanup()` function is always called to remove all temp files associated with a job whenever said job exits, either successfully or due to a failure.
+
+### Run interactive jobs on compute nodes
+When analyzing data, we often need to run commands interactively, either testing out commands before deploying at a large scale or run some preliminary data exploration and visualization through Rstudio or Jupyter Notebook. When working on HPC systems, a rule of thumb is to not run any jobs other than simple commands like `cp`, `mv`, `nano`, etc on head nodes because head nodes usually have very limited resources and are not suitable for resource-intensive computing. To run commands interactively, you need to start an interactive job:
+```
+srun -t 240 --mem=10g --pty bash
+```
+This will request 10g RAM and 1 thread for 240 minutes (4 hours) to start an interactive bash shell. You can also use `--pty R` and `--pty python` to start R and Python shells respectively.
+
+### Run RStudio interactively on HPC
+I'm a big fan of RStudio for its user friendly interface and versatile functionality and I use R notebooks with RStudio for most of my data analysis work and I often run out of RAM on my PC for large data-set. Is it possible to move my RStudio workflow to HPC as well? Yes!
+
+First let's install RStudio on HPC. I use conda but many other methods will do as well.
+```
+conda create -n rstudio rstudio
+```
+And then fresh log in to HPC through ssh with X11 forwarding enabled:
+```
+ssh -X username@host
+```
+You can test X11 forwarding with your connection with `xclock`. If it's working, you should see an analog clock app pop up on your local machine.
+Now we can start RStudio. *First request an interactive session*:
+```
+srun -t 240 --mem=10g --pty bash
+```
+
+And start RStudio:
+```
+conda activate rstudio
+rstudio
+```
+Now you should be able to use it on your local machine!
+
