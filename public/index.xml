@@ -735,6 +735,41 @@ rstudio
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now you should be able to use it on your local machine!&lt;/p&gt;
+
+&lt;h3 id=&#34;run-jupyter-lab-on-hpc&#34;&gt;Run Jupyter Lab on HPC&lt;/h3&gt;
+
+&lt;p&gt;For those of you who prefer Jupyter Lab (or notebook) to RStudio, worry not: You can run it on HPC as well!
+This involves a little bit more work:&lt;/p&gt;
+
+&lt;p&gt;First, start an interactive bash session on HPC:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;srun -t 240 --mem=10g -p bmh --pty bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here I request an interactive bash session on a queue called &lt;code&gt;bmh&lt;/code&gt;. Modify this according to your HPC configurations.
+Note the node you are assigned to (in my case its &lt;code&gt;bm3&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;username@bm3:~$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can start a jupyter server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda activate jupyter
+jupyter-lab --port 8888 --no-browser
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we ask jupyter to forward all traffic to port &lt;code&gt;8888&lt;/code&gt;, and not to open a browser (&lt;code&gt;--no-browser&lt;/code&gt;) since we don&amp;rsquo;t have a GUI browser on HPC.&lt;/p&gt;
+
+&lt;p&gt;Next step, we need to create an SSH tunnel connecting our local machine to the node the jupyter is running on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh -t -t username@host -L 8888:localhost:8888 ssh bm3 -L 8888:localhost:8888
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates an SSH tunnel from your local machine&amp;rsquo;s port &lt;code&gt;8888&lt;/code&gt; to your HPC&amp;rsquo;s login node&amp;rsquo;s port &lt;code&gt;8888&lt;/code&gt; and on the login node, it creates an SSH tunnel to &lt;code&gt;bm3&lt;/code&gt; port &lt;code&gt;8888&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can open a browser and go to &lt;code&gt;localhost:8888&lt;/code&gt; and Jupyter should show up!&lt;/p&gt;
+
+&lt;p&gt;Note that you can significantly simplify this process by using aliases and defining functions in your bash profile!&lt;/p&gt;
 </description>
     </item>
     

@@ -271,3 +271,33 @@ rstudio
 ```
 Now you should be able to use it on your local machine!
 
+### Run Jupyter Lab on HPC
+For those of you who prefer Jupyter Lab (or notebook) to RStudio, worry not: You can run it on HPC as well!
+This involves a little bit more work:
+
+First, start an interactive bash session on HPC:
+```{bash}
+srun -t 240 --mem=10g -p bmh --pty bash
+```
+Here I request an interactive bash session on a queue called `bmh`. Modify this according to your HPC configurations.
+Note the node you are assigned to (in my case its `bm3`):
+```
+username@bm3:~$
+```
+
+Now you can start a jupyter server:
+```
+conda activate jupyter
+jupyter-lab --port 8888 --no-browser
+```
+Here we ask jupyter to forward all traffic to port `8888`, and not to open a browser (`--no-browser`) since we don't have a GUI browser on HPC.
+
+Next step, we need to create an SSH tunnel connecting our local machine to the node the jupyter is running on. 
+```{bash}
+ssh -t -t username@host -L 8888:localhost:8888 ssh bm3 -L 8888:localhost:8888
+```
+This command creates an SSH tunnel from your local machine's port `8888` to your HPC's login node's port `8888` and on the login node, it creates an SSH tunnel to `bm3` port `8888`. 
+
+Now you can open a browser and go to `localhost:8888` and Jupyter should show up!
+
+Note that you can significantly simplify this process by using aliases and defining functions in your bash profile!
