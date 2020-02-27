@@ -1,4 +1,7 @@
 theme = "hugo-academic"
-baseURL = "http://127.0.0.1:5435/"
+baseURL = "www.sichong.site/"
 languageCode = "en-us"
 title = "Sichong Peng"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
