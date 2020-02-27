@@ -1,0 +1,234 @@
+---
+title: 'Snakemake and Slurm: How to Manage Workflow with Resource Constraint on HPC'
+author: Sichong Peng
+date: '2020-02-25'
+slug: snakemake-and-slurm-how-to-manage-workflow-with-resource-constraint-on-hpc
+categories:
+  - HPC
+  - Workflow
+  - Linux
+tags:
+  - Linux
+  - bioinformatics
+  - Workflow
+  - HPC
+image:
+  caption: ''
+  focal_point: ''
+---
+
+
+
+<blockquote>
+<p>Note: This is an update to my previous post: <a href="/2019/10/17/how-to-run-snakemake-pipeline-on-hpc/">How to Run Snakemake pipeline on HPC</a>.</p>
+</blockquote>
+<p>In my <a href="/2019/10/17/how-to-run-snakemake-pipeline-on-hpc/">previous post</a>, I disucessed some tips on how to effectively manage workflow using Snakemake on an HPC system. However, I have recently noticed that Snakemake support for <code>--cluster-config</code> is offcially deprecated in favor of <code>--profile</code>. I spent most of today digging into this feature and now I’m happy to share with you my latest setup.</p>
+<div id="how-does---profile-differ-from---cluster-config" class="section level1">
+<h1>How does <code>--profile</code> differ from <code>--cluster-config</code>?</h1>
+<p>In short, <code>--profile</code> is more universal and versatile. You can set different profiles for different environments: HPC, local machines, cloud computing, etc.</p>
+</div>
+<div id="how-to-make-a-simple-slurm-profile" class="section level1">
+<h1>How to make a simple Slurm profile</h1>
+<p>To use a profile, you should first create a directory:</p>
+<pre class="bash"><code>mkdir -p ~/.config/snakemake/slurm</code></pre>
+<p>Here I name my profile as <code>slurm</code> indicating that it’s a profile for executing on HPC with Slurm.</p>
+<p>Then in the newly created folder, make a new file <code>config.yaml</code>:</p>
+<pre><code>jobs: 10
+cluster: sbatch
+use-conda: true</code></pre>
+<p>Then when you run snakemake with: <code>snakemake --profile slurm</code>, Snakemake will search your current directory as well as <code>~/.config/snakemake/</code> for a directory named <code>slurm</code> and attempt to load <code>config.yaml</code> inside that directory. Once it is able to load the file, it will execute with above options specified.</p>
+<p>Now as you may have guessed, <code>profiles</code> effectively allows you to put command line arguments for Snakemake in a file that can be re-used at any time and from any directory.</p>
+<p>Now to port the workflow we have from last post (<a href="/2019/10/17/how-to-run-snakemake-pipeline-on-hpc/">check it out here</a>), we will make our Slurm profile’s <code>config.yaml</code> look like this:</p>
+<pre class="yaml"><code>jobs: 10
+cluster: &quot;sbatch -p high -t {resources.time_min} --mem={resources.mem_mb} -c {resources.cpus} -o logs_slurm/{rule}_{wildcards} -e logs_slurm/{rule}_{wildcards} --mail-type=FAIL --mail-user=user@mail.com&quot;</code></pre>
+<p>Then in our <code>Snakefile</code>, we will modify rules like this:</p>
+<pre><code>samples = [&#39;sample1&#39;, &#39;sample2&#39;, &#39;sample3&#39;, &#39;sample4&#39;]
+rule all:
+    input: expand(&quot;Alignment/{sample}.bam&quot;, sample = samples)
+
+rule downloadFASTQ:
+    output: &quot;RawData/{sample}_1.fastq.gz&quot;, &quot;RawData/{sample}_2.fastq.gz&quot;
+    resources: time_min=60, mem_mb=100, cpus=1
+    shell:
+     &quot;&quot;&quot;
+     ascp username@host:path/to/file/{wildcards.sample} RawData/
+     &quot;&quot;&quot;
+
+rule mapFASTQ:
+    input: 
+        f1 = &quot;RawData/{sample}_1.fastq.gz&quot;, 
+        f2 =&quot;RawData/{sample}_2.fastq.gz&quot;, 
+        ref = &quot;Ref/ref.fa&quot;
+    output: temp(&quot;Alignment/{sample}.sam&quot;)
+    resources: time_min=300, mem_mb=8000, cpus=8
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -@ {resources.cpus} -R &quot;@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}&quot; {input.ref} {input.f1} {input.f2} &gt; {output}
+     &quot;&quot;&quot;
+
+rule convertSAM:
+    input: &quot;Alignment/{sample}.sam&quot;
+    output: &quot;Alignment/{sample}.bam&quot;
+    resources: time_min=60, mem_mb=2000, cpus=1
+    shell:
+     &quot;&quot;&quot;
+     samtools view -bh {input} &gt; {output}
+     &quot;&quot;&quot;</code></pre>
+<p>Now we can simply run Snakemake with <code>snakemake --profile slurm</code>!</p>
+</div>
+<div id="use-default-resource-assignment" class="section level1">
+<h1>Use default resource assignment</h1>
+<p>You probably noticed that in the above I used <code>resources</code> directive instead of <code>params</code> directive to define memory, cpus, and time each rule should request. This is because <code>resources</code> directive enables an awesome feature in Snakemake that allows you to make full use of an HPC system’s mighty power (more on this later)!</p>
+<p>But how can we set default resource allocation like we did before with <code>--cluster-config</code> so that we don’t have to mannually set those numbers for every rule?</p>
+<p>We can do so in our Slurm profile’s <code>config.yaml</code>:</p>
+<pre class="yaml"><code>jobs: 10
+cluster: &quot;sbatch -p high -t {resources.time_min} --mem={resources.mem_mb} -c {resources.cpus} -o logs_slurm/{rule}_{wildcards} -e logs_slurm/{rule}_{wildcards} --mail-type=FAIL --mail-user=user@mail.com&quot;
+default-resources: [cpus=1, mem_mb=2000, time_min=60]</code></pre>
+<p>And now in our <code>Snakefile</code> we only need to set <code>resource</code> when a rule requires an amount that is different from default:</p>
+<pre><code>samples = [&#39;sample1&#39;, &#39;sample2&#39;, &#39;sample3&#39;, &#39;sample4&#39;]
+rule all:
+    input: expand(&quot;Alignment/{sample}.bam&quot;, sample = samples)
+
+rule downloadFASTQ:
+    output: &quot;RawData/{sample}_1.fastq.gz&quot;, &quot;RawData/{sample}_2.fastq.gz&quot;
+    resources: mem_mb=100
+    shell:
+     &quot;&quot;&quot;
+     ascp username@host:path/to/file/{wildcards.sample} RawData/
+     &quot;&quot;&quot;
+
+rule mapFASTQ:
+    input: 
+        f1 = &quot;RawData/{sample}_1.fastq.gz&quot;, 
+        f2 =&quot;RawData/{sample}_2.fastq.gz&quot;, 
+        ref = &quot;Ref/ref.fa&quot;
+    output: temp(&quot;Alignment/{sample}.sam&quot;)
+    resources: time_min=300, mem_mb=8000, cpus=8
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -@ {resources.cpus} -R &quot;@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}&quot; {input.ref} {input.f1} {input.f2} &gt; {output}
+     &quot;&quot;&quot;
+
+rule convertSAM:
+    input: &quot;Alignment/{sample}.sam&quot;
+    output: &quot;Alignment/{sample}.bam&quot;
+    resources: time_min=60, mem_mb=2000, cpus=1
+    shell:
+     &quot;&quot;&quot;
+     samtools view -bh {input} &gt; {output}
+     &quot;&quot;&quot;</code></pre>
+</div>
+<div id="parallelize-jobs-based-on-resource-consumption" class="section level1">
+<h1>Parallelize jobs based on resource consumption</h1>
+<p>HPC system usually has resource constraint for users in order to mantain general accessibility for all users.</p>
+<p>Let’s say we have access to 30 CPUs and 500Gb RAM. And we wish to run a workflow with following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Run FastQC on raw files</li>
+<li>Run BWA on raw files</li>
+</ol>
+<p>Based on past experiences, we can have some expectations for these steps:</p>
+<ol style="list-style-type: decimal">
+<li>FastQC cannot be multithreaded for a single input file and therefore does not benefit from having more than 1 CPU. But it runs relatively fast and requires only a small amount of RAM.</li>
+<li>Depending on input file size and complexity, BWA can take a very long time and typically requires a substantially large RAM. BWA is multithreaded so having more CPUS can greatly decrease running time.</li>
+</ol>
+<p>Say we use 1 CPU, 2Gb RAM for FastQC and 5 CPUS, 30Gb RAM for BWA and we simply use <code>-j</code> option from Snakemake to parallelize jobs, we either sprout too many jobs for BWA or too few for FastQC. While on an HPC system submitting more jobs than total allocated resources will simply result in jobs in queue, this can be a real problem with cloud computing or a local machine: jobs will be terminated by the OS if it runs out of RAM!</p>
+<p>So how do we make most of resources available to us without crashing everything? Luckily, <code>resources</code> directive in Snakemake allows us a more versatile way of managing resource allocation on an HPC system. We can define resource consumption on a per-rule basis and an overall resource constraint at workflow level. With such information, Snakemake will then wait to submit any jobs if executing it will exceed any resource constraint.</p>
+<p>Let’s add resource constraint to our Slurm profile:</p>
+<pre class="yaml"><code>jobs: 100
+cluster: &quot;sbatch -p high -t {resources.time_min} --mem={resources.mem_mb} -c {resources.cpus} -o logs_slurm/{rule}_{wildcards} -e logs_slurm/{rule}_{wildcards} --mail-type=FAIL --mail-user=user@mail.com&quot;
+default-resources: [cpus=1, mem_mb=2000, time_min=60]
+resources: [cpus=30, mem_mb=500000]</code></pre>
+<p>And then our <code>Snakefile</code>:</p>
+<pre class="yaml"><code>import pandas as pd
+samples = pd.read_csv(&quot;...&quot;) # A list of 100 samples
+rule FastQC:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/QC/{sample}_fastqc.zip&quot;
+    shell:
+     &quot;&quot;&quot;
+     fastqc -o Results/QC/ {input} 
+     &quot;&quot;&quot;
+     
+rule BWA:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/mapping/{sample}.sam&quot;
+    resources: cpus=5, mem_mb=30000, time_min=1440
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -t {resources.cpus} -o {output} /path/to/ref.fa {input}
+     &quot;&quot;&quot;</code></pre>
+<p>Now we can invoke Snakemake with our profile: <code>snakemake --profile slurm</code>. With these resource constraints, Snakemake will at most submit 6 BWA jobs (30/5=6) or 30 FastQC jobs (30/1=30).</p>
+</div>
+<div id="use-different-partitions-for-different-rules" class="section level1">
+<h1>Use different partitions for different rules</h1>
+<p>Many HPC systems with Slurm have a queue system with different partitions. Usually these will be assigned different priorities and one can specify which partition they wish their job to be queued on when submitting a job with <code>-p</code> argument for <code>sbatch</code> command. In our previous post, we used <code>high</code> for all our rules. A typical partition system with <code>high</code>, <code>med</code>, and <code>low</code> partitions may look like this:</p>
+<ul>
+<li><p><code>high</code>: Jobs start as soon as there are sufficient resources. Can suspend jobs running on <code>med</code> or <code>low</code> partitions to free up resources. One usually have limited amount of resources available to them on this partition (eg. 30 CPUS, 500Gb RAM) and when one’s total jobs exceed that limit, jobs will wait in queue.</p></li>
+<li><p><code>med</code>: Jobs start as soon as there are sufficient resources available. Can suspend jobs running on <code>low</code> partition to free up resources. One may have same access limitation as <code>high</code> partition. When a job on <code>med</code> partition is suspended by a job on <code>high</code> partition, it can resume as soon as its resource is freed up.</p></li>
+<li><p><code>low</code>: Jobs start as soon as there are sufficient resources available. Typically “free-for-all” access. When a job on <code>low</code> partition is suspended by a job on <code>med</code> or <code>high</code> partition, it is <a href="https://slurm.schedmd.com/preempt.html">“preempted”</a> and will restart once its resources are freed up.</p></li>
+</ul>
+<p>Low priority partitions are great for small jobs that finish fast and don’t require large amount of resources. We can put our FastQC jobs on this partition so that it doesn’t compete for resources with our BWA jobs!</p>
+<p>To do this, let’s modify our Slurm profile again:</p>
+<pre class="yaml"><code>jobs: 100
+cluster: &quot;sbatch -p {params.partition} -t {resources.time_min} --mem={resources.mem_mb} -c {resources.cpus} -o logs_slurm/{rule}_{wildcards} -e logs_slurm/{rule}_{wildcards} --mail-type=FAIL --mail-user=user@mail.com&quot;
+default-resources: [cpus_high=0, mem_mb_high=0, time_min=60, cpus=1, mem_mb=2000]
+resources: [cpus_high=30, mem_mb_high=500000]</code></pre>
+<p>Notice here we use two sets of resources: <code>cpus</code> + <code>mem_mb</code> and <code>cpus_high</code> + <code>mem_mb_high</code>.
+Since we only want to count resources consumption towards resource limit when a job is run on a <code>high</code> or <code>med</code> priority, we separate them out and use <code>cpus</code> and <code>mem_mb</code> to submit jobs to Slurm while set <code>cpus_high</code> and <code>mem_mb_high</code> only for jobs on <code>high</code> and <code>med</code> partition so they get counted towards resource limit.</p>
+<pre class="yaml"><code>import pandas as pd
+samples = pd.read_csv(&quot;...&quot;) # A list of 100 samples
+rule FastQC:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/QC/{sample}_fastqc.zip&quot;
+    params: partition = &#39;low&#39;
+    shell:
+     &quot;&quot;&quot;
+     fastqc -o Results/QC/ {input} 
+     &quot;&quot;&quot;
+     
+rule BWA:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/mapping/{sample}.sam&quot;
+    params: partition = &#39;med&#39;
+    resources: cpus=5, mem_mb=30000, time_min=1440, cpus_high=5, mem_mb_high=30000
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -t {resources.cpus} -o {output} /path/to/ref.fa {input}
+     &quot;&quot;&quot;</code></pre>
+<p>Now when we invoke Snakemake with <code>snakemake --profile slurm</code>, all FastQC jobs will be submitted at once while BWA jobs will be parallelized to up to 5 at a time.</p>
+</div>
+<div id="set-default-values-for-partition" class="section level1">
+<h1>Set default values for partition</h1>
+<p>If we have a workflow with dozens or even more rules, is there a way to set default partitions for all my rules so I don’t have to define them for every single rule in my workflow? Sadly, at the moment, there is no official support for such a feature in Snakemake. However, several workarounds do exist.</p>
+<p>Fisrt, we can use an input function for <code>params</code> directive to determine partition based on a separate configuration file. For example, we may have a <code>cluster_partition.conf</code>:</p>
+<pre><code>__default__: low
+BWA: med</code></pre>
+<p>And then in our <code>Snakefile</code>:</p>
+<pre><code>import pandas as pd
+import yaml
+samples = pd.read_csv(&quot;...&quot;) # A list of 100 samples
+with open(&#39;cluster_partition.conf&#39;, &#39;r&#39;) as f:
+    partitions = yaml.safe_load()
+    
+def get_partition(wildcards, rule_name):
+    return partitions[rule_name] if rule_name in partitions else partitions[&#39;__default__&#39;]
+
+rule FastQC:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/QC/{sample}_fastqc.zip&quot;
+    params: partition = get_partition(&#39;FastQC&#39;)
+    shell:
+     &quot;&quot;&quot;
+     fastqc -o Results/QC/ {input} 
+     &quot;&quot;&quot;
+     
+rule BWA:
+    input: &quot;Data/{sample}.fastq.gz&quot;
+    output: &quot;Results/mapping/{sample}.sam&quot;
+    params: partition = get_partition(&#39;BWA&#39;)
+    resources: cpus=5, mem_mb=30000, time_min=1440, cpus_high=5, mem_mb_high=30000
+    shell:
+     &quot;&quot;&quot;
+     bwa mem -t {resources.cpus} -o {output} /path/to/ref.fa {input}</code></pre>
+<p>Alternatively, we can use a custom wrapper to submit our job scripts. <a href="https://github.com/Snakemake-Profiles/slurm">Here is an excellent example</a> showcasing the potentials of Snakemake.</p>
+</div>
