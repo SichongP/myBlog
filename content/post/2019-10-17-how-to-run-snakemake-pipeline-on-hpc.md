@@ -42,10 +42,11 @@ To execute this workflow locally, we can simply invoke `snakemake -s path/to/Sna
 
 Now if we want to run this on HPC on compute nodes, Snakemake allows us to do so by:
 ```
-snakemake -s Snakefile --cluster 'sbatch -t 60 --mem=2g -c 1'
+snakemake -s Snakefile --cluster 'sbatch -t 60 --mem=2g -c 1' -j 10
 ```
 In the above command, we use `--cluster` to hand Snakemake a command that it can use to submit a job script. Snakemake creates a job script for each job to be run and uses this command to submit that job to HPC. That simple!
 Notice that here we use `sbatch` because it's the command you would use to submit a shell script on HPC managed by Slurm. Replace this with `qsub` commands if your HPC uses SGE. 
+`-j 10` argument limits to at most 10 jobs running at the same time.
 
 ## Decorate your job submission
 
@@ -108,7 +109,7 @@ rule mapFASTQ:
 ```
 And then we can revoke the workflow by:
 ```
-snakemake -s Snakefile --cluster 'sbatch -t {params.time} --mem={params.mem} -c {threads}'
+snakemake -s Snakefile --cluster 'sbatch -t {params.time} --mem={params.mem} -c {threads}' -j 10
 ```
 Notice that you must define these params for all rules or you will get an error when Snakemake tries to submit a job from a rule that doesn't have one or more of these params defined.
 
@@ -156,7 +157,7 @@ The reason I keep `threads` in rule definition is because when running on a loca
 Then we can revoke by:
 
 ```
-snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus}'
+snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus}' -j 10
 ```
 
 ### Redirect cluster output
@@ -174,7 +175,7 @@ __default__:
 And then we revoke Snakemake by:
 
 ```
-snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output}'
+snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output}' -j 10
 ```
 
 This will redirect stdout and stderr of every job to their corresponding log files named as by rule and wildcards (eg. `downloadFASTQ.sample1.out`) under `logs_slurm` directory. If a particular job fails, it's super easy to find its log file!
@@ -195,7 +196,7 @@ __default__:
 
 And then revoke Snakemake with:
 ```
-snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}'
+snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}' -j 10
 ```
 
 ### Put Snakemake command in a "scheduler" script
@@ -217,7 +218,7 @@ Evidently, as our cluster config parameters grow, the command to revoke Snakemak
 cd /path/to/snakemake/piepeline
 
 mkdir -p logs_slurm
-snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}'
+snakemake -s Snakefile --cluster-config cluster.yaml --cluster 'sbatch -t {cluster.time} --mem={cluster.mem} -c {cluster.cpus} -o {cluster.output} -e {cluster.output} --mail-type {cluster.email_type} --mail-user {cluster.email}' -j 10
 ```
 And then submit this script to cluster using `sbatch scheduler.sh`. Then all you need to do is sit back and wait for it to finish (or error out).
 ## Best practice on cluster
