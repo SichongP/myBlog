@@ -59,7 +59,8 @@ Now that Jupyter Lab is up and running on a compute node `bm3`, we go to a local
 ssh -t -t username@host -L 8888:localhost:8888 ssh bm3 -L 8888:localhost:8888
 ```
 
-This command is a little confusing so let's break it down:
+This command is a little confusing so let's break it down:  
+
 - The first `ssh` starts a tunnel between our local machine and remote host (head node)
 - `-t -t` forces a tty (terminal) on head node. This is required to tunnel data back to head node from compute node
 - `username@host` this is your login credential
