@@ -64,10 +64,10 @@ This command is a little confusing so let's break it down:
 - The first `ssh` starts a tunnel between our local machine and remote host (head node)
 - `-t -t` forces a tty (terminal) on head node. This is required to tunnel data back to head node from compute node
 - `username@host` this is your login credential
-- `-L 8888:localhost:8888` This directs ssh to tunnel traffic from port 8888 on head node to port 8888 on local machine. If the port on either end is used by other programs, you can simply change this to a different number.
+- `-L 8888:localhost:8888` This directs ssh to tunnel traffic from port 8888 on local machine to port 8888 on remote server. If the port on either end is used by other programs, you can simply change this to a different number. The general form is [local port]:[remote ip]:[remote port].
 - The second `ssh` starts a tunnel between head node and compute node
 - `bm3` is the compute node our jupter-lab is currently running on
-- `-L 8888:localhost:8888` This directes ssh to tunnel traffic from port 8888 on cmpute node bm3 to head node
+- `-L 8888:localhost:8888` This directes ssh to tunnel traffic from port 8888 on head node bm3 to compute node
 
 Now we can head on to our browser at `localhost:8888`. This should open up a page where Jupyter Lab resides!
 
@@ -126,3 +126,22 @@ And then you just need to figure out the name of compute node your jupyter lab i
 ```
 jupyter_server name
 ```
+
+## Troubleshooting
+Here is a very head scratching problem I had recently run into:  
+When I start my jupyter lab instance on HPC as normal, everything goes fine. But when I tried to access my jupyter thourgh a browser, I keep getting "invalid credentials" error, no matter if I use my password or tokens. A quick Google search did not yield any meaningful answers.  
+If I look closely, when I run `ssh` to start a tunnel, I got a warning message:
+> bind: Address already in use
+channel_setup_fwd_listener_tcpip: cannot listen to port: 8888
+Could not request local forwarding.
+
+Note that this does not stop ssh connection and can very easily be missed. It simply means that the port `8888` that I requested is already in use and therefore is inaccessible. Now normally when I go to `localhost:8888` on my browser, I shouldn't get a login page of jupyter and that should already let you know that forwarding isn't working. However, in my case, I still got a jupyter login page, except none of my credentials works! It would seem that somebody is also using the same port on the head node to forward their jupyter traffic! And since I'm accessing their jupyter instance instead of mine, of course it wouldn't work!
+
+A simple solution is to use a different port:
+```
+ssh -t -t user@host -L 8887:localhost:8889 ssh $node -L 8889:localhost:8888
+```
+Above I'm using three different ports at different levels so when any of them is in use, I can immediately know which level it is at:  
+- `8887`: local port
+- `8888`: compute node port
+- `8889`: head node port
