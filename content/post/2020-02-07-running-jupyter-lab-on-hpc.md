@@ -131,9 +131,10 @@ jupyter_server name
 Here is a very head scratching problem I had recently run into:  
 When I start my jupyter lab instance on HPC as normal, everything goes fine. But when I tried to access my jupyter thourgh a browser, I keep getting "invalid credentials" error, no matter if I use my password or tokens. A quick Google search did not yield any meaningful answers.  
 If I look closely, when I run `ssh` to start a tunnel, I got a warning message:
-> bind: Address already in use
-channel_setup_fwd_listener_tcpip: cannot listen to port: 8888
-Could not request local forwarding.
+
+> bind: Address already in use  
+> channel_setup_fwd_listener_tcpip: cannot listen to port: 8888  
+> Could not request local forwarding.  
 
 Note that this does not stop ssh connection and can very easily be missed. It simply means that the port `8888` that I requested is already in use and therefore is inaccessible. Now normally when I go to `localhost:8888` on my browser, I shouldn't get a login page of jupyter and that should already let you know that forwarding isn't working. However, in my case, I still got a jupyter login page, except none of my credentials works! It would seem that somebody is also using the same port on the head node to forward their jupyter traffic! And since I'm accessing their jupyter instance instead of mine, of course it wouldn't work!
 
